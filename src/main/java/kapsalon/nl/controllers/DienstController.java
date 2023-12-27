@@ -37,11 +37,11 @@ public class DienstController {
     }
 
     @PostMapping
-    public ResponseEntity<DienstDTO> createTelevision(@RequestBody DienstDTO dto) {
+    public ResponseEntity<DienstDTO> createKapper(@RequestBody DienstDTO dto) {
 
-        DienstDTO createdTelevisionDTO = dienstService.createDienst(dto);
+        DienstDTO createdDienstDTO = dienstService.createDienst(dto);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdTelevisionDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdDienstDTO);
 
     }
 

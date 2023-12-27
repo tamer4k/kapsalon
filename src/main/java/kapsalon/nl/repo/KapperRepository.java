@@ -1,9 +1,9 @@
 package kapsalon.nl.repo;
 
-import kapsalon.nl.models.entity.Dienst;
+import kapsalon.nl.models.entity.Kapper;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DienstRepository extends JpaRepository<Dienst, Long> {
+public interface KapperRepository extends JpaRepository<Kapper, Long> {
 }

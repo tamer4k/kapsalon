@@ -4,6 +4,7 @@ import kapsalon.nl.models.dto.DienstDTO;
 import kapsalon.nl.models.entity.Category;
 import kapsalon.nl.models.entity.Dienst;
 import kapsalon.nl.repo.DienstRepository;
+import kapsalon.nl.repo.KapsalonRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ public class DienstServiceImpl implements DienstService {
             entity.setDescription(dto.getDescription());
             entity.setPrice(dto.getPrice());
             entity.setDuration(dto.getDuration());
-
+            entity.setKapper(dto.getKapper());
             Dienst updatedEntity = dienstRepository.save(entity);
             return fromEntityToDto(updatedEntity);
         }
@@ -78,6 +79,7 @@ public class DienstServiceImpl implements DienstService {
         dto.setDescription(entity.getDescription());
         dto.setPrice(entity.getPrice());
         dto.setDuration(entity.getDuration());
+        dto.setKapper(entity.getKapper());
 
         return  dto;
     }
@@ -91,6 +93,7 @@ public class DienstServiceImpl implements DienstService {
         entity.setDescription(dto.getDescription());
         entity.setPrice(dto.getPrice());
         entity.setDuration(dto.getDuration());
+        entity.setKapper(dto.getKapper());
 
         return entity;
     }

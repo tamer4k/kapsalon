@@ -1,6 +1,9 @@
 package kapsalon.nl.models.dto;
 
+import kapsalon.nl.models.entity.Kapper;
 import lombok.*;
+
+import java.util.List;
 
 @Builder
 @Data
@@ -16,4 +19,8 @@ public class DienstDTO {
     private String description;
     private double duration;
     private double price;
+
+    private Kapper kapper;
+
+
 }

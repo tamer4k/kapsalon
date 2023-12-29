@@ -20,7 +20,7 @@ public class DienstDTO {
     private double duration;
     private double price;
 
-    private Kapper kapper;
+
 
 
 }

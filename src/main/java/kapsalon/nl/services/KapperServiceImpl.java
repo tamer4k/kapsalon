@@ -1,8 +1,11 @@
 package kapsalon.nl.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import kapsalon.nl.models.dto.KapperDTO;
 import kapsalon.nl.models.entity.Kapper;
+import kapsalon.nl.models.entity.Kapsalon;
 import kapsalon.nl.repo.KapperRepository;
+import kapsalon.nl.repo.KapsalonRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,9 +15,10 @@ import java.util.Optional;
 @Service
 public class KapperServiceImpl implements KapperService {
     private final KapperRepository kapperRepository;
-
-    public KapperServiceImpl (KapperRepository kapperRepository){
+    private final KapsalonRepository kapsalonRepository;
+    public KapperServiceImpl (KapperRepository kapperRepository,KapsalonRepository kapsalonRepository){
         this.kapperRepository = kapperRepository;
+        this.kapsalonRepository =kapsalonRepository;
     }
     @Override
     public List<KapperDTO> getAllKappers() {
@@ -42,6 +46,11 @@ public class KapperServiceImpl implements KapperService {
     @Override
     public KapperDTO createKapper(KapperDTO dto) {
         Kapper entity = kapperRepository.save(fromDtoToEntity(dto));
+
+        Kapsalon kapsalon = kapsalonRepository.findById(dto.getKapsalon().getId())
+                .orElseThrow(() -> new EntityNotFoundException("Kapsalon not found with id: " + dto.getKapsalon().getId()));
+        entity.setKapsalon(kapsalon);
+
         return fromEntityToDto(entity);
     }
 
@@ -54,9 +63,14 @@ public class KapperServiceImpl implements KapperService {
             entity.setName(dto.getName());
             entity.setAvailable(dto.isAvailable());
             entity.setLicense(dto.getLicense());
-
+            entity.setKapsalon(dto.getKapsalon());
 
             Kapper updatedEntity = kapperRepository.save(entity);
+
+            Kapsalon kapsalon = kapsalonRepository.findById(dto.getKapsalon().getId())
+                    .orElseThrow(() -> new EntityNotFoundException("Kapsalon not found with id: " + dto.getKapsalon().getId()));
+            entity.setKapsalon(kapsalon);
+
             return fromEntityToDto(updatedEntity);
         }
         return null;
@@ -73,6 +87,7 @@ public class KapperServiceImpl implements KapperService {
         dto.setName(entity.getName());
         dto.setAvailable(entity.isAvailable());
         dto.setLicense(entity.getLicense());
+        dto.setKapsalon(entity.getKapsalon());
         return  dto;
     }
 
@@ -83,6 +98,7 @@ public class KapperServiceImpl implements KapperService {
         entity.setName(dto.getName());
         entity.setAvailable(dto.isAvailable());
         entity.setLicense(dto.getLicense());
+        entity.setKapsalon(dto.getKapsalon());
         return entity;
     }
 }

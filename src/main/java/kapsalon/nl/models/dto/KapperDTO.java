@@ -2,6 +2,7 @@ package kapsalon.nl.models.dto;
 
 import jakarta.persistence.*;
 import kapsalon.nl.models.entity.Category;
+import kapsalon.nl.models.entity.Kapsalon;
 import lombok.*;
 
 @Builder
@@ -15,4 +16,5 @@ public class KapperDTO {
     private String name;
     private boolean available;
     private String license;
+    private Kapsalon kapsalon;
 }

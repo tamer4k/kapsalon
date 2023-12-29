@@ -3,6 +3,9 @@ package kapsalon.nl.models.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Table(name="dienst")
 @Entity
@@ -25,8 +28,13 @@ public class Dienst {
     private double duration;
     private double price;
 
-    @ManyToOne
-    @JoinColumn(name = "kapper_id")
-    private Kapper kapper;
+    @ManyToMany
+    @JoinTable(
+            name = "dienst_kapper",
+            joinColumns = @JoinColumn(name = "dienst_id"),
+            inverseJoinColumns = @JoinColumn(name = "kapper_id")
+    )
+
+    private Set<Kapper> kappers = new HashSet<>();
 
 }

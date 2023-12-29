@@ -59,8 +59,8 @@ public class DienstServiceImpl implements DienstService {
             entity.setDescription(dto.getDescription());
             entity.setPrice(dto.getPrice());
             entity.setDuration(dto.getDuration());
-            entity.setKapper(dto.getKapper());
             Dienst updatedEntity = dienstRepository.save(entity);
+
             return fromEntityToDto(updatedEntity);
         }
         return null;
@@ -79,7 +79,6 @@ public class DienstServiceImpl implements DienstService {
         dto.setDescription(entity.getDescription());
         dto.setPrice(entity.getPrice());
         dto.setDuration(entity.getDuration());
-        dto.setKapper(entity.getKapper());
 
         return  dto;
     }
@@ -93,7 +92,6 @@ public class DienstServiceImpl implements DienstService {
         entity.setDescription(dto.getDescription());
         entity.setPrice(dto.getPrice());
         entity.setDuration(dto.getDuration());
-        entity.setKapper(dto.getKapper());
 
         return entity;
     }

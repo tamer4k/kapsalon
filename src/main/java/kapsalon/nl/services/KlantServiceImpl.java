@@ -59,6 +59,9 @@ public class KlantServiceImpl implements KlantService{
             entity.setEmail(dto.getEmail());
             entity.setPhoneNumber(dto.getPhoneNumber());
 
+            Klant updatedEntity = klantRepository.save(entity);
+            return fromEntityToDto(updatedEntity);
+
         }
         return null;
     }

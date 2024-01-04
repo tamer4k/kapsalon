@@ -5,6 +5,7 @@ import jakarta.persistence.ManyToOne;
 import kapsalon.nl.models.entity.Dienst;
 import kapsalon.nl.models.entity.Kapper;
 import kapsalon.nl.models.entity.Kapsalon;
+import kapsalon.nl.models.entity.Klant;
 import lombok.*;
 
 import java.sql.Time;
@@ -21,6 +22,7 @@ public class AppointmentDTO {
     private Long id;
     private Date appointmentDate;
     private Time appointmentTime;
+    private Klant klant;
     private Kapper kapper;
     private Dienst dienst;
 }

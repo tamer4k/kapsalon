@@ -21,6 +21,10 @@ public class Appointment {
     private Date appointmentDate;
     private Time appointmentTime;
 
+    @ManyToOne
+    @JoinColumn(name = "klant_id")
+    private Klant klant;
+
     @ManyToOne()
     @JoinColumn(name = "kapper_id")
     private Kapper kapper;
@@ -28,4 +32,6 @@ public class Appointment {
     @ManyToOne()
     @JoinColumn(name = "dienst_id")
     private Dienst dienst;
+
+
 }

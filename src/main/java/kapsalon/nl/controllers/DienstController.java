@@ -22,34 +22,34 @@ public class DienstController {
 
     @GetMapping
     public ResponseEntity<List<DienstDTO>> getAllDiensten() {
-        List<DienstDTO> diensten = dienstService.getAllDiensten();
-        return new ResponseEntity<>(diensten, HttpStatus.OK);
+        List<DienstDTO> result = dienstService.getAllDiensten();
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<DienstDTO> getDienstById(@PathVariable Long id) {
-        DienstDTO dienst = dienstService.getDienstById(id);
-        if (dienst != null) {
-            return new ResponseEntity<>(dienst, HttpStatus.OK);
+        DienstDTO result = dienstService.getDienstById(id);
+        if (result != null) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping
-    public ResponseEntity<DienstDTO> createKapper(@RequestBody DienstDTO dto) {
+    public ResponseEntity<DienstDTO> createDienst(@RequestBody DienstDTO dto) {
 
-        DienstDTO createdDienstDTO = dienstService.createDienst(dto);
+        DienstDTO result = dienstService.createDienst(dto);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdDienstDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
 
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<DienstDTO> updateDienst(@PathVariable Long id, @RequestBody DienstDTO dienstDTO) {
-        DienstDTO updatedDienstDto = dienstService.updateDienst(id, dienstDTO);
-        if (updatedDienstDto != null) {
-            return new ResponseEntity<>(updatedDienstDto, HttpStatus.OK);
+        DienstDTO result = dienstService.updateDienst(id, dienstDTO);
+        if (result != null) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

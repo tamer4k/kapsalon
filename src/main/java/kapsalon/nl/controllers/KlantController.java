@@ -18,15 +18,15 @@ public class KlantController {
 
     @GetMapping
     public ResponseEntity<List<KlantDTO>> getAllKlanten() {
-        List<KlantDTO> klanten = klantService.getAllKlanten();
-        return new ResponseEntity<>(klanten, HttpStatus.OK);
+        List<KlantDTO> result = klantService.getAllKlanten();
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<KlantDTO> getKlantById(@PathVariable Long id) {
-        KlantDTO klantDTO = klantService.getKlantById(id);
-        if (klantDTO != null) {
-            return new ResponseEntity<>(klantDTO, HttpStatus.OK);
+        KlantDTO result = klantService.getKlantById(id);
+        if (result != null) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -35,17 +35,17 @@ public class KlantController {
     @PostMapping
     public ResponseEntity<KlantDTO> createKlant(@RequestBody KlantDTO dto) {
 
-        KlantDTO createdKlanttDTO = klantService.createKlant(dto);
+        KlantDTO result = klantService.createKlant(dto);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdKlanttDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
 
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<KlantDTO> updateKlant(@PathVariable Long id, @RequestBody KlantDTO dto) {
-        KlantDTO updateKlantDto = klantService.updateKlant(id, dto);
-        if (updateKlantDto != null) {
-            return new ResponseEntity<>(updateKlantDto, HttpStatus.OK);
+        KlantDTO result = klantService.updateKlant(id, dto);
+        if (result != null) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

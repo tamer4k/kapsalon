@@ -21,15 +21,15 @@ public class KapsalonController {
 
     @GetMapping
     public ResponseEntity<List<KapsalonDTO>> getAllKapsalons() {
-        List<KapsalonDTO> kapsalon = kapsalonService.getAllKapsalons();
-        return new ResponseEntity<>(kapsalon, HttpStatus.OK);
+        List<KapsalonDTO> result = kapsalonService.getAllKapsalons();
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<KapsalonDTO> getKapsalonById(@PathVariable Long id) {
-        KapsalonDTO kapsalon = kapsalonService.getKapsalonById(id);
-        if (kapsalon != null) {
-            return new ResponseEntity<>(kapsalon, HttpStatus.OK);
+        KapsalonDTO result = kapsalonService.getKapsalonById(id);
+        if (result != null) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -38,17 +38,17 @@ public class KapsalonController {
     @PostMapping
     public ResponseEntity<KapsalonDTO> createKapsalon(@RequestBody KapsalonDTO dto) {
 
-        KapsalonDTO createdKapsalonDTO = kapsalonService.createKapsalon(dto);
+        KapsalonDTO result = kapsalonService.createKapsalon(dto);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdKapsalonDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
 
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<KapsalonDTO> updateKapsalon(@PathVariable Long id, @RequestBody KapsalonDTO dto) {
-        KapsalonDTO updatedKapsalonDto = kapsalonService.updateKapsalon(id, dto);
-        if (updatedKapsalonDto != null) {
-            return new ResponseEntity<>(updatedKapsalonDto, HttpStatus.OK);
+        KapsalonDTO result = kapsalonService.updateKapsalon(id, dto);
+        if (result != null) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

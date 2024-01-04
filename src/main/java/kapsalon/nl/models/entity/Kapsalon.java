@@ -25,5 +25,4 @@ public class Kapsalon {
     @JoinColumn(name = "openings_tijden_id")
     private OpeningsTijden openingsTijden;
 
-
 }

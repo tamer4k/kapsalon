@@ -88,6 +88,7 @@ public class KapperServiceImpl implements KapperService {
         dto.setAvailable(entity.isAvailable());
         dto.setLicense(entity.getLicense());
         dto.setKapsalon(entity.getKapsalon());
+        dto.setDiensten(entity.getDiensten());
         return  dto;
     }
 
@@ -99,6 +100,7 @@ public class KapperServiceImpl implements KapperService {
         entity.setAvailable(dto.isAvailable());
         entity.setLicense(dto.getLicense());
         entity.setKapsalon(dto.getKapsalon());
+        entity.setDiensten(dto.getDiensten());
         return entity;
     }
 }

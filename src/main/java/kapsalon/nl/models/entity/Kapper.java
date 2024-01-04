@@ -25,14 +25,17 @@ public class Kapper {
     private boolean available;
     private String license;
 
-//    @ManyToOne(mappedBy = "kappers")
-//    private Set<Kapsalon> kapsalons = new HashSet<>();
-
-    @ManyToMany(mappedBy = "kappers")
-    private Set<Dienst> diensten = new HashSet<>();
-
     @ManyToOne
     @JoinColumn(name = "kapsalon_id")
     private Kapsalon kapsalon;
+
+    @ManyToMany
+    @JoinTable(
+            name = "kapper_dienst",
+            joinColumns = @JoinColumn(name = "kapper_id"),
+            inverseJoinColumns = @JoinColumn(name = "dienst_id")
+    )
+    private List<Dienst> diensten = new ArrayList<>();
+
 
 }

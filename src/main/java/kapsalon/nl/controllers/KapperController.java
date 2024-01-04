@@ -19,15 +19,15 @@ public class KapperController {
 
     @GetMapping
     public ResponseEntity<List<KapperDTO>> getAllKappers() {
-        List<KapperDTO> kappers = kapperService.getAllKappers();
-        return new ResponseEntity<>(kappers, HttpStatus.OK);
+        List<KapperDTO> result = kapperService.getAllKappers();
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<KapperDTO> getKapperById(@PathVariable Long id) {
-        KapperDTO kapper = kapperService.getKapperById(id);
-        if (kapper != null) {
-            return new ResponseEntity<>(kapper, HttpStatus.OK);
+        KapperDTO result = kapperService.getKapperById(id);
+        if (result != null) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -36,17 +36,17 @@ public class KapperController {
     @PostMapping
     public ResponseEntity<KapperDTO> createKapper(@RequestBody KapperDTO dto) {
 
-        KapperDTO createdKapperDTO = kapperService.createKapper(dto);
+        KapperDTO result = kapperService.createKapper(dto);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdKapperDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
 
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<KapperDTO> updateKapper(@PathVariable Long id, @RequestBody KapperDTO kapperDTO) {
-        KapperDTO updatedKapperDto = kapperService.updateKapper(id, kapperDTO);
-        if (updatedKapperDto != null) {
-            return new ResponseEntity<>(updatedKapperDto, HttpStatus.OK);
+        KapperDTO result = kapperService.updateKapper(id, kapperDTO);
+        if (result != null) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

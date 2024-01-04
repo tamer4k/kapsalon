@@ -19,8 +19,4 @@ public class DienstDTO {
     private String description;
     private double duration;
     private double price;
-
-
-
-
 }

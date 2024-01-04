@@ -1,11 +1,13 @@
 package kapsalon.nl.models.dto;
 
-import jakarta.persistence.Embedded;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import kapsalon.nl.models.entity.Appointment;
+import kapsalon.nl.models.entity.Kapper;
 import kapsalon.nl.models.entity.OpeningsTijden;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Builder
 @Data
@@ -13,6 +15,7 @@ import lombok.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class KapsalonDTO {
     private Long id;
     private String name;

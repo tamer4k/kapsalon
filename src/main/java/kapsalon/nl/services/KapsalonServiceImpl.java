@@ -56,10 +56,12 @@ public class KapsalonServiceImpl implements KapsalonService {
         Optional<Kapsalon> entityId = kapsalonRepository.findById(id);
         if (entityId.isPresent()) {
             Kapsalon entity = entityId.get();
+
             entity.setName(dto.getName());
             entity.setAvailability(dto.isAvailability());
             entity.setLocation(dto.getLocation());
             entity.setOpeningsTijden(dto.getOpeningsTijden());
+
 
             Kapsalon updatedEntity = kapsalonRepository.save(entity);
             return fromEntityToDto(updatedEntity);
@@ -79,6 +81,7 @@ public class KapsalonServiceImpl implements KapsalonService {
         dto.setAvailability(entity.isAvailability());
         dto.setLocation(entity.getLocation());
         dto.setOpeningsTijden(entity.getOpeningsTijden());
+
         return  dto;
     }
 
@@ -90,6 +93,7 @@ public class KapsalonServiceImpl implements KapsalonService {
         entity.setAvailability(dto.isAvailability());
         entity.setLocation(dto.getLocation());
         entity.setOpeningsTijden(dto.getOpeningsTijden());
+
         return entity;
     }
 }

@@ -33,4 +33,4 @@ INSERT INTO financial_details (bank_name, account_name, account_number, card_num
 
 
 
-INSERT INTO appointment (appointment_date, appointment_time, kapper_id,dienst_id ,klant_id) VALUES('2023-01-15', '10:30:00', 1,1,1);
+INSERT INTO appointment (appointment_date, appointment_time, kapper_id,dienst_id ,klant_id,kapsalon_id) VALUES('2023-01-15', '10:30:00', 1,1,1,1);

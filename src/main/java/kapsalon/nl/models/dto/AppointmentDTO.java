@@ -20,9 +20,10 @@ import java.util.Date;
 
 public class AppointmentDTO {
     private Long id;
+    private Kapsalon kapsalon;
+    private Dienst dienst;
+    private Kapper kapper;
     private Date appointmentDate;
     private Time appointmentTime;
     private Klant klant;
-    private Kapper kapper;
-    private Dienst dienst;
 }

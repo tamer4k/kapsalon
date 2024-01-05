@@ -5,12 +5,18 @@ import kapsalon.nl.models.entity.Dienst;
 import kapsalon.nl.services.DienstService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/diensten")
+@RequestMapping("/api/v1/diensten")
 public class DienstController {
 
 
@@ -36,12 +42,21 @@ public class DienstController {
         }
     }
 
+
     @PostMapping
-    public ResponseEntity<DienstDTO> createDienst(@RequestBody DienstDTO dto) {
+    public ResponseEntity<Object> createDienst(@Validated @RequestBody DienstDTO dto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errors.put(error.getField(), error.getDefaultMessage());
+            }
+            return ResponseEntity.badRequest().body(errors);
+        }else {
+            DienstDTO result = dienstService.createDienst(dto);
 
-        DienstDTO result = dienstService.createDienst(dto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(result);
+        }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(result);
 
     }
 

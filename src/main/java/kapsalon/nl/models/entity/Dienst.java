@@ -3,10 +3,6 @@ package kapsalon.nl.models.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
-
 @Table(name="dienst")
 @Entity
 @Data

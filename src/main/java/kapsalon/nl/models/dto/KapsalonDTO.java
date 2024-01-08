@@ -1,13 +1,8 @@
 package kapsalon.nl.models.dto;
-
-import jakarta.persistence.*;
-import kapsalon.nl.models.entity.Appointment;
-import kapsalon.nl.models.entity.Kapper;
 import kapsalon.nl.models.entity.OpeningsTijden;
 import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.validation.constraints.*;
+import org.springframework.validation.annotation.Validated;
 
 @Builder
 @Data
@@ -15,11 +10,23 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Validated
 
 public class KapsalonDTO {
     private Long id;
+
+    @NotBlank(message = "het mag niet leeg zijn")
     private String name;
+
+    @NotBlank(message = "het mag niet leeg zijn")
     private String location;
+
+    @NotBlank(message = "het mag niet leeg zijn")
+    @Pattern(regexp = "\\d{4}[A-Za-z]{2}", message = "Ongeldige postcode, gebruik het formaat 1234AB")
+    private String postalCode;
+
+
     private boolean availability;
+
     private OpeningsTijden openingsTijden;
 }

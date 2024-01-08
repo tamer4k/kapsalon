@@ -1,11 +1,17 @@
 package kapsalon.nl.controllers;
+import kapsalon.nl.models.dto.KapperDTO;
 import kapsalon.nl.models.dto.KlantDTO;
 import kapsalon.nl.services.KlantService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/klanten")
@@ -33,12 +39,18 @@ public class KlantController {
     }
 
     @PostMapping
-    public ResponseEntity<KlantDTO> createKlant(@RequestBody KlantDTO dto) {
+    public ResponseEntity<Object> createKlant(@Validated  @RequestBody KlantDTO dto , BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errors.put(error.getField(), error.getDefaultMessage());
+            }
+            return ResponseEntity.badRequest().body(errors);
+        }else {
+            KlantDTO result = klantService.createKlant(dto);
 
-        KlantDTO result = klantService.createKlant(dto);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(result);
-
+            return ResponseEntity.status(HttpStatus.CREATED).body(result);
+        }
     }
 
     @PutMapping("/{id}")

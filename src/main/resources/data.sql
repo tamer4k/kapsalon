@@ -6,8 +6,8 @@ INSERT INTO openings_tijden (monday, tuesday, wednesday, thursday, friday, satur
 INSERT INTO openings_tijden (monday, tuesday, wednesday, thursday, friday, saturday, sunday)VALUES('09:00 - 18:00', '09:00 - 18:00', '09:00 - 18:00', '09:00 - 18:00', '09:00 - 18:00', 'Closed', 'Closed');
 
 
-INSERT INTO kapsalon (name, location, availability, openings_tijden_id)VALUES('HairStyle Masters', '123 Main Street', true,1);
-INSERT INTO kapsalon (name, location, availability, openings_tijden_id)VALUES('Kapper Knipper', '123 Main Street', true,2);
+INSERT INTO kapsalon (name, location, postal_code, availability, openings_tijden_id)VALUES('HairStyle Masters', 'Main Street10','1811DS', true,1);
+INSERT INTO kapsalon (name, location, postal_code,availability, openings_tijden_id)VALUES('Kapper Knipper', 'Main Street4','3356KA', true,2);
 
 
 INSERT INTO kappers (name, available, license,kapsalon_id) VALUES ('Tamer', true, 'License123',1);
@@ -33,4 +33,4 @@ INSERT INTO financial_details (bank_name, account_name, account_number, card_num
 
 
 
-INSERT INTO appointment (appointment_date, appointment_time, kapper_id,dienst_id ,klant_id,kapsalon_id) VALUES('2023-01-15', '10:30:00', 1,1,1,1);
+INSERT INTO appointment (appointment_date, appointment_time, kapper_id,dienst_id ,klant_id,kapsalon_id) VALUES('2023-01-15', '10:30', 1,1,1,1);

@@ -10,5 +10,5 @@ public interface DienstService {
     public DienstDTO getDienstById(Long id);
     public DienstDTO createDienst(DienstDTO dienstDTO);
     public DienstDTO updateDienst(Long id, DienstDTO dienstDTO);
-    public void deleteDienst(Long id);
+    public DienstDTO deleteDienst(Long id);
 }

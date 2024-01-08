@@ -142,8 +142,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public void deleteAppointment(Long id) {
+    public AppointmentDTO deleteAppointment(Long id) {
         appointmentRepository.deleteById(id);
+        return null;
     }
 
     public  AppointmentDTO fromEntityToDto(Appointment entity){

@@ -67,8 +67,9 @@ public class DienstServiceImpl implements DienstService {
     }
 
     @Override
-    public void deleteDienst(Long id) {
+    public DienstDTO deleteDienst(Long id) {
         dienstRepository.deleteById(id);
+        return null;
     }
 
     public static DienstDTO fromEntityToDto(Dienst entity){

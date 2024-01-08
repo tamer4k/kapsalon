@@ -1,8 +1,6 @@
 package kapsalon.nl.models.dto;
-import jakarta.validation.constraints.*;
-import kapsalon.nl.models.entity.Category;
-import kapsalon.nl.models.entity.Kapper;
 import lombok.*;
+import jakarta.validation.constraints.*;
 import org.springframework.validation.annotation.Validated;
 
 @Builder
@@ -22,7 +20,7 @@ public class DienstDTO {
     private String title;
 
     @NotBlank(message = "deze mag niet leeg zijn")
-    @Size(min = 2, max = 50, message = "Lengte moet tussen 2 en 50 liggen")
+    @Size(min = 5, max = 50, message = "Lengte moet tussen 2 en 50 liggen")
     private String description;
 
     @Positive(message = "Moet een positieve waarde zijn")

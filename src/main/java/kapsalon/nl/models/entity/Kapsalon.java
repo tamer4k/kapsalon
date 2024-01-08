@@ -19,6 +19,7 @@ public class Kapsalon {
     private Long id;
     private String name;
     private String location;
+    private String postalCode;
     private boolean availability;
 
     @OneToOne(cascade = CascadeType.ALL)

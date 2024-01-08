@@ -60,6 +60,7 @@ public class KapsalonServiceImpl implements KapsalonService {
             entity.setName(dto.getName());
             entity.setAvailability(dto.isAvailability());
             entity.setLocation(dto.getLocation());
+            entity.setPostalCode(dto.getPostalCode());
             entity.setOpeningsTijden(dto.getOpeningsTijden());
 
 
@@ -80,6 +81,7 @@ public class KapsalonServiceImpl implements KapsalonService {
         dto.setName(entity.getName());
         dto.setAvailability(entity.isAvailability());
         dto.setLocation(entity.getLocation());
+        dto.setPostalCode(entity.getPostalCode());
         dto.setOpeningsTijden(entity.getOpeningsTijden());
 
         return  dto;
@@ -92,6 +94,7 @@ public class KapsalonServiceImpl implements KapsalonService {
         entity.setName(dto.getName());
         entity.setAvailability(dto.isAvailability());
         entity.setLocation(dto.getLocation());
+        entity.setPostalCode(dto.getPostalCode());
         entity.setOpeningsTijden(dto.getOpeningsTijden());
 
         return entity;

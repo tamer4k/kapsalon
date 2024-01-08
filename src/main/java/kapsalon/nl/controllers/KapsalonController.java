@@ -6,9 +6,14 @@ import kapsalon.nl.services.KapperService;
 import kapsalon.nl.services.KapsalonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/kapsalon")
@@ -35,13 +40,20 @@ public class KapsalonController {
         }
     }
 
+
     @PostMapping
-    public ResponseEntity<KapsalonDTO> createKapsalon(@RequestBody KapsalonDTO dto) {
+    public ResponseEntity<Object> createKapsalon(@Validated @RequestBody KapsalonDTO dto , BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errors.put(error.getField(), error.getDefaultMessage());
+            }
+            return ResponseEntity.badRequest().body(errors);
+        }else {
+            KapsalonDTO result = kapsalonService.createKapsalon(dto);
 
-        KapsalonDTO result = kapsalonService.createKapsalon(dto);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(result);
-
+            return ResponseEntity.status(HttpStatus.CREATED).body(result);
+        }
     }
 
     @PutMapping("/{id}")

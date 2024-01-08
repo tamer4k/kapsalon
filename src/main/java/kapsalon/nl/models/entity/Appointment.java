@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Table(name="appointment")
@@ -31,7 +32,7 @@ public class Appointment {
     @JoinColumn(name = "kapper_id")
     private Kapper kapper;
 
-    private Date appointmentDate;
+    private LocalDate appointmentDate;
 
     private Time appointmentTime;
 

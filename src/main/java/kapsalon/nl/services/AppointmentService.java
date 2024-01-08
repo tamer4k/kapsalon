@@ -8,5 +8,5 @@ public interface AppointmentService {
     public AppointmentDTO getAppointmentById(Long id);
     public AppointmentDTO createAppointment(AppointmentDTO dto);
     public AppointmentDTO updateAppointment(Long id, AppointmentDTO dto);
-    public void deleteAppointment(Long id);
+    public AppointmentDTO deleteAppointment(Long id);
 }

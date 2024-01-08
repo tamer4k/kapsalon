@@ -1,12 +1,18 @@
 package kapsalon.nl.controllers;
 
+import kapsalon.nl.models.dto.DienstDTO;
 import kapsalon.nl.models.dto.KapperDTO;
 import kapsalon.nl.services.KapperService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/kappers")
@@ -34,12 +40,18 @@ public class KapperController {
     }
 
     @PostMapping
-    public ResponseEntity<KapperDTO> createKapper(@RequestBody KapperDTO dto) {
+    public ResponseEntity<Object> createKapper(@Validated @RequestBody KapperDTO  dto , BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errors.put(error.getField(), error.getDefaultMessage());
+            }
+            return ResponseEntity.badRequest().body(errors);
+        }else {
+            KapperDTO result = kapperService.createKapper(dto);
 
-        KapperDTO result = kapperService.createKapper(dto);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(result);
-
+            return ResponseEntity.status(HttpStatus.CREATED).body(result);
+        }
     }
 
     @PutMapping("/{id}")
@@ -55,7 +67,6 @@ public class KapperController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteKapper(@PathVariable Long id) {
         kapperService.deleteKapper(id);
-
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
     }

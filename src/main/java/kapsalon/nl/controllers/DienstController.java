@@ -1,5 +1,6 @@
 package kapsalon.nl.controllers;
 
+import kapsalon.nl.models.dto.AppointmentDTO;
 import kapsalon.nl.models.dto.DienstDTO;
 import kapsalon.nl.models.entity.Dienst;
 import kapsalon.nl.services.DienstService;
@@ -56,8 +57,6 @@ public class DienstController {
 
             return ResponseEntity.status(HttpStatus.CREATED).body(result);
         }
-
-
     }
 
     @PutMapping("/{id}")
@@ -69,9 +68,8 @@ public class DienstController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteDienst(@PathVariable Long id) {
+    public ResponseEntity<DienstDTO> deleteDienst(@PathVariable Long id) {
         dienstService.deleteDienst(id);
 
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

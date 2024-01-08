@@ -25,7 +25,7 @@ public class AppointmentDTO {
     @NotNull(message = "het mag niet leeg zijn")
     private Kapsalon kapsalon;
 
-    @NotNull(message = "het mag niet leeg zijn")
+    @NotNull(message = "het mag niet leeg zijn ")
     private Dienst dienst;
 
     @NotNull(message = "het mag niet leeg zijn")

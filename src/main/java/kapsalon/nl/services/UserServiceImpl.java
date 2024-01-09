@@ -1,8 +1,8 @@
 package kapsalon.nl.services;
 
-import kapsalon.nl.models.dto.KlantDTO;
-import kapsalon.nl.models.entity.Klant;
-import kapsalon.nl.repo.KlantRepository;
+import kapsalon.nl.models.dto.UserDTO;
+import kapsalon.nl.models.entity.User;
+import kapsalon.nl.repo.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,27 +10,27 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class KlantServiceImpl implements KlantService{
-    private final KlantRepository klantRepository;
+public class UserServiceImpl implements UserService {
+    private final UserRepository userRepository;
 
-    public KlantServiceImpl (KlantRepository klantRepository){
-        this.klantRepository = klantRepository;
+    public UserServiceImpl(UserRepository userRepository){
+        this.userRepository = userRepository;
     }
     @Override
-    public List<KlantDTO> getAllKlanten() {
+    public List<UserDTO> getAllUsers() {
 
-        List<Klant> entityList = klantRepository.findAll();
-        List<KlantDTO> dtoList = new ArrayList<>();
-        for (Klant entity : entityList) {
+        List<User> entityList = userRepository.findAll();
+        List<UserDTO> dtoList = new ArrayList<>();
+        for (User entity : entityList) {
             dtoList.add(fromEntityToDto(entity));
         }
         return dtoList;
     }
 
     @Override
-    public KlantDTO getKlantById(Long id) {
-        Optional<Klant> entity = klantRepository.findById(id);
-        KlantDTO dto;
+    public UserDTO getUsertById(Long id) {
+        Optional<User> entity = userRepository.findById(id);
+        UserDTO dto;
         if (entity.isPresent()) {
             dto = fromEntityToDto(entity.get());
 
@@ -41,22 +41,22 @@ public class KlantServiceImpl implements KlantService{
 
 
     @Override
-    public KlantDTO createKlant(KlantDTO dto) {
-        Klant entity = klantRepository.save(fromDtoToEntity(dto));
+    public UserDTO createUser(UserDTO dto) {
+        User entity = userRepository.save(fromDtoToEntity(dto));
         return fromEntityToDto(entity);
     }
 
     @Override
-    public KlantDTO updateKlant(Long id, KlantDTO dto) {
-        Optional<Klant> entityId = klantRepository.findById(id);
+    public UserDTO updateUser(Long id, UserDTO dto) {
+        Optional<User> entityId = userRepository.findById(id);
         if (entityId.isPresent()) {
-            Klant entity = entityId.get();
+            User entity = entityId.get();
             entity.setFirstName(dto.getFirstName());
             entity.setSecondName(dto.getSecondName());
             entity.setEmail(dto.getEmail());
             entity.setPhoneNumber(dto.getPhoneNumber());
 
-            Klant updatedEntity = klantRepository.save(entity);
+            User updatedEntity = userRepository.save(entity);
             return fromEntityToDto(updatedEntity);
 
         }
@@ -64,12 +64,12 @@ public class KlantServiceImpl implements KlantService{
     }
 
     @Override
-    public void deleteKlant(Long id) {
-        klantRepository.deleteById(id);
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
     }
 
-    public static KlantDTO fromEntityToDto(Klant entity){
-        KlantDTO dto = new KlantDTO();
+    public static UserDTO fromEntityToDto(User entity){
+        UserDTO dto = new UserDTO();
         dto.setId(entity.getId());
         dto.setFirstName(entity.getFirstName());
         dto.setSecondName(entity.getSecondName());
@@ -78,8 +78,8 @@ public class KlantServiceImpl implements KlantService{
         return  dto;
     }
 
-    public static Klant fromDtoToEntity(KlantDTO dto) {
-        Klant entity = new Klant();
+    public static User fromDtoToEntity(UserDTO dto) {
+        User entity = new User();
 
         entity.setId(dto.getId());
         entity.setFirstName(dto.getFirstName());

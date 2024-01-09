@@ -4,7 +4,7 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Table(name="kappers")
+@Table(name="barbers")
 @Entity
 @Data
 @Builder
@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Kapper {
+public class Barber {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,8 +27,8 @@ public class Kapper {
 
     @ManyToMany
     @JoinTable(
-            name = "kapper_dienst",
-            joinColumns = @JoinColumn(name = "kapper_id"),
+            name = "barber_dienst",
+            joinColumns = @JoinColumn(name = "barber_id"),
             inverseJoinColumns = @JoinColumn(name = "dienst_id")
     )
     private List<Dienst> diensten = new ArrayList<>();

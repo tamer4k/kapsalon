@@ -11,7 +11,7 @@ import org.springframework.validation.annotation.Validated;
 @NoArgsConstructor
 @Validated
 
-public class KlantDTO {
+public class UserDTO {
     private Long id;
 
     @NotBlank(message = "het mag niet leeg zijn")

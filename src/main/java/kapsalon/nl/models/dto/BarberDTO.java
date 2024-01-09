@@ -16,7 +16,7 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 
 
-public class KapperDTO {
+public class BarberDTO {
     private Long id;
 
     @NotBlank(message = "deze mag niet leeg zijn")

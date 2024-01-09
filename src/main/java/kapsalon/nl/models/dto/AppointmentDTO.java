@@ -1,16 +1,15 @@
 package kapsalon.nl.models.dto;
 
 import kapsalon.nl.models.entity.Dienst;
-import kapsalon.nl.models.entity.Kapper;
+import kapsalon.nl.models.entity.Barber;
 import kapsalon.nl.models.entity.Kapsalon;
-import kapsalon.nl.models.entity.Klant;
+import kapsalon.nl.models.entity.User;
 import lombok.*;
 import jakarta.validation.constraints.*;
 import org.springframework.validation.annotation.Validated;
 
 import java.sql.Time;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Builder
 @Data
@@ -29,7 +28,7 @@ public class AppointmentDTO {
     private Dienst dienst;
 
     @NotNull(message = "het mag niet leeg zijn")
-    private Kapper kapper;
+    private Barber barber;
 
     @NotNull(message = "het mag niet leeg zijn")
     @Future(message = "Datum moet in de toekomst liggen")
@@ -40,6 +39,6 @@ public class AppointmentDTO {
     private Time appointmentTime;
 
     @NotNull(message = "het mag niet leeg zijn")
-    private Klant klant;
+    private User user;
 
 }

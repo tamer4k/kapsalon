@@ -5,7 +5,6 @@ import lombok.*;
 
 import java.sql.Time;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Table(name="appointment")
 @Entity
@@ -29,16 +28,16 @@ public class Appointment {
     private Dienst dienst;
 
     @ManyToOne()
-    @JoinColumn(name = "kapper_id")
-    private Kapper kapper;
+    @JoinColumn(name = "barber_id")
+    private Barber barber;
 
     private LocalDate appointmentDate;
 
     private Time appointmentTime;
 
     @ManyToOne
-    @JoinColumn(name = "klant_id")
-    private Klant klant;
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
 

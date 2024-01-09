@@ -3,7 +3,7 @@ package kapsalon.nl.models.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Table(name="klanten")
+@Table(name="users")
 @Entity
 @Data
 @Builder
@@ -12,7 +12,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Klant {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

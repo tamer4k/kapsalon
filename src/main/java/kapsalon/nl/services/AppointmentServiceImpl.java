@@ -1,11 +1,9 @@
 package kapsalon.nl.services;
 import jakarta.persistence.EntityNotFoundException;
 import kapsalon.nl.models.dto.AppointmentDTO;
-import kapsalon.nl.models.dto.KapperDTO;
 import kapsalon.nl.models.entity.*;
 import kapsalon.nl.repo.*;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -87,43 +85,6 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         return null;
     }
-
-//    @Override
-//    public AppointmentDTO createAppointment(AppointmentDTO dto) {
-//        // Zoek de Kapsalon op basis van het ID in de DTO
-//        Kapsalon kapsalon = kapsalonRepository.findById(dto.getKapsalon().getId())
-//                .orElseThrow(() -> new EntityNotFoundException("Kapsalon not found with id: " + dto.getKapsalon().getId()));
-//
-//        // Zoek de Kapper op basis van het ID in de DTO, binnen de specifieke Kapsalon
-//        Kapper kapper = kapperRepository.findByIdAndKapsalonId(dto.getKapper().getId(), kapsalon.getId())
-//                .orElseThrow(() -> new EntityNotFoundException("Kapper not found with id: " + dto.getKapper().getId()));
-//
-//        // Controleer of de gekozen Dienst beschikbaar is voor de geselecteerde Kapper
-//        kapper.getDiensten()
-//                .stream()
-//                .filter(d -> d.getId().equals(dto.getDienst().getId()))
-//                .findAny()
-//                .orElseThrow(() -> new EntityNotFoundException("Dienst not found for the selected Kapper"));
-//
-//        // Maak de Appointment entity en sla deze op
-//        Appointment entity = appointmentRepository.save(fromDtoToEntity(dto));
-//
-//        // Stel de relaties in
-//        entity.setKapsalon(kapsalon);
-//        entity.setKapper(kapper);
-//
-//        // Zoek en stel de Dienst in op basis van het ID in de DTO
-//        Dienst dienst = dienstRepository.findById(dto.getDienst().getId())
-//                .orElseThrow(() -> new EntityNotFoundException("Dienst not found with id: " + dto.getDienst().getId()));
-//        entity.setDienst(dienst);
-//
-//        // Zoek en stel de Klant in op basis van het ID in de DTO
-//        Klant klant = klantRepository.findById(dto.getKlant().getId())
-//                .orElseThrow(() -> new EntityNotFoundException("Klant not found with id: " + dto.getKlant().getId()));
-//        entity.setKlant(klant);
-//
-//        return fromEntityToDto(entity);
-//    }
 
     @Override
     public AppointmentDTO updateAppointment(Long id, AppointmentDTO dto) {

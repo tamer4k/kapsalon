@@ -4,7 +4,6 @@ import kapsalon.nl.models.dto.DienstDTO;
 import kapsalon.nl.models.entity.Category;
 import kapsalon.nl.models.entity.Dienst;
 import kapsalon.nl.repo.DienstRepository;
-import kapsalon.nl.repo.KapsalonRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

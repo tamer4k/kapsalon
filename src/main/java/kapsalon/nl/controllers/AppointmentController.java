@@ -1,9 +1,6 @@
 package kapsalon.nl.controllers;
 
 import kapsalon.nl.models.dto.AppointmentDTO;
-import kapsalon.nl.models.dto.KlantDTO;
-import kapsalon.nl.models.entity.Dienst;
-import kapsalon.nl.models.entity.Kapper;
 import kapsalon.nl.services.AppointmentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

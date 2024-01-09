@@ -1,5 +1,4 @@
 package kapsalon.nl.controllers;
-import kapsalon.nl.models.dto.KapperDTO;
 import kapsalon.nl.models.dto.KlantDTO;
 import kapsalon.nl.services.KlantService;
 import org.springframework.http.HttpStatus;

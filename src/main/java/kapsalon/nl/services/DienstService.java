@@ -1,7 +1,6 @@
 package kapsalon.nl.services;
 
 import kapsalon.nl.models.dto.DienstDTO;
-import kapsalon.nl.models.entity.Dienst;
 
 import java.util.List;
 

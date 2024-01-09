@@ -11,15 +11,15 @@ import java.util.Optional;
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentRepository appointmentRepository;
-    private final KapperRepository kapperRepository;
-    private final KlantRepository klantRepository;
+    private final BarberRepository barberRepository;
+    private final UserRepository userRepository;
     private final KapsalonRepository kapsalonRepository;
     private final DienstRepository dienstRepository;
 
-    public AppointmentServiceImpl (AppointmentRepository appointmentRepository,KapperRepository kapperRepository,KlantRepository klantRepository,KapsalonRepository kapsalonRepository,DienstRepository dienstRepository){
+    public AppointmentServiceImpl (AppointmentRepository appointmentRepository, BarberRepository barberRepository, UserRepository userRepository, KapsalonRepository kapsalonRepository, DienstRepository dienstRepository){
         this.appointmentRepository = appointmentRepository;
-        this.kapperRepository = kapperRepository;
-        this.klantRepository = klantRepository;
+        this.barberRepository = barberRepository;
+        this.userRepository = userRepository;
         this.kapsalonRepository = kapsalonRepository;
         this.dienstRepository =dienstRepository;
     }
@@ -50,9 +50,9 @@ public class AppointmentServiceImpl implements AppointmentService {
         List<Kapsalon> kapsalonList = kapsalonRepository.findAll();
         for (Kapsalon kapsalonUitList : kapsalonList){
             if (dto.getKapsalon().getId().equals(kapsalonUitList.getId())){
-                List<Kapper> kapperList = kapperRepository.findAll();
-                for (Kapper kapperUitList : kapperList) {
-                    if(dto.getKapper().getId().equals(kapperUitList.getId()) && dto.getKapsalon().getId().equals(kapperUitList.getKapsalon().getId())){
+                List<Barber> kapperList = barberRepository.findAll();
+                for (Barber kapperUitList : kapperList) {
+                    if(dto.getBarber().getId().equals(kapperUitList.getId()) && dto.getKapsalon().getId().equals(kapperUitList.getKapsalon().getId())){
                         List<Dienst> kapperDienstenList = kapperUitList.getDiensten();
                         for (Dienst kapperDienst: kapperDienstenList) {
                             if (dto.getDienst().getId().equals(kapperDienst.getId())) {
@@ -67,13 +67,13 @@ public class AppointmentServiceImpl implements AppointmentService {
                                         .orElseThrow(() -> new EntityNotFoundException("Dienst not found with id: " + dto.getDienst().getId()));
                                 entity.setDienst(dienst);
 
-                                Kapper kapper = kapperRepository.findById(dto.getKapper().getId())
-                                        .orElseThrow(() -> new EntityNotFoundException("Kapper not found with id: " + dto.getKapper().getId()));
-                                entity.setKapper(kapper);
+                                Barber barber = barberRepository.findById(dto.getBarber().getId())
+                                        .orElseThrow(() -> new EntityNotFoundException("Barber not found with id: " + dto.getBarber().getId()));
+                                entity.setBarber(barber);
 
-                                Klant klant = klantRepository.findById(dto.getKlant().getId())
-                                        .orElseThrow(() -> new EntityNotFoundException("Klant not found with id: " + dto.getKlant().getId()));
-                                entity.setKlant(klant);
+                                User user = userRepository.findById(dto.getUser().getId())
+                                        .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + dto.getUser().getId()));
+                                entity.setUser(user);
 
                                 return fromEntityToDto(entity);
                             }
@@ -94,7 +94,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
             entity.setAppointmentDate(dto.getAppointmentDate());
             entity.setAppointmentTime(dto.getAppointmentTime());
-            entity.setKapper(dto.getKapper());
+            entity.setBarber(dto.getBarber());
             Appointment updatedEntity = appointmentRepository.save(entity);
 
             return fromEntityToDto(updatedEntity);
@@ -115,10 +115,10 @@ public class AppointmentServiceImpl implements AppointmentService {
         dto.setId(entity.getId());
         dto.setKapsalon(entity.getKapsalon());
         dto.setDienst(entity.getDienst());
-        dto.setKapper(entity.getKapper());
+        dto.setBarber(entity.getBarber());
         dto.setAppointmentDate(entity.getAppointmentDate());
         dto.setAppointmentTime(entity.getAppointmentTime());
-        dto.setKlant(entity.getKlant());
+        dto.setUser(entity.getUser());
 
         return  dto;
     }
@@ -129,10 +129,10 @@ public class AppointmentServiceImpl implements AppointmentService {
         entity.setId(dto.getId());
         entity.setKapsalon(dto.getKapsalon());
         entity.setDienst(dto.getDienst());
-        entity.setKapper(dto.getKapper());
+        entity.setBarber(dto.getBarber());
         entity.setAppointmentDate(dto.getAppointmentDate());
         entity.setAppointmentTime(dto.getAppointmentTime());
-        entity.setKlant(dto.getKlant());
+        entity.setUser(dto.getUser());
 
         return entity;
 

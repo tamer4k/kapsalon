@@ -1,6 +1,6 @@
 package kapsalon.nl.controllers;
-import kapsalon.nl.models.dto.KlantDTO;
-import kapsalon.nl.services.KlantService;
+import kapsalon.nl.models.dto.UserDTO;
+import kapsalon.nl.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -13,23 +13,23 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/klanten")
-public class KlantController {
-    private final KlantService klantService;
+@RequestMapping("/api/v1/users")
+public class UserController {
+    private final UserService userService;
 
-    public KlantController(KlantService klantService){
-        this.klantService = klantService;
+    public UserController(UserService userService){
+        this.userService = userService;
     }
 
     @GetMapping
-    public ResponseEntity<List<KlantDTO>> getAllKlanten() {
-        List<KlantDTO> result = klantService.getAllKlanten();
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        List<UserDTO> result = userService.getAllUsers();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<KlantDTO> getKlantById(@PathVariable Long id) {
-        KlantDTO result = klantService.getKlantById(id);
+    public ResponseEntity<UserDTO> getUsertById(@PathVariable Long id) {
+        UserDTO result = userService.getUsertById(id);
         if (result != null) {
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
@@ -38,7 +38,7 @@ public class KlantController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createKlant(@Validated  @RequestBody KlantDTO dto , BindingResult bindingResult) {
+    public ResponseEntity<Object> createUser(@Validated  @RequestBody UserDTO dto , BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
             for (FieldError error : bindingResult.getFieldErrors()) {
@@ -46,15 +46,15 @@ public class KlantController {
             }
             return ResponseEntity.badRequest().body(errors);
         }else {
-            KlantDTO result = klantService.createKlant(dto);
+            UserDTO result = userService.createUser(dto);
 
             return ResponseEntity.status(HttpStatus.CREATED).body(result);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<KlantDTO> updateKlant(@PathVariable Long id, @RequestBody KlantDTO dto) {
-        KlantDTO result = klantService.updateKlant(id, dto);
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserDTO dto) {
+        UserDTO result = userService.updateUser(id, dto);
         if (result != null) {
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
@@ -63,8 +63,8 @@ public class KlantController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteKlant(@PathVariable Long id) {
-        klantService.deleteKlant(id);
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

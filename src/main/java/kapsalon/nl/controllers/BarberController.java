@@ -1,7 +1,7 @@
 package kapsalon.nl.controllers;
 
-import kapsalon.nl.models.dto.KapperDTO;
-import kapsalon.nl.services.KapperService;
+import kapsalon.nl.models.dto.BarberDTO;
+import kapsalon.nl.services.BarberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -13,23 +13,23 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/kappers")
-public class KapperController {
-    private final KapperService kapperService;
+@RequestMapping("/api/v1/barbers")
+public class BarberController {
+    private final BarberService barberService;
 
-    public KapperController(KapperService kapperService){
-        this.kapperService = kapperService;
+    public BarberController(BarberService barberService){
+        this.barberService = barberService;
     }
 
     @GetMapping
-    public ResponseEntity<List<KapperDTO>> getAllKappers() {
-        List<KapperDTO> result = kapperService.getAllKappers();
+    public ResponseEntity<List<BarberDTO>> getAllBarbers() {
+        List<BarberDTO> result = barberService.getAllBarbers();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<KapperDTO> getKapperById(@PathVariable Long id) {
-        KapperDTO result = kapperService.getKapperById(id);
+    public ResponseEntity<BarberDTO> getBarberById(@PathVariable Long id) {
+        BarberDTO result = barberService.getBarberById(id);
         if (result != null) {
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
@@ -38,7 +38,7 @@ public class KapperController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createKapper(@Validated @RequestBody KapperDTO  dto , BindingResult bindingResult) {
+    public ResponseEntity<Object> createBarber(@Validated @RequestBody BarberDTO dto , BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
             for (FieldError error : bindingResult.getFieldErrors()) {
@@ -46,15 +46,15 @@ public class KapperController {
             }
             return ResponseEntity.badRequest().body(errors);
         }else {
-            KapperDTO result = kapperService.createKapper(dto);
+            BarberDTO result = barberService.createBarber(dto);
 
             return ResponseEntity.status(HttpStatus.CREATED).body(result);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<KapperDTO> updateKapper(@PathVariable Long id, @RequestBody KapperDTO kapperDTO) {
-        KapperDTO result = kapperService.updateKapper(id, kapperDTO);
+    public ResponseEntity<BarberDTO> updateBarber(@PathVariable Long id, @RequestBody BarberDTO barberDTO) {
+        BarberDTO result = barberService.updateBarber(id, barberDTO);
         if (result != null) {
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
@@ -63,8 +63,8 @@ public class KapperController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteKapper(@PathVariable Long id) {
-        kapperService.deleteKapper(id);
+    public ResponseEntity<Void> deleteBarber(@PathVariable Long id) {
+        barberService.deleteBarber(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
     }

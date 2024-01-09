@@ -1,8 +1,6 @@
 package kapsalon.nl.controllers;
 
-import kapsalon.nl.models.dto.KapperDTO;
 import kapsalon.nl.models.dto.KapsalonDTO;
-import kapsalon.nl.services.KapperService;
 import kapsalon.nl.services.KapsalonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

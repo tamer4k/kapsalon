@@ -14,8 +14,10 @@ import org.springframework.validation.annotation.Validated;
 public class KlantDTO {
     private Long id;
 
+    @NotBlank(message = "het mag niet leeg zijn")
     private String firstName;
 
+    @NotBlank(message = "het mag niet leeg zijn")
     private String secondName;
 
     @Email(message = "Ongeldig e-mailadres")

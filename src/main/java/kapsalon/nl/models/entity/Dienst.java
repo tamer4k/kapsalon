@@ -3,7 +3,7 @@ package kapsalon.nl.models.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Table(name="dienst")
+@Table(name="diensten")
 @Entity
 @Data
 @Builder

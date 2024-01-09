@@ -1,10 +1,7 @@
 package kapsalon.nl.services;
 
-import kapsalon.nl.models.dto.KapsalonDTO;
 import kapsalon.nl.models.dto.KlantDTO;
-import kapsalon.nl.models.entity.Kapsalon;
 import kapsalon.nl.models.entity.Klant;
-import kapsalon.nl.repo.KapsalonRepository;
 import kapsalon.nl.repo.KlantRepository;
 import org.springframework.stereotype.Service;
 

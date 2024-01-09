@@ -1,6 +1,5 @@
 package kapsalon.nl.services;
 
-import kapsalon.nl.models.dto.KapsalonDTO;
 import kapsalon.nl.models.dto.KlantDTO;
 
 import java.util.List;

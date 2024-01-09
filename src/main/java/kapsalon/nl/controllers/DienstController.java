@@ -1,12 +1,9 @@
 package kapsalon.nl.controllers;
 
-import kapsalon.nl.models.dto.AppointmentDTO;
 import kapsalon.nl.models.dto.DienstDTO;
-import kapsalon.nl.models.entity.Dienst;
 import kapsalon.nl.services.DienstService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

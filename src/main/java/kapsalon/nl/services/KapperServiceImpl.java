@@ -7,7 +7,6 @@ import kapsalon.nl.models.entity.Kapsalon;
 import kapsalon.nl.repo.KapperRepository;
 import kapsalon.nl.repo.KapsalonRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

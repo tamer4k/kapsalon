@@ -3,7 +3,7 @@ package kapsalon.nl.models.dto;
 import kapsalon.nl.models.entity.Dienst;
 import kapsalon.nl.models.entity.Barber;
 import kapsalon.nl.models.entity.Kapsalon;
-import kapsalon.nl.models.entity.User;
+import kapsalon.nl.models.entity.Customer;
 import lombok.*;
 import jakarta.validation.constraints.*;
 import org.springframework.validation.annotation.Validated;
@@ -39,6 +39,6 @@ public class AppointmentDTO {
     private Time appointmentTime;
 
     @NotNull(message = "het mag niet leeg zijn")
-    private User user;
+    private Customer customer;
 
 }

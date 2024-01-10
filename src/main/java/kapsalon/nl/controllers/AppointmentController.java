@@ -40,7 +40,7 @@ public class AppointmentController {
 
 
     @PostMapping
-    public ResponseEntity<?> createAppointment(@Validated @RequestBody AppointmentDTO dto , BindingResult bindingResult) {
+    public ResponseEntity<Object> createAppointment(@Validated @RequestBody AppointmentDTO dto , BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
             for (FieldError error : bindingResult.getFieldErrors()) {
@@ -67,7 +67,8 @@ public class AppointmentController {
         if (result != null) {
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage.);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 

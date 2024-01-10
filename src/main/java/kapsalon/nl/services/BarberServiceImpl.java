@@ -63,7 +63,7 @@ public class BarberServiceImpl implements BarberService {
             entity.setAvailable(dto.isAvailable());
             entity.setLicense(dto.getLicense());
             entity.setKapsalon(dto.getKapsalon());
-
+            entity.setDiensten(dto.getDiensten());
             Barber updatedEntity = barberRepository.save(entity);
 
             Kapsalon kapsalon = kapsalonRepository.findById(dto.getKapsalon().getId())

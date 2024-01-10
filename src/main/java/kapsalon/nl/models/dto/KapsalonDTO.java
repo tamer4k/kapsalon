@@ -1,5 +1,5 @@
 package kapsalon.nl.models.dto;
-import kapsalon.nl.models.entity.OpeningsTijden;
+import kapsalon.nl.models.entity.OpeningHours;
 import lombok.*;
 import jakarta.validation.constraints.*;
 import org.springframework.validation.annotation.Validated;
@@ -28,5 +28,5 @@ public class KapsalonDTO {
 
     private boolean availability;
 
-    private OpeningsTijden openingsTijden;
+    private OpeningHours openingHours;
 }

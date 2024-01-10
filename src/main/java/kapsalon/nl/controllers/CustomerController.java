@@ -1,9 +1,6 @@
 package kapsalon.nl.controllers;
-
 import kapsalon.nl.models.dto.CustomerDTO;
-import kapsalon.nl.models.dto.UserDTO;
 import kapsalon.nl.services.CustomerService;
-import kapsalon.nl.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -16,23 +13,23 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/users")
-public class UserController {
-    private final UserService userService;
+@RequestMapping("/api/v1/customers")
+public class CustomerController {
+    private final CustomerService customerService;
 
-    public UserController(UserService userService){
-        this.userService = userService;
+    public CustomerController(CustomerService customerService){
+        this.customerService = customerService;
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDTO>> getAllUsers() {
-        List<UserDTO> result = userService.getAllUsers();
+    public ResponseEntity<List<CustomerDTO>> getAllCustomers() {
+        List<CustomerDTO> result = customerService.getAllCustomers();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> getUsertById(@PathVariable Long id) {
-        UserDTO result = userService.getUsertById(id);
+    public ResponseEntity<CustomerDTO> getCustomertById(@PathVariable Long id) {
+        CustomerDTO result = customerService.getCustomertById(id);
         if (result != null) {
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
@@ -41,7 +38,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createUser(@Validated @RequestBody UserDTO dto , BindingResult bindingResult) {
+    public ResponseEntity<Object> createCustomer(@Validated  @RequestBody CustomerDTO dto , BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
             for (FieldError error : bindingResult.getFieldErrors()) {
@@ -49,15 +46,15 @@ public class UserController {
             }
             return ResponseEntity.badRequest().body(errors);
         }else {
-            UserDTO result = userService.createUser(dto);
+            CustomerDTO result = customerService.createCustomer(dto);
 
             return ResponseEntity.status(HttpStatus.CREATED).body(result);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserDTO dto) {
-        UserDTO result = userService.updateUser(id, dto);
+    public ResponseEntity<CustomerDTO> updateCustomer(@PathVariable Long id, @RequestBody CustomerDTO dto) {
+        CustomerDTO result = customerService.updateCustomer(id, dto);
         if (result != null) {
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
@@ -66,8 +63,8 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
+        customerService.deleteCustomer(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

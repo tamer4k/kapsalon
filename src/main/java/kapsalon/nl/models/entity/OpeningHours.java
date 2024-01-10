@@ -4,17 +4,15 @@ package kapsalon.nl.models.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Map;
-
 @Entity
-@Table(name="openings_tijden")
+@Table(name="opening_hours")
 @Data
 @Builder
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OpeningsTijden {
+public class OpeningHours {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

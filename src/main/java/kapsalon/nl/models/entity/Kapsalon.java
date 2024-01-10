@@ -3,8 +3,6 @@ package kapsalon.nl.models.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.*;
-
 @Table(name="kapsalon")
 @Entity
 @Data
@@ -23,7 +21,7 @@ public class Kapsalon {
     private boolean availability;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "openings_tijden_id")
-    private OpeningsTijden openingsTijden;
+    @JoinColumn(name = "opening_hours_id")
+    private OpeningHours openingHours;
 
 }

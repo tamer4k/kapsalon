@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     private final UserRepository userRepository;
 
     public UserServiceImpl(UserRepository userRepository){
@@ -51,10 +52,10 @@ public class UserServiceImpl implements UserService {
         Optional<User> entityId = userRepository.findById(id);
         if (entityId.isPresent()) {
             User entity = entityId.get();
-            entity.setFirstName(dto.getFirstName());
-            entity.setSecondName(dto.getSecondName());
-            entity.setEmail(dto.getEmail());
-            entity.setPhoneNumber(dto.getPhoneNumber());
+            entity.setRole(dto.getRole());
+            entity.setRegisterDate(dto.getRegisterDate());
+            entity.setPassword(dto.getPassword());
+
 
             User updatedEntity = userRepository.save(entity);
             return fromEntityToDto(updatedEntity);
@@ -71,10 +72,10 @@ public class UserServiceImpl implements UserService {
     public static UserDTO fromEntityToDto(User entity){
         UserDTO dto = new UserDTO();
         dto.setId(entity.getId());
-        dto.setFirstName(entity.getFirstName());
-        dto.setSecondName(entity.getSecondName());
-        dto.setEmail(entity.getEmail());
-        dto.setPhoneNumber(entity.getPhoneNumber());
+        dto.setRole(entity.getRole());
+        dto.setRegisterDate(entity.getRegisterDate());
+        dto.setPassword(entity.getPassword());
+
         return  dto;
     }
 
@@ -82,10 +83,11 @@ public class UserServiceImpl implements UserService {
         User entity = new User();
 
         entity.setId(dto.getId());
-        entity.setFirstName(dto.getFirstName());
-        entity.setSecondName(dto.getSecondName());
-        entity.setEmail(dto.getEmail());
-        entity.setPhoneNumber(dto.getPhoneNumber());
+        entity.setRole(dto.getRole());
+        entity.setRegisterDate(dto.getRegisterDate());
+        entity.setPassword(dto.getPassword());
+
         return entity;
     }
+
 }

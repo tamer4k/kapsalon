@@ -1,8 +1,14 @@
 package kapsalon.nl.models.dto;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.*;
-import jakarta.validation.constraints.*;
 import org.springframework.validation.annotation.Validated;
+
+import java.time.LocalDate;
+
+
 @Builder
 @Data
 @Setter
@@ -10,20 +16,12 @@ import org.springframework.validation.annotation.Validated;
 @AllArgsConstructor
 @NoArgsConstructor
 @Validated
-
 public class UserDTO {
     private Long id;
 
-    @NotBlank(message = "het mag niet leeg zijn")
-    private String firstName;
+    private String role;
 
-    @NotBlank(message = "het mag niet leeg zijn")
-    private String secondName;
+    private LocalDate registerDate;
 
-    @Email(message = "Ongeldig e-mailadres")
-    private String email;
-
-    @NotBlank(message = "Telefoonnummer mag niet leeg zijn")
-    @Pattern(regexp = "^\\+(?:[0-9] ?){6,14}[0-9]$", message = "Ongeldig telefoonnummer formaat")
-    private String phoneNumber;
+    private String password;
 }

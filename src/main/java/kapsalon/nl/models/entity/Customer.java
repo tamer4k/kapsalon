@@ -1,12 +1,9 @@
 package kapsalon.nl.models.entity;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
-
-@Table(name="users")
+@Table(name="customers")
 @Entity
 @Data
 @Builder
@@ -14,15 +11,13 @@ import java.time.LocalDate;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String role;
-
-    private LocalDate registerDate;
-
-    private String password;
-
+    private String firstName;
+    private String secondName;
+    private String email;
+    private String phoneNumber;
 }

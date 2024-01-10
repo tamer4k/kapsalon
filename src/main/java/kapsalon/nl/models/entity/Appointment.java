@@ -36,8 +36,8 @@ public class Appointment {
     private Time appointmentTime;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
 
 

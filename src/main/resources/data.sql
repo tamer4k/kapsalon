@@ -12,7 +12,7 @@ INSERT INTO kapsalon (name, location, postal_code,availability, opening_hours_id
 
 INSERT INTO barbers (name, available, license,kapsalon_id) VALUES ('Tamer', true, 'License123',1);
 INSERT INTO barbers (name, available, license,kapsalon_id) VALUES ('Ashraf', true, 'License456',1);
-INSERT INTO barbers (name, available, license,kapsalon_id) VALUES ('Joe', true, 'License789',2);
+INSERT INTO barbers (name, available, license,kapsalon_id) VALUES ('Joeseef', true, 'License789',2);
 
 
 INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (1,1);
@@ -20,9 +20,9 @@ INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (3,2);
 INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (2,2);
 INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (1,3);
 
-INSERT INTO users (role, register_date, password) VALUES ('ADMIN', CURRENT_DATE, 'admin1');
-INSERT INTO users (role, register_date, password) VALUES ('Barber', CURRENT_DATE, 'barber1');
-INSERT INTO users (role, register_date, password) VALUES ('Customer', CURRENT_DATE, 'customer1');
+INSERT INTO users (username, password, register_date) VALUES ('Jasper','123', CURRENT_DATE);
+INSERT INTO users (username, password, register_date) VALUES ('Alexia','123', CURRENT_DATE);
+INSERT INTO users (username, password, register_date) VALUES ('Luna','123', CURRENT_DATE);
 
 INSERT INTO customers (first_name, second_name, email, phone_number) VALUES('John', 'Doe', 'john.doe@example.com', '+1234567890');
 INSERT INTO customers (first_name, second_name, email, phone_number) VALUES('Alice', 'Smith', 'alice.smith@example.com', '+9876543210');
@@ -36,3 +36,11 @@ INSERT INTO financial_details (bank_name, account_name, account_number, card_num
 
 
 INSERT INTO appointment (appointment_date, appointment_time, barber_id,dienst_id ,customer_id,kapsalon_id) VALUES('2023-01-15', '10:30', 1,1,1,1);
+
+INSERT INTO roles(rolename) VALUES ('admin');
+INSERT INTO roles(rolename) VALUES ('barber');
+INSERT INTO roles(rolename) VALUES ('customer');
+
+
+INSERT INTO users_roles(users_id, roles_id) values (3,1);
+INSERT INTO users_roles(users_id, roles_id) values (3,2);

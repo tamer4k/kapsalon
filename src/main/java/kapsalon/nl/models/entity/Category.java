@@ -1,11 +1,6 @@
 package kapsalon.nl.models.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.*;
-
-
 public enum Category {
     Men("Men"),
     Women("Women"),

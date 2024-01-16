@@ -48,6 +48,8 @@ public class BarberServiceImpl implements BarberService {
 
         Kapsalon kapsalon = kapsalonRepository.findById(dto.getKapsalon().getId())
                 .orElseThrow(() -> new EntityNotFoundException("Kapsalon not found with id: " + dto.getKapsalon().getId()));
+
+
         entity.setKapsalon(kapsalon);
 
         return fromEntityToDto(entity);

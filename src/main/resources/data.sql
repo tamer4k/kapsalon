@@ -35,14 +35,21 @@ INSERT INTO financial_details (bank_name, account_name, account_number, card_num
 
 INSERT INTO appointment (appointment_date, appointment_time, barber_id,dienst_id ,customer_id,kapsalon_id) VALUES('2023-01-15', '10:30', 1,1,1,1);
 
-INSERT INTO roles(rolename) VALUES ('ADMIN');
-INSERT INTO roles(rolename) VALUES ('USER');
+-- INSERT INTO roles(rolename) VALUES ('ADMIN');
+-- INSERT INTO roles(rolename) VALUES ('USER');
+--
+--
+-- INSERT INTO users (username, password) VALUES ('Jasper','$2a$10$5vMSZ.1K6fpsCnOPt/majeei.JUSC8XYka8IlDZhmLc1Srv6j67ye');
+-- INSERT INTO users (username, password) VALUES ('Alexia','$2a$10$5vMSZ.1K6fpsCnOPt/majeei.JUSC8XYka8IlDZhmLc1Srv6j67ye');
+-- INSERT INTO users (username, password) VALUES ('Luna','$2a$10$5vMSZ.1K6fpsCnOPt/majeei.JUSC8XYka8IlDZhmLc1Srv6j67ye');
+--
+--
+-- INSERT INTO users_roles(user_id, role_id) values (3,1);
+-- INSERT INTO users_roles(user_id, role_id) values (3,2);
 
+INSERT INTO users (username, password, email, enabled) VALUES ('user', '$2a$12$IzA1Ja1LH4PSMoro9PeITO1etDlknPjSX1nLusgt1vi9c1uaEXdEK','user@test.nl', TRUE);
+INSERT INTO users (username, password, email, enabled) VALUES ('admin', '$2a$12$IzA1Ja1LH4PSMoro9PeITO1etDlknPjSX1nLusgt1vi9c1uaEXdEK', 'admin@test.nl', TRUE);
 
-INSERT INTO users (username, password) VALUES ('Jasper','$2a$10$5vMSZ.1K6fpsCnOPt/majeei.JUSC8XYka8IlDZhmLc1Srv6j67ye');
-INSERT INTO users (username, password) VALUES ('Alexia','$2a$10$5vMSZ.1K6fpsCnOPt/majeei.JUSC8XYka8IlDZhmLc1Srv6j67ye');
-INSERT INTO users (username, password) VALUES ('Luna','$2a$10$5vMSZ.1K6fpsCnOPt/majeei.JUSC8XYka8IlDZhmLc1Srv6j67ye');
-
-
-INSERT INTO users_roles(user_id, role_id) values (3,1);
-INSERT INTO users_roles(user_id, role_id) values (3,2);
+INSERT INTO authorities (username, authority) VALUES ('user', 'ROLE_USER');
+INSERT INTO authorities (username, authority) VALUES ('admin', 'ROLE_USER');
+INSERT INTO authorities (username, authority) VALUES ('admin', 'ROLE_ADMIN');

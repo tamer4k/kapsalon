@@ -1,8 +1,11 @@
 package kapsalon.nl.services;
 
 
+import kapsalon.nl.models.dto.DienstDTO;
 import kapsalon.nl.models.dto.UserDto;
 import kapsalon.nl.models.entity.Authority;
+import kapsalon.nl.models.entity.Category;
+import kapsalon.nl.models.entity.Dienst;
 import kapsalon.nl.models.entity.User;
 import kapsalon.nl.repo.UserRepository;
 import kapsalon.nl.utils.RandomStringGenerator;
@@ -36,13 +39,14 @@ public class UserService {
     }
 
     public UserDto getUser(String username) {
-        UserDto dto = new UserDto();
-        Optional<User> user = userRepository.findById(username);
-        if (user.isPresent()){
-            dto = fromUser(user.get());
-        }else {
-            throw new UsernameNotFoundException(username);
-        }
+
+
+
+        Optional<User> user = userRepository.findByUsername(username);
+        UserDto dto;
+
+        dto = fromUser(user.get());
+
         return dto;
     }
 
@@ -63,11 +67,27 @@ public class UserService {
         userRepository.deleteById(username);
     }
 
-    public void updateUser(String username, UserDto newUser) {
-        if (!userRepository.existsById(username)) throw new RecordNotFoundException();
-        User user = userRepository.findById(username).get();
-        user.setPassword(newUser.getPassword());
-        userRepository.save(user);
+//    public void updateUser(String username, UserDto newUser) {
+//        if (!userRepository.existsById(username)) throw new RecordNotFoundException();
+//        User user = userRepository.findById(username).get();
+//        user.setPassword(newUser.getPassword());
+//        userRepository.save(user);
+//    }
+
+    public UserDto updateUser(String username, UserDto dto) {
+        Optional<User> user = userRepository.findById(username);
+        if (user.isPresent()) {
+            User entity = user.get();
+
+            entity.setUsername(dto.getUsername());
+            entity.setPassword(dto.getPassword());
+            entity.setApikey(dto.getApikey());
+            entity.setEmail(dto.getEmail());
+            entity.setAuthorities(dto.getAuthorities());
+
+            return fromUser(entity);
+        }
+        return null;
     }
 
     public Set<Authority> getAuthorities(String username) {

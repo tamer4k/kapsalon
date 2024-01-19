@@ -57,15 +57,43 @@ public class SpringSecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth ->
                         auth
-                .requestMatchers(HttpMethod.POST, "/api/v1/users").hasRole("ADMIN")
-
-                .requestMatchers(HttpMethod.POST,"/api/v1/users/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/api/v1/users/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET,"/api/v1/diensten").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.GET,"/api/v1/diensten/**").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.POST,"/api/v1/diensten").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.PUT,"/api/v1/diensten/**").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.DELETE,"/api/v1/diensten/**").hasAnyRole("ADMIN","USER")
+                                // Barber
                 .requestMatchers(HttpMethod.GET,"/api/v1/barbers").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.GET,"/api/v1/barbers/**").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.POST,"/api/v1/barbers").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.PUT,"/api/v1/barbers/**").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.DELETE,"/api/v1/barbers/**").hasAnyRole("ADMIN","USER")
+                                // Kapsalon
                 .requestMatchers(HttpMethod.GET,"/api/v1/kapsalon").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.GET,"/api/v1/kapsalon/**").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.POST,"/api/v1/kapsalon").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.PUT,"/api/v1/kapsalon/**").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.DELETE,"/api/v1/kapsalon/**").hasAnyRole("ADMIN","USER")
+                                // Customer
+                .requestMatchers(HttpMethod.GET,"/api/v1/customers").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.GET,"/api/v1/customers/**").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.POST,"/api/v1/customers").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.PUT,"/api/v1/customers/**").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.DELETE,"/api/v1/customers/**").hasAnyRole("ADMIN","USER")
+                                // Afspraak
                 .requestMatchers(HttpMethod.GET,"/api/v1/afspraken").hasAnyRole("ADMIN","USER")
-                .requestMatchers(HttpMethod.GET,"/api/v1/customers").permitAll()
-                .requestMatchers(HttpMethod.GET,"/api/v1/users/register").permitAll()
+                .requestMatchers(HttpMethod.GET,"/api/v1/afspraken/**").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.POST,"/api/v1/afspraken").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.PUT,"/api/v1/afspraken/**").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.DELETE,"/api/v1/afspraken/**").hasAnyRole("ADMIN","USER")
+                                // User
+                .requestMatchers(HttpMethod.GET,"/api/v1/users").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.GET,"/api/v1/users/{username}").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.POST,"/api/v1/users/{username}/authorities").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.PUT,"/api/v1/users/{username}").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.DELETE,"/api/v1/users/{username}").hasAnyRole("ADMIN","USER")
+                                //authe
+                .requestMatchers(HttpMethod.POST,"/api/v1/users/register").permitAll()
                 .requestMatchers("/api/v1/login").permitAll()
                 .requestMatchers("/api/v1/authenticated").authenticated()
 

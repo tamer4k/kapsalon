@@ -2,10 +2,13 @@ package kapsalon.nl.controllers;
 
 
 import kapsalon.nl.exceptions.BadRequestException;
+import kapsalon.nl.exceptions.UsernameNotFoundException;
+import kapsalon.nl.models.dto.DienstDTO;
 import kapsalon.nl.models.dto.UserDto;
 import kapsalon.nl.repo.AuthorityRepository;
 import kapsalon.nl.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +42,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/{username}")
-    public ResponseEntity<UserDto> getUser(@PathVariable("username") String username) {
+    public ResponseEntity<UserDto> getUser(@PathVariable String username) {
 
         UserDto optionalUser = userService.getUser(username);
 
@@ -68,7 +71,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/{username}")
-    public ResponseEntity<UserDto> updateKlant(@PathVariable("username") String username, @RequestBody UserDto dto) {
+    public ResponseEntity<UserDto> updateKlant(@PathVariable String username, @RequestBody UserDto dto) {
 
         userService.updateUser(username, dto);
 
@@ -81,15 +84,15 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping(value = "/{username}/roles")
+    @GetMapping(value = "/{username}/authorities")
     public ResponseEntity<Object> getUserRoles(@PathVariable("username") String username) {
         return ResponseEntity.ok().body(userService.getAuthorities(username));
     }
 
-    @PostMapping(value = "/{username}/roles")
+    @PostMapping(value = "/{username}/authorities")
     public ResponseEntity<Object> addUserRole(@PathVariable("username") String username, @RequestBody Map<String, Object> fields) {
         try {
-            String authorityName = (String) fields.get("role");
+            String authorityName = (String) fields.get("authority");
             userService.addAuthority(username, authorityName);
             return ResponseEntity.noContent().build();
         }
@@ -98,8 +101,8 @@ public class UserController {
         }
     }
 
-    @DeleteMapping(value = "/{username}/roles/{role}")
-    public ResponseEntity<Object> deleteUserAuthority(@PathVariable("username") String username, @PathVariable("role") String authority) {
+    @DeleteMapping(value = "/{username}/authorities/{authority}")
+    public ResponseEntity<Object> deleteUserAuthority(@PathVariable("username") String username, @PathVariable("authority") String authority) {
         userService.removeAuthority(username, authority);
         return ResponseEntity.noContent().build();
     }

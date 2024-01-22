@@ -1,5 +1,7 @@
 package kapsalon.nl.services;
 
+import kapsalon.nl.exceptions.ErrorMessages;
+import kapsalon.nl.exceptions.RecordNotFoundException;
 import kapsalon.nl.models.dto.DienstDTO;
 import kapsalon.nl.models.entity.Category;
 import kapsalon.nl.models.entity.Dienst;
@@ -29,17 +31,16 @@ public class DienstServiceImpl implements DienstService {
         return dtoList;
     }
 
+
     @Override
     public DienstDTO getDienstById(Long id) {
-
         Optional<Dienst> entity = dienstRepository.findById(id);
-        DienstDTO dto;
-
-        dto = fromEntityToDto(entity.get());
-
-        return dto;
+        if (entity.isPresent()) {
+            return fromEntityToDto(entity.get());
+        } else {
+            throw new RecordNotFoundException(ErrorMessages.DIENST_NOT_FOUND + id);
+        }
     }
-
 
     @Override
     public DienstDTO createDienst(DienstDTO dto) {
@@ -61,13 +62,23 @@ public class DienstServiceImpl implements DienstService {
             Dienst updatedEntity = dienstRepository.save(entity);
 
             return fromEntityToDto(updatedEntity);
+        }else {
+
+            throw new RecordNotFoundException(ErrorMessages.DIENST_NOT_FOUND + id);
+
         }
-        return null;
     }
 
     @Override
     public DienstDTO deleteDienst(Long id) {
-        dienstRepository.deleteById(id);
+        Optional<Dienst> entityId = dienstRepository.findById(id);
+        if (entityId.isPresent()) {
+            dienstRepository.deleteById(id);
+        }else
+
+            throw new RecordNotFoundException(ErrorMessages.DIENST_NOT_FOUND + id);
+
+
         return null;
     }
 

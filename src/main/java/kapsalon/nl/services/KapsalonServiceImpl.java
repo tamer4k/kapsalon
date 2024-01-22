@@ -1,5 +1,7 @@
 package kapsalon.nl.services;
 
+import kapsalon.nl.exceptions.ErrorMessages;
+import kapsalon.nl.exceptions.RecordNotFoundException;
 import kapsalon.nl.models.dto.KapsalonDTO;
 import kapsalon.nl.models.entity.Kapsalon;
 import kapsalon.nl.repo.KapsalonRepository;
@@ -32,13 +34,11 @@ public class KapsalonServiceImpl implements KapsalonService {
     public KapsalonDTO getKapsalonById(Long id) {
 
         Optional<Kapsalon> entity = kapsalonRepository.findById(id);
-        KapsalonDTO dto;
-        if (entity.isPresent()) {
-        dto = fromEntityToDto(entity.get());
-
-        return dto;
+        if (entity.isPresent()){
+            return fromEntityToDto(entity.get());
+        }else {
+            throw new RecordNotFoundException(ErrorMessages.KAPSALON_NOT_FOUND + id);
         }
-        return  null;
     }
 
 
@@ -63,13 +63,19 @@ public class KapsalonServiceImpl implements KapsalonService {
 
             Kapsalon updatedEntity = kapsalonRepository.save(entity);
             return fromEntityToDto(updatedEntity);
+        }else {
+            throw new RecordNotFoundException(ErrorMessages.KAPSALON_NOT_FOUND + id);
         }
-        return null;
     }
 
     @Override
     public void deleteKapsalon(Long id) {
-        kapsalonRepository.deleteById(id);
+        Optional<Kapsalon> entityId = kapsalonRepository.findById(id);
+        if (entityId.isPresent()) {
+            kapsalonRepository.deleteById(id);
+        }else {
+            throw new RecordNotFoundException(ErrorMessages.KAPSALON_NOT_FOUND + id);
+        }
     }
 
     public static KapsalonDTO fromEntityToDto(Kapsalon entity){

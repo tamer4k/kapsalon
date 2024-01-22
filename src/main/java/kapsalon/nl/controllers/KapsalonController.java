@@ -1,5 +1,7 @@
 package kapsalon.nl.controllers;
 
+import kapsalon.nl.exceptions.ErrorMessages;
+import kapsalon.nl.exceptions.RecordNotFoundException;
 import kapsalon.nl.models.dto.KapsalonDTO;
 import kapsalon.nl.services.KapsalonService;
 import org.springframework.http.HttpStatus;
@@ -29,12 +31,14 @@ public class KapsalonController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<KapsalonDTO> getKapsalonById(@PathVariable Long id) {
-        KapsalonDTO result = kapsalonService.getKapsalonById(id);
-        if (result != null) {
+    public ResponseEntity<Object> getKapsalonById(@PathVariable Long id) {
+        try {
+            KapsalonDTO result = kapsalonService.getKapsalonById(id);
             return new ResponseEntity<>(result, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        }catch (RecordNotFoundException ex){
+            String errorMessage = ErrorMessages.KAPSALON_NOT_FOUND + id + " niet gevonden";
+            return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
         }
     }
 
@@ -55,20 +59,24 @@ public class KapsalonController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<KapsalonDTO> updateKapsalon(@PathVariable Long id, @RequestBody KapsalonDTO dto) {
+    public ResponseEntity<?> updateKapsalon(@PathVariable Long id, @RequestBody KapsalonDTO dto) {
+        try {
         KapsalonDTO result = kapsalonService.updateKapsalon(id, dto);
-        if (result != null) {
             return new ResponseEntity<>(result, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }catch (RecordNotFoundException ex){
+                String errorMessage = ErrorMessages.KAPSALON_NOT_FOUND + id + " niet gevonden";
+                return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteKapsalon(@PathVariable Long id) {
-        kapsalonService.deleteKapsalon(id);
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
+    public ResponseEntity<?> deleteKapsalon(@PathVariable Long id) {
+        try {
+            kapsalonService.deleteKapsalon(id);
+        }catch (RecordNotFoundException ex){
+            String errorMessage = ErrorMessages.KAPSALON_NOT_FOUND + id + " niet gevonden";
+            return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
+        }
+        return null;
     }
 }

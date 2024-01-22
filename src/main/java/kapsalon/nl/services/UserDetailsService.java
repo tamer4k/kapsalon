@@ -28,7 +28,7 @@ public class UserDetailsService implements org.springframework.security.core.use
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        UserDto userDto = userService.getUser(username);
+        UserDto userDto = userService.getByByUserName(username);
 
 
         String password = userDto.getPassword();

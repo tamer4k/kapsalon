@@ -42,6 +42,7 @@ public class DienstController {
             return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
         }
     }
+
     @PostMapping
     public ResponseEntity<Object> createDienst(@Validated @RequestBody DienstDTO dto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -68,6 +69,7 @@ public class DienstController {
             return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
         }
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteDienst(@PathVariable Long id) {
         try {

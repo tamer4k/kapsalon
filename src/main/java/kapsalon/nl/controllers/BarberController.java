@@ -1,5 +1,7 @@
 package kapsalon.nl.controllers;
 
+import kapsalon.nl.exceptions.ErrorMessages;
+import kapsalon.nl.exceptions.RecordNotFoundException;
 import kapsalon.nl.models.dto.BarberDTO;
 import kapsalon.nl.services.BarberService;
 import org.springframework.http.HttpStatus;
@@ -28,12 +30,13 @@ public class BarberController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BarberDTO> getBarberById(@PathVariable Long id) {
+    public ResponseEntity<Object> getBarberById(@PathVariable Long id) {
+        try {
         BarberDTO result = barberService.getBarberById(id);
-        if (result != null) {
             return new ResponseEntity<>(result, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }catch (RecordNotFoundException ex) {
+            String errorMessage = ErrorMessages.BARBER_NOT_FOUND + id + " niet gevonden";
+            return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
         }
     }
 
@@ -53,19 +56,25 @@ public class BarberController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BarberDTO> updateBarber(@PathVariable Long id, @RequestBody BarberDTO barberDTO) {
-        BarberDTO result = barberService.updateBarber(id, barberDTO);
-        if (result != null) {
+    public ResponseEntity<?> updateBarber(@PathVariable Long id, @RequestBody BarberDTO barberDTO) {
+        try {
+            BarberDTO result = barberService.updateBarber(id, barberDTO);
             return new ResponseEntity<>(result, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        }catch (RecordNotFoundException ex) {
+            String errorMessage = ErrorMessages.BARBER_NOT_FOUND + id + " niet gevonden";
+            return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBarber(@PathVariable Long id) {
-        barberService.deleteBarber(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
+    public ResponseEntity<?> deleteBarber(@PathVariable Long id) {
+        try {
+            barberService.deleteBarber(id);
+        } catch (RecordNotFoundException ex) {
+            String errorMessage = ErrorMessages.BARBER_NOT_FOUND + id + " niet gevonden";
+            return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
+        }
+        return null;
     }
 }

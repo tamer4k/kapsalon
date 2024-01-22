@@ -1,5 +1,7 @@
 package kapsalon.nl.controllers;
 
+import kapsalon.nl.exceptions.ErrorMessages;
+import kapsalon.nl.exceptions.RecordNotFoundException;
 import kapsalon.nl.models.dto.AppointmentDTO;
 import kapsalon.nl.services.AppointmentService;
 import org.springframework.http.HttpStatus;
@@ -29,12 +31,14 @@ public class AppointmentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AppointmentDTO> getAppointmentById(@PathVariable Long id) {
-        AppointmentDTO result = appointmentService.getAppointmentById(id);
-        if (result != null) {
+    public ResponseEntity<Object> getAppointmentById(@PathVariable Long id) {
+        try {
+            AppointmentDTO result = appointmentService.getAppointmentById(id);
             return new ResponseEntity<>(result, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        }catch (RecordNotFoundException ex) {
+            String errorMessage = ErrorMessages.APPOINTMENT_NOT_FOUND + id + " niet gevonden";
+            return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
         }
     }
 
@@ -73,10 +77,14 @@ public class AppointmentController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<AppointmentDTO> deleteAppointment(@PathVariable Long id) {
-        appointmentService.deleteAppointment(id);
+    public ResponseEntity<?> deleteAppointment(@PathVariable Long id) {
+        try {
+            appointmentService.deleteAppointment(id);
+        }catch (RecordNotFoundException ex) {
+            String errorMessage = ErrorMessages.APPOINTMENT_NOT_FOUND + id + " niet gevonden";
+            return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
+        }
 
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
+        return null;
     }
 }

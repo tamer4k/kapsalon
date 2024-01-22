@@ -1,6 +1,8 @@
 package kapsalon.nl.services;
 
 import jakarta.persistence.EntityNotFoundException;
+import kapsalon.nl.exceptions.ErrorMessages;
+import kapsalon.nl.exceptions.RecordNotFoundException;
 import kapsalon.nl.models.dto.BarberDTO;
 import kapsalon.nl.models.entity.Barber;
 import kapsalon.nl.models.entity.Kapsalon;
@@ -32,13 +34,14 @@ public class BarberServiceImpl implements BarberService {
 
     @Override
     public BarberDTO getBarberById(Long id) {
-
         Optional<Barber> entity = barberRepository.findById(id);
-        BarberDTO dto;
+        if (entity.isPresent()) {
 
-        dto = fromEntityToDto(entity.get());
+            return fromEntityToDto(entity.get());
 
-        return dto;
+        }else {
+            throw new RecordNotFoundException(ErrorMessages.BARBER_NOT_FOUND + id);
+        }
     }
 
 
@@ -73,13 +76,25 @@ public class BarberServiceImpl implements BarberService {
             entity.setKapsalon(kapsalon);
 
             return fromEntityToDto(updatedEntity);
+        }else {
+
+            throw new RecordNotFoundException(ErrorMessages.BARBER_NOT_FOUND + id);
+
         }
-        return null;
     }
 
     @Override
     public void deleteBarber(Long id) {
-        barberRepository.deleteById(id);
+
+        Optional<Barber> entityId = barberRepository.findById(id);
+
+        if (entityId.isPresent()) {
+            barberRepository.deleteById(id);
+        }else {
+
+            throw new RecordNotFoundException(ErrorMessages.BARBER_NOT_FOUND + id);
+        }
+
     }
 
     public static BarberDTO fromEntityToDto(Barber entity){

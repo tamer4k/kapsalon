@@ -1,6 +1,7 @@
 package kapsalon.nl.services;
 
 
+import kapsalon.nl.exceptions.ErrorMessages;
 import kapsalon.nl.models.dto.DienstDTO;
 import kapsalon.nl.models.dto.UserDto;
 import kapsalon.nl.models.entity.Authority;
@@ -29,7 +30,7 @@ public class UserService {
     }
 
 
-    public List<UserDto> getUsers() {
+    public List<UserDto> getAllUsers() {
         List<UserDto> collection = new ArrayList<>();
         List<User> list = userRepository.findAll();
         for (User user : list) {
@@ -38,16 +39,14 @@ public class UserService {
         return collection;
     }
 
-    public UserDto getUser(String username) {
-
-
+    public UserDto getByByUserName(String username) {
 
         Optional<User> user = userRepository.findByUsername(username);
-        UserDto dto;
-
-        dto = fromUser(user.get());
-
-        return dto;
+        if(user.isPresent()){
+            return fromUser(user.get());
+        }else {
+            throw new RecordNotFoundException(ErrorMessages.USER_NOT_FOUND + username);
+        }
     }
 
     public boolean userExists(String username) {

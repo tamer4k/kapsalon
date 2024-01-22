@@ -2,8 +2,8 @@ package kapsalon.nl.controllers;
 
 
 import kapsalon.nl.exceptions.BadRequestException;
-import kapsalon.nl.exceptions.UsernameNotFoundException;
-import kapsalon.nl.models.dto.DienstDTO;
+import kapsalon.nl.exceptions.ErrorMessages;
+import kapsalon.nl.exceptions.RecordNotFoundException;
 import kapsalon.nl.models.dto.UserDto;
 import kapsalon.nl.repo.AuthorityRepository;
 import kapsalon.nl.services.UserService;
@@ -34,20 +34,24 @@ public class UserController {
     }
 
     @GetMapping(value = "")
-    public ResponseEntity<List<UserDto>> getUsers() {
+    public ResponseEntity<List<UserDto>> getAllUsers() {
 
-        List<UserDto> userDtos = userService.getUsers();
+        List<UserDto> userDtos = userService.getAllUsers();
 
         return ResponseEntity.ok().body(userDtos);
     }
 
     @GetMapping(value = "/{username}")
-    public ResponseEntity<UserDto> getUser(@PathVariable String username) {
+    public ResponseEntity<Object> getByByUserName(@PathVariable String username) {
 
-        UserDto optionalUser = userService.getUser(username);
+        try {
+            UserDto optionalUser = userService.getByByUserName(username);
+            return ResponseEntity.ok().body(optionalUser);
 
-
-        return ResponseEntity.ok().body(optionalUser);
+        }catch (RecordNotFoundException ex) {
+            String errorMessage = ErrorMessages.USER_NOT_FOUND + username + " niet gevonden";
+            return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
+        }
 
     }
 
@@ -71,7 +75,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/{username}")
-    public ResponseEntity<UserDto> updateKlant(@PathVariable String username, @RequestBody UserDto dto) {
+    public ResponseEntity<UserDto> updateUser(@PathVariable String username, @RequestBody UserDto dto) {
 
         userService.updateUser(username, dto);
 
@@ -79,7 +83,7 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/{username}")
-    public ResponseEntity<Object> deleteKlant(@PathVariable("username") String username) {
+    public ResponseEntity<Object> deleteUser(@PathVariable("username") String username) {
         userService.deleteUser(username);
         return ResponseEntity.noContent().build();
     }
@@ -90,7 +94,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/{username}/authorities")
-    public ResponseEntity<Object> addUserRole(@PathVariable("username") String username, @RequestBody Map<String, Object> fields) {
+    public ResponseEntity<Object> addAuthority(@PathVariable("username") String username, @RequestBody Map<String, Object> fields) {
         try {
             String authorityName = (String) fields.get("authority");
             userService.addAuthority(username, authorityName);

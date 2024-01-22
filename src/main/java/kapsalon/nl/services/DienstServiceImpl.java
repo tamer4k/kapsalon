@@ -74,10 +74,10 @@ public class DienstServiceImpl implements DienstService {
         Optional<Dienst> entityId = dienstRepository.findById(id);
         if (entityId.isPresent()) {
             dienstRepository.deleteById(id);
-        }else
+        }else {
 
             throw new RecordNotFoundException(ErrorMessages.DIENST_NOT_FOUND + id);
-
+        }
 
         return null;
     }

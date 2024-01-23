@@ -9,5 +9,5 @@ public interface DienstService {
     public DienstDTO getDienstById(Long id);
     public DienstDTO createDienst(DienstDTO dienstDTO);
     public DienstDTO updateDienst(Long id, DienstDTO dienstDTO);
-    public DienstDTO deleteDienst(Long id);
+    public void deleteDienst(Long id);
 }

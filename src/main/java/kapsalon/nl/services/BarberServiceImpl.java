@@ -1,7 +1,6 @@
 package kapsalon.nl.services;
 
 import jakarta.persistence.EntityNotFoundException;
-import kapsalon.nl.exceptions.ErrorMessages;
 import kapsalon.nl.exceptions.RecordNotFoundException;
 import kapsalon.nl.models.dto.BarberDTO;
 import kapsalon.nl.models.entity.Barber;
@@ -34,14 +33,13 @@ public class BarberServiceImpl implements BarberService {
 
     @Override
     public BarberDTO getBarberById(Long id) {
-        Optional<Barber> entity = barberRepository.findById(id);
-        if (entity.isPresent()) {
 
-            return fromEntityToDto(entity.get());
+        Barber entity = barberRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("No Barber found with ID: " + id));
 
-        }else {
-            throw new RecordNotFoundException(ErrorMessages.BARBER_NOT_FOUND + id);
-        }
+        return fromEntityToDto(entity);
+
+
     }
 
 
@@ -60,9 +58,11 @@ public class BarberServiceImpl implements BarberService {
 
     @Override
     public BarberDTO updateBarber(Long id, BarberDTO dto) {
-        Optional<Barber> entityId = barberRepository.findById(id);
-        if (entityId.isPresent()) {
-            Barber entity = entityId.get();
+
+        Barber entity = barberRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("No Barber found with ID: " + id));
+
+
 
             entity.setName(dto.getName());
             entity.setAvailable(dto.isAvailable());
@@ -72,29 +72,19 @@ public class BarberServiceImpl implements BarberService {
             Barber updatedEntity = barberRepository.save(entity);
 
             Kapsalon kapsalon = kapsalonRepository.findById(dto.getKapsalon().getId())
-                    .orElseThrow(() -> new EntityNotFoundException("Kapsalon not found with id: " + dto.getKapsalon().getId()));
+                    .orElseThrow(() -> new RecordNotFoundException("Kapsalon not found with id: " + dto.getKapsalon().getId()));
             entity.setKapsalon(kapsalon);
 
             return fromEntityToDto(updatedEntity);
-        }else {
-
-            throw new RecordNotFoundException(ErrorMessages.BARBER_NOT_FOUND + id);
-
-        }
     }
 
     @Override
     public void deleteBarber(Long id) {
 
-        Optional<Barber> entityId = barberRepository.findById(id);
+        Barber barber = barberRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("No Barber found with ID: " + id));
 
-        if (entityId.isPresent()) {
-            barberRepository.deleteById(id);
-        }else {
-
-            throw new RecordNotFoundException(ErrorMessages.BARBER_NOT_FOUND + id);
-        }
-
+            barberRepository.delete(barber);
     }
 
     public static BarberDTO fromEntityToDto(Barber entity){

@@ -1,11 +1,13 @@
 package kapsalon.nl.services;
 
-import kapsalon.nl.exceptions.ErrorMessages;
 import kapsalon.nl.exceptions.RecordNotFoundException;
 import kapsalon.nl.models.dto.DienstDTO;
+import kapsalon.nl.models.dto.UserDto;
 import kapsalon.nl.models.entity.Category;
 import kapsalon.nl.models.entity.Dienst;
+import kapsalon.nl.models.entity.User;
 import kapsalon.nl.repo.DienstRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,12 +36,12 @@ public class DienstServiceImpl implements DienstService {
 
     @Override
     public DienstDTO getDienstById(Long id) {
-        Optional<Dienst> entity = dienstRepository.findById(id);
-        if (entity.isPresent()) {
-            return fromEntityToDto(entity.get());
-        } else {
-            throw new RecordNotFoundException(ErrorMessages.DIENST_NOT_FOUND + id);
-        }
+
+        Dienst dienst = dienstRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("No Dienst found with ID: " + id));
+
+            return fromEntityToDto(dienst);
+
     }
 
     @Override
@@ -50,38 +52,31 @@ public class DienstServiceImpl implements DienstService {
 
     @Override
     public DienstDTO updateDienst(Long id, DienstDTO dto) {
-        Optional<Dienst> entityId = dienstRepository.findById(id);
-        if (entityId.isPresent()) {
-            Dienst entity = entityId.get();
 
-            entity.setCategory(Category.valueOf(dto.getCategory()));
-            entity.setTitle(dto.getTitle());
-            entity.setDescription(dto.getDescription());
-            entity.setPrice(dto.getPrice());
-            entity.setDuration(dto.getDuration());
-            Dienst updatedEntity = dienstRepository.save(entity);
+        Dienst dienst = dienstRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("No Dienst found with ID: " + id));
+
+
+        dienst.setCategory(Category.valueOf(dto.getCategory()));
+        dienst.setTitle(dto.getTitle());
+        dienst.setDescription(dto.getDescription());
+        dienst.setPrice(dto.getPrice());
+        dienst.setDuration(dto.getDuration());
+
+            Dienst updatedEntity = dienstRepository.save(dienst);
 
             return fromEntityToDto(updatedEntity);
-        }else {
-
-            throw new RecordNotFoundException(ErrorMessages.DIENST_NOT_FOUND + id);
-
-        }
     }
 
     @Override
-    public DienstDTO deleteDienst(Long id) {
-        Optional<Dienst> entityId = dienstRepository.findById(id);
-        if (entityId.isPresent()) {
-            dienstRepository.deleteById(id);
-        }else {
+    public void deleteDienst(Long id) {
+        Dienst dienst = dienstRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("No Dienst found with ID: " + id));
 
-            throw new RecordNotFoundException(ErrorMessages.DIENST_NOT_FOUND + id);
-        }
+         dienstRepository.delete(dienst);
 
-        return null;
+
     }
-
     public static DienstDTO fromEntityToDto(Dienst entity){
         DienstDTO dto = new DienstDTO();
         dto.setId(entity.getId());

@@ -1,6 +1,5 @@
 package kapsalon.nl.services;
 
-import kapsalon.nl.exceptions.ErrorMessages;
 import kapsalon.nl.exceptions.RecordNotFoundException;
 import kapsalon.nl.models.dto.KapsalonDTO;
 import kapsalon.nl.models.entity.Kapsalon;
@@ -33,12 +32,11 @@ public class KapsalonServiceImpl implements KapsalonService {
     @Override
     public KapsalonDTO getKapsalonById(Long id) {
 
-        Optional<Kapsalon> entity = kapsalonRepository.findById(id);
-        if (entity.isPresent()){
-            return fromEntityToDto(entity.get());
-        }else {
-            throw new RecordNotFoundException(ErrorMessages.KAPSALON_NOT_FOUND + id);
-        }
+        Kapsalon kapsalon  = kapsalonRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("Kapsalon not found with id: " + id));
+
+            return fromEntityToDto(kapsalon);
+
     }
 
 
@@ -50,32 +48,30 @@ public class KapsalonServiceImpl implements KapsalonService {
 
     @Override
     public KapsalonDTO updateKapsalon(Long id, KapsalonDTO dto) {
-        Optional<Kapsalon> entityId = kapsalonRepository.findById(id);
-        if (entityId.isPresent()) {
-            Kapsalon entity = entityId.get();
-
-            entity.setName(dto.getName());
-            entity.setAvailability(dto.isAvailability());
-            entity.setLocation(dto.getLocation());
-            entity.setPostalCode(dto.getPostalCode());
-            entity.setOpeningHours(dto.getOpeningHours());
+        Kapsalon kapsalon = kapsalonRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("Kapsalon not found with id: " + id));
 
 
-            Kapsalon updatedEntity = kapsalonRepository.save(entity);
+
+        kapsalon.setName(dto.getName());
+        kapsalon.setAvailability(dto.isAvailability());
+        kapsalon.setLocation(dto.getLocation());
+        kapsalon.setPostalCode(dto.getPostalCode());
+        kapsalon.setOpeningHours(dto.getOpeningHours());
+
+
+            Kapsalon updatedEntity = kapsalonRepository.save(kapsalon);
             return fromEntityToDto(updatedEntity);
-        }else {
-            throw new RecordNotFoundException(ErrorMessages.KAPSALON_NOT_FOUND + id);
-        }
+
     }
 
     @Override
     public void deleteKapsalon(Long id) {
-        Optional<Kapsalon> entityId = kapsalonRepository.findById(id);
-        if (entityId.isPresent()) {
-            kapsalonRepository.deleteById(id);
-        }else {
-            throw new RecordNotFoundException(ErrorMessages.KAPSALON_NOT_FOUND + id);
-        }
+        Kapsalon kapsalon = kapsalonRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("Kapsalon not found with id: " + id));
+
+            kapsalonRepository.delete(kapsalon);
+
     }
 
     public static KapsalonDTO fromEntityToDto(Kapsalon entity){

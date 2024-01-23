@@ -1,8 +1,8 @@
 package kapsalon.nl.controllers;
 
-import kapsalon.nl.exceptions.ErrorMessages;
 import kapsalon.nl.exceptions.RecordNotFoundException;
 import kapsalon.nl.models.dto.DienstDTO;
+import kapsalon.nl.models.entity.Dienst;
 import kapsalon.nl.services.DienstService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,13 +34,10 @@ public class DienstController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getDienstById(@PathVariable Long id) {
-        try {
+
             DienstDTO result = dienstService.getDienstById(id);
             return new ResponseEntity<>(result, HttpStatus.OK);
-        } catch (RecordNotFoundException ex) {
-            String errorMessage = ErrorMessages.DIENST_NOT_FOUND + id + " niet gevonden";
-            return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
-        }
+
     }
 
     @PostMapping
@@ -61,24 +58,17 @@ public class DienstController {
     @PutMapping("/{id}")
     public ResponseEntity<?> updateDienst(@PathVariable Long id, @RequestBody DienstDTO dienstDTO) {
 
-        try {
             DienstDTO result = dienstService.updateDienst(id, dienstDTO);
             return new ResponseEntity<>(result, HttpStatus.OK);
-        } catch (RecordNotFoundException ex) {
-            String errorMessage = ErrorMessages.DIENST_NOT_FOUND + id + " niet gevonden";
-            return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
-        }
+
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteDienst(@PathVariable Long id) {
-        try {
-            dienstService.deleteDienst(id);
-        } catch (RecordNotFoundException ex) {
-            String errorMessage = ErrorMessages.DIENST_NOT_FOUND + id + " niet gevonden";
-            return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
+
+         dienstService.deleteDienst(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+
         }
 
-        return null;
-    }
 }

@@ -2,7 +2,6 @@ package kapsalon.nl.controllers;
 
 
 import kapsalon.nl.exceptions.BadRequestException;
-import kapsalon.nl.exceptions.ErrorMessages;
 import kapsalon.nl.exceptions.RecordNotFoundException;
 import kapsalon.nl.models.dto.UserDto;
 import kapsalon.nl.repo.AuthorityRepository;
@@ -41,17 +40,13 @@ public class UserController {
         return ResponseEntity.ok().body(userDtos);
     }
 
+
+
     @GetMapping(value = "/{username}")
-    public ResponseEntity<Object> getByByUserName(@PathVariable String username) {
+    public ResponseEntity<?> getByByUserName(@PathVariable String username) {
 
-        try {
-            UserDto optionalUser = userService.getByByUserName(username);
+            UserDto optionalUser = userService.getByUserName(username);
             return ResponseEntity.ok().body(optionalUser);
-
-        }catch (RecordNotFoundException ex) {
-            String errorMessage = ErrorMessages.USER_NOT_FOUND + username + " niet gevonden";
-            return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
-        }
 
     }
 
@@ -76,10 +71,8 @@ public class UserController {
 
     @PutMapping(value = "/{username}")
     public ResponseEntity<UserDto> updateUser(@PathVariable String username, @RequestBody UserDto dto) {
-
-        userService.updateUser(username, dto);
-
-        return ResponseEntity.noContent().build();
+        UserDto optionalUser = userService.updateUser(username,dto);
+        return ResponseEntity.ok().body(optionalUser);
     }
 
     @DeleteMapping(value = "/{username}")

@@ -1,6 +1,5 @@
 package kapsalon.nl.services;
 import jakarta.persistence.EntityNotFoundException;
-import kapsalon.nl.exceptions.ErrorMessages;
 import kapsalon.nl.exceptions.RecordNotFoundException;
 import kapsalon.nl.models.dto.AppointmentDTO;
 import kapsalon.nl.models.entity.*;
@@ -38,12 +37,10 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public AppointmentDTO getAppointmentById(Long id) {
-        Optional<Appointment> entity = appointmentRepository.findById(id);
-        if (entity.isPresent()) {
-            return fromEntityToDto(entity.get());
-        }else {
-            throw new RecordNotFoundException(ErrorMessages.APPOINTMENT_NOT_FOUND + id);
-        }
+        Appointment appointment = appointmentRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("Appointment not found with id: " + id));
+            return fromEntityToDto(appointment);
+
     }
 
     @Override
@@ -144,15 +141,12 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public AppointmentDTO deleteAppointment(Long id) {
-        Optional<Appointment> entity = appointmentRepository.findById(id);
-        if (entity.isPresent()) {
-            appointmentRepository.deleteById(id);
-        }else {
+    public void deleteAppointment(Long id) {
+       Appointment appointment= appointmentRepository.findById(id)
+               .orElseThrow(() -> new RecordNotFoundException("Appointment not found with id: " + id));
 
-            throw new RecordNotFoundException(ErrorMessages.BARBER_NOT_FOUND + id);
-        }
-        return null;
+            appointmentRepository.delete(appointment);
+
     }
 
     public  AppointmentDTO fromEntityToDto(Appointment entity){

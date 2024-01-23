@@ -1,6 +1,5 @@
 package kapsalon.nl.controllers;
 
-import kapsalon.nl.exceptions.ErrorMessages;
 import kapsalon.nl.exceptions.RecordNotFoundException;
 import kapsalon.nl.models.dto.BarberDTO;
 import kapsalon.nl.services.BarberService;
@@ -31,14 +30,11 @@ public class BarberController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getBarberById(@PathVariable Long id) {
-        try {
+
         BarberDTO result = barberService.getBarberById(id);
             return new ResponseEntity<>(result, HttpStatus.OK);
-        }catch (RecordNotFoundException ex) {
-            String errorMessage = ErrorMessages.BARBER_NOT_FOUND + id + " niet gevonden";
-            return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
-        }
     }
+
 
     @PostMapping
     public ResponseEntity<Object> createBarber(@Validated @RequestBody BarberDTO dto , BindingResult bindingResult) {
@@ -57,24 +53,16 @@ public class BarberController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateBarber(@PathVariable Long id, @RequestBody BarberDTO barberDTO) {
-        try {
+
             BarberDTO result = barberService.updateBarber(id, barberDTO);
             return new ResponseEntity<>(result, HttpStatus.OK);
 
-        }catch (RecordNotFoundException ex) {
-            String errorMessage = ErrorMessages.BARBER_NOT_FOUND + id + " niet gevonden";
-            return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
-        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteBarber(@PathVariable Long id) {
-        try {
-            barberService.deleteBarber(id);
-        } catch (RecordNotFoundException ex) {
-            String errorMessage = ErrorMessages.BARBER_NOT_FOUND + id + " niet gevonden";
-            return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
-        }
-        return null;
+
+        barberService.deleteBarber(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

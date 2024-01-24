@@ -1,6 +1,9 @@
 package kapsalon.nl.models.entity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +26,7 @@ public class Barber {
 
     @ManyToOne
     @JoinColumn(name = "kapsalon_id")
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     private Kapsalon kapsalon;
 
     @ManyToMany

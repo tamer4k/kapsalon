@@ -6,13 +6,15 @@ INSERT INTO opening_hours (monday, tuesday, wednesday, thursday, friday, saturda
 INSERT INTO opening_hours (monday, tuesday, wednesday, thursday, friday, saturday, sunday)VALUES('09:00 - 18:00', '09:00 - 18:00', '09:00 - 18:00', '09:00 - 18:00', '09:00 - 18:00', 'Closed', 'Closed');
 
 
-INSERT INTO kapsalon (name, location, postal_code, availability, opening_hours_id)VALUES('HairStyle Masters', 'Main Street10','1811DS', true,1);
-INSERT INTO kapsalon (name, location, postal_code,availability, opening_hours_id)VALUES('Kapper Knipper', 'Main Street4','3356KA', true,2);
+INSERT INTO kapsalon (name, owner, location, postal_code, availability, opening_hours_id)VALUES('StarkStyle', 'Eddard',  'Main Street10','1811DS', true,1);
+INSERT INTO kapsalon (name, owner,location, postal_code,availability, opening_hours_id)VALUES('LannisterStyle', 'Tywin' ,  'Main Street4','3356KA', true,2);
 
 
-INSERT INTO barbers (name, available, license,kapsalon_id) VALUES ('Tamer', true, 'License123',1);
-INSERT INTO barbers (name, available, license,kapsalon_id) VALUES ('Ashraf', true, 'License456',1);
-INSERT INTO barbers (name, available, license,kapsalon_id) VALUES ('Joeseef', true, 'License789',2);
+INSERT INTO barbers (name, available, license,kapsalon_id) VALUES ('Sansa', true, 'License123',1);
+INSERT INTO barbers (name, available, license,kapsalon_id) VALUES ('Arya', true, 'License456',1);
+INSERT INTO barbers (name, available, license,kapsalon_id) VALUES ('Cersei', true, 'License789',2);
+INSERT INTO barbers (name, available, license,kapsalon_id) VALUES ('Baelish', true, 'License780',2);
+
 
 
 INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (1,1);
@@ -21,10 +23,9 @@ INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (2,2);
 INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (1,3);
 
 
-
-INSERT INTO customers (first_name, second_name, email, phone_number) VALUES('John', 'Doe', 'john.doe@example.com', '+1234567890');
-INSERT INTO customers (first_name, second_name, email, phone_number) VALUES('Alice', 'Smith', 'alice.smith@example.com', '+9876543210');
-INSERT INTO customers (first_name, second_name, email, phone_number) VALUES('Bob', 'Johnson', 'bob.johnson@example.com', '+1112233445');
+INSERT INTO customers (first_name, second_name, email, phone_number) VALUES('Jon', ' Snow', 'Jon@example.com', '+1112233445');
+INSERT INTO customers (first_name, second_name, email, phone_number) VALUES('Joffrey', 'Baratheon', 'Joffrey@example.com', '+1234567890');
+INSERT INTO customers (first_name, second_name, email, phone_number) VALUES('Tyrion', 'Lannister', 'Tyrion@example.com', '+9876543210');
 
 
 INSERT INTO financial_details (bank_name, account_name, account_number, card_number, valid) VALUES('ING', 'John Doe', '12345678', '1111222233334444', '12/24');

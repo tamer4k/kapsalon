@@ -16,6 +16,7 @@ public class Kapsalon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String owner;
     private String location;
     private String postalCode;
     private boolean availability;
@@ -23,5 +24,6 @@ public class Kapsalon {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "opening_hours_id")
     private OpeningHours openingHours;
+
 
 }

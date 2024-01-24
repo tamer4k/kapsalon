@@ -1,0 +1,1295 @@
+{
+	"info": {
+		"_postman_id": "836c539f-0203-4b91-a54e-258cb803a838",
+		"name": "kapsalon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21220787"
+	},
+	"item": [
+		{
+			"name": "Diensten",
+			"item": [
+				{
+					"name": "getAllDiensten",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTkxOTIyMywiZXhwIjoxNzA2NzgzMjIzfQ.ZWmmJBrC9q5aY8susGDY_-7GW394Qb19AIgpIbhHA9g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/diensten",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"diensten"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDienstById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTkxOTIyMywiZXhwIjoxNzA2NzgzMjIzfQ.ZWmmJBrC9q5aY8susGDY_-7GW394Qb19AIgpIbhHA9g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/diensten/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"diensten",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createDienst",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTY3NDg5MSwiZXhwIjoxNzA2NTM4ODkxfQ.hZeuhIOE70jAtT-IyiPfHtofpZzjYBrk0jkbcbUW8xU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category\": \"Men\",\r\n    \"title\": \"Haar Knippen en stylen\",\r\n    \"description\": \"Onderhoud van mannelijke kippen\",\r\n    \"duration\": 15,\r\n    \"price\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/diensten",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"diensten"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateDienst",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTkyNjM3MSwiZXhwIjoxNzA2NzkwMzcxfQ.Tq-thc11xLbU1vNP0NMqPngufM4Y2oVjPQ3fQE4dBZc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category\": \"Men\",\r\n    \"title\": \"Herenservicezc\",\r\n    \"description\": \"Onderhoud van mannelijke kippen\",\r\n    \"duration\": 15.0,\r\n    \"price\": 20.0,\r\n    \"kapper\": {\r\n        \"id\":1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/diensten/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"diensten",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteDienst",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTkyNjQ0NCwiZXhwIjoxNzA2NzkwNDQ0fQ.93d4iZGMmjjGbfZ7pbna4p9fge6d4MdrerMA6fzlMTg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/diensten/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"diensten",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Barbers",
+			"item": [
+				{
+					"name": "getAllBarbers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTY3NTE0NiwiZXhwIjoxNzA2NTM5MTQ2fQ.uMKdhFZhEPX58vgiqNfukihM6GYSrhfmwfrB3DiWcOA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/barbers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"barbers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBarberById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTY3NTE0NiwiZXhwIjoxNzA2NTM5MTQ2fQ.uMKdhFZhEPX58vgiqNfukihM6GYSrhfmwfrB3DiWcOA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/barbers/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"barbers",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createBarber",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTY3MDA0MSwiZXhwIjoxNzA2NTM0MDQxfQ.PwTr_b25mPOo6WKXUILDGNDyMiCFWtwga3V28UyTI_c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Daenerys\",\r\n  \"available\": true,\r\n  \"license\": \"123ABC\",\r\n  \"kapsalon\": {\r\n    \"id\": 1\r\n  },\r\n  \"diensten\": [\r\n    {\"id\": 1},\r\n    {\"id\": 2},\r\n    {\"id\": 3}\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/barbers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"barbers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateBarber",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTY3NTE0NiwiZXhwIjoxNzA2NTM5MTQ2fQ.uMKdhFZhEPX58vgiqNfukihM6GYSrhfmwfrB3DiWcOA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Daenerys\",\r\n  \"available\": true,\r\n  \"license\": \"123ABC\",\r\n  \"kapsalon\": {\r\n    \"id\": 3\r\n  },\r\n  \"diensten\": [\r\n    {\"id\": 1},\r\n    {\"id\": 2},\r\n    {\"id\": 3}\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/barbers/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"barbers",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteBarber",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTY3NTE0NiwiZXhwIjoxNzA2NTM5MTQ2fQ.uMKdhFZhEPX58vgiqNfukihM6GYSrhfmwfrB3DiWcOA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/barbers/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"barbers",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Kapsalon",
+			"item": [
+				{
+					"name": "getAllKapsalons",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTY3NTE0NiwiZXhwIjoxNzA2NTM5MTQ2fQ.uMKdhFZhEPX58vgiqNfukihM6GYSrhfmwfrB3DiWcOA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/kapsalon",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"kapsalon"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getKapsalonById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTY3NTE0NiwiZXhwIjoxNzA2NTM5MTQ2fQ.uMKdhFZhEPX58vgiqNfukihM6GYSrhfmwfrB3DiWcOA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/kapsalon/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"kapsalon",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createKapsalon",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTY3NTE0NiwiZXhwIjoxNzA2NTM5MTQ2fQ.uMKdhFZhEPX58vgiqNfukihM6GYSrhfmwfrB3DiWcOA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"TargaryenStyle\",\r\n    \"owner\": \"Aerys\",\r\n    \"location\": \"Main Street5\",\r\n    \"postalCode\": \"1274DS\",\r\n    \"availability\": true,\r\n    \"openingHours\": {\r\n        \"monday\": \"09:00 - 18:00\",\r\n        \"tuesday\": \"09:00 - 18:00\",\r\n        \"wednesday\": \"09:00 - 18:00\",\r\n        \"thursday\": \"09:00 - 18:00\",\r\n        \"friday\": \"09:00 - 18:00\",\r\n        \"saturday\": \"10:00 - 16:00\",\r\n        \"sunday\": \"Closed\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/kapsalon",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"kapsalon"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateKapsalon",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTY3NTE0NiwiZXhwIjoxNzA2NTM5MTQ2fQ.uMKdhFZhEPX58vgiqNfukihM6GYSrhfmwfrB3DiWcOA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"StarkStyles\",\r\n    \"owner\": \"Eddard\",\r\n    \"location\": \"Main Street10\",\r\n    \"postalCode\": \"1811DS\",\r\n    \"availability\": true,\r\n    \"openingHours\": {\r\n        \"id\": 1,\r\n        \"monday\": \"09:00 - 18:00\",\r\n        \"tuesday\": \"09:00 - 18:00\",\r\n        \"wednesday\": \"09:00 - 18:00\",\r\n        \"thursday\": \"09:00 - 18:00\",\r\n        \"friday\": \"09:00 - 18:00\",\r\n        \"saturday\": \"10:00 - 16:00\",\r\n        \"sunday\": \"Closed\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/kapsalon/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"kapsalon",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteKapsalon",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNjEwNTk3MCwiZXhwIjoxNzA2OTY5OTcwfQ.tPBD5VTdJ5aI9FXby5mi1kVvZny82j7TDXEXs-v8dCw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/kapsalon/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"kapsalon",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "getAllCustomers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTY3NzM0MywiZXhwIjoxNzA2NTQxMzQzfQ.2222TDqORPCZVH5H1S64EOxSRPdmM6rUyD-kGSy__so",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCustomertById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTY3NzM0MywiZXhwIjoxNzA2NTQxMzQzfQ.2222TDqORPCZVH5H1S64EOxSRPdmM6rUyD-kGSy__so",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createCustomer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTY3NzM0MywiZXhwIjoxNzA2NTQxMzQzfQ.2222TDqORPCZVH5H1S64EOxSRPdmM6rUyD-kGSy__so",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Missandei\",\r\n    \"secondName\": \"Emmanuel\",\r\n    \"email\": \"Missandei@example.com\",\r\n    \"phoneNumber\": \"+1234567890\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCustomer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTY3NzM0MywiZXhwIjoxNzA2NTQxMzQzfQ.2222TDqORPCZVH5H1S64EOxSRPdmM6rUyD-kGSy__so",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Jon\",\r\n    \"secondName\": \" Snows\",\r\n    \"email\": \"Jon@example.com\",\r\n    \"phoneNumber\": \"+1112233445\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCustomer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTY3NzM0MywiZXhwIjoxNzA2NTQxMzQzfQ.2222TDqORPCZVH5H1S64EOxSRPdmM6rUyD-kGSy__so",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Appointment",
+			"item": [
+				{
+					"name": "getAllAppointments",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTkzMjMxMiwiZXhwIjoxNzA2Nzk2MzEyfQ.eVfzIc_S_zJV-myiQ5gGz9ez5G0gLZsStKRXO-CDbhQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/afspraken",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"afspraken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAppointmentById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTY3NzM0MywiZXhwIjoxNzA2NTQxMzQzfQ.2222TDqORPCZVH5H1S64EOxSRPdmM6rUyD-kGSy__so",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/afspraken/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"afspraken",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createAppointment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0YW1lciIsImlhdCI6MTcwNTU2Njc2MiwiZXhwIjoxNzA2NDMwNzYyfQ.qJma7IvSsatT-wWQBm-INtvqejjf1mhKwN0tTFMZ1jc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"appointmentDate\": \"2024-01-22\",\r\n    \"appointmentTime\": \"16:15:00\",\r\n    \"kapsalon\":{\r\n        \"id\": 1\r\n    },\r\n        \"dienst\":{\r\n        \"id\": 1\r\n    },\r\n        \"barber\":{\r\n        \"id\": 1\r\n    },\r\n        \"customer\":{\r\n        \"id\":2\r\n    }\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/afspraken",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"afspraken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateAppointment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTY3NzM0MywiZXhwIjoxNzA2NTQxMzQzfQ.2222TDqORPCZVH5H1S64EOxSRPdmM6rUyD-kGSy__so",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"appointmentDate\": \"2024-01-22\",\r\n    \"appointmentTime\": \"16:15:00\",\r\n    \"kapsalon\":{\r\n        \"id\": 1\r\n    },\r\n        \"dienst\":{\r\n        \"id\": 2\r\n    },\r\n        \"barber\":{\r\n        \"id\": 2\r\n    },\r\n        \"customer\":{\r\n        \"id\":3\r\n    }\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/afspraken/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"afspraken",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAppointment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTkzMjMxMiwiZXhwIjoxNzA2Nzk2MzEyfQ.eVfzIc_S_zJV-myiQ5gGz9ez5G0gLZsStKRXO-CDbhQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/afspraken/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"afspraken",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "getAllUsers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTY2NzQ5MSwiZXhwIjoxNzA2NTMxNDkxfQ.NWNe_Q5CdC_bWBxspDhVqPtAAqZaSwJDvn1eaP-h77w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUsertById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNjAwMTAxNywiZXhwIjoxNzA2ODY1MDE3fQ.La-5Hqj-qUYdwML6xK8LhI7WTDjxE2nRMxjqY8l_lDM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/tamer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"tamer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNjAwNTM3NSwiZXhwIjoxNzA2ODY5Mzc1fQ.1gnweLWVm_rVOBlMdoE9ZtFOQdA2HL6GmOCe2Nh6-S8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"tamer\",\r\n    \"email\":\"tamer@test.nl\",\r\n    \"enabled\":\"TRUE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/tamer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"tamer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNjAwNTM3NSwiZXhwIjoxNzA2ODY5Mzc1fQ.1gnweLWVm_rVOBlMdoE9ZtFOQdA2HL6GmOCe2Nh6-S8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/tamer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"tamer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add-role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNTY3NzM0MywiZXhwIjoxNzA2NTQxMzQzfQ.2222TDqORPCZVH5H1S64EOxSRPdmM6rUyD-kGSy__so",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"authority\": \"Owner\"}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/tamer/authorities",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"tamer",
+								"authorities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNjEwMDk0NywiZXhwIjoxNzA2OTY0OTQ3fQ.pPVz9uChGt6A8jSOaDVRp5Eg7h0FzgX62PLeSdhI1rU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/admin/authorities",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"admin",
+								"authorities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove-role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNjEwMTQzMCwiZXhwIjoxNzA2OTY1NDMwfQ._18AHGkt5oHhLcOAzWM1nDnl9BqQ8f9kerCpbKQcSi4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/tamer/authorities/admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"tamer",
+								"authorities",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "authenticated",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwNjEwMDgyOSwiZXhwIjoxNzA2OTY0ODI5fQ.FN4rTroYkhpZ0WnydULjUc8vFmwTkFqq2AZ5cjaLWD4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/authenticated",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"authenticated"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"tamer\",\r\n    \"password\":\"123\",\r\n    \"email\":\"tamer@test.nl\",\r\n    \"enabled\":\"TRUE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"password\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

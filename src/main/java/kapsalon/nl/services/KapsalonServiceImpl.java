@@ -54,6 +54,7 @@ public class KapsalonServiceImpl implements KapsalonService {
 
 
         kapsalon.setName(dto.getName());
+        kapsalon.setOwner(dto.getOwner());
         kapsalon.setAvailability(dto.isAvailability());
         kapsalon.setLocation(dto.getLocation());
         kapsalon.setPostalCode(dto.getPostalCode());
@@ -78,6 +79,7 @@ public class KapsalonServiceImpl implements KapsalonService {
         KapsalonDTO dto = new KapsalonDTO();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
+        dto.setOwner(entity.getOwner());
         dto.setAvailability(entity.isAvailability());
         dto.setLocation(entity.getLocation());
         dto.setPostalCode(entity.getPostalCode());
@@ -91,6 +93,7 @@ public class KapsalonServiceImpl implements KapsalonService {
 
         entity.setId(dto.getId());
         entity.setName(dto.getName());
+        entity.setOwner(dto.getOwner());
         entity.setAvailability(dto.isAvailability());
         entity.setLocation(dto.getLocation());
         entity.setPostalCode(dto.getPostalCode());

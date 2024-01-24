@@ -57,6 +57,7 @@ public class SpringSecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth ->
                         auth
+                                //Dienst
                 .requestMatchers(HttpMethod.GET,"/api/v1/diensten").hasAnyRole("ADMIN","USER")
                 .requestMatchers(HttpMethod.GET,"/api/v1/diensten/**").hasAnyRole("ADMIN","USER")
                 .requestMatchers(HttpMethod.POST,"/api/v1/diensten").hasAnyRole("ADMIN","USER")
@@ -89,9 +90,12 @@ public class SpringSecurityConfig {
                                 // User
                 .requestMatchers(HttpMethod.GET,"/api/v1/users").hasAnyRole("ADMIN","USER")
                 .requestMatchers(HttpMethod.GET,"/api/v1/users/{username}").hasAnyRole("ADMIN","USER")
-                .requestMatchers(HttpMethod.POST,"/api/v1/users/{username}/authorities").hasAnyRole("ADMIN","USER")
                 .requestMatchers(HttpMethod.PUT,"/api/v1/users/{username}").hasAnyRole("ADMIN","USER")
                 .requestMatchers(HttpMethod.DELETE,"/api/v1/users/{username}").hasAnyRole("ADMIN","USER")
+                                //Role
+                .requestMatchers(HttpMethod.POST,"/api/v1/users/{username}/authorities").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.GET,"/api/v1/users/{username}/authorities").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.DELETE,"/api/v1/users/{username}/authorities/{authority}").hasAnyRole("ADMIN","USER")
                                 //authe
                 .requestMatchers(HttpMethod.POST,"/api/v1/users/register").permitAll()
                 .requestMatchers("/api/v1/login").permitAll()

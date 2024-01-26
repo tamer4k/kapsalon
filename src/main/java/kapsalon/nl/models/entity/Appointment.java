@@ -24,15 +24,15 @@ public class Appointment {
     @ManyToOne()
     @JoinColumn(name = "kapsalon_id")
     @OnDelete(action = OnDeleteAction.SET_NULL)
-    private Kapsalon kapsalon;
+    private Kapsalon selectedKapsalon;
 
     @ManyToOne()
     @JoinColumn(name = "dienst_id")
-    private Dienst dienst;
+    private Dienst selectedDienst;
 
     @ManyToOne()
     @JoinColumn(name = "barber_id")
-    private Barber barber;
+    private Barber selectedBarber;
 
     private LocalDate appointmentDate;
 
@@ -41,6 +41,8 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
+
+    private  boolean isPaid;
 
 
 

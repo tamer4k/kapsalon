@@ -48,27 +48,27 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         List<Kapsalon> kapsalonList = kapsalonRepository.findAll();
         for (Kapsalon kapsalonUitList : kapsalonList){
-            if (dto.getKapsalon().getId().equals(kapsalonUitList.getId())){
+            if (dto.getSelectedKapsalon().getId().equals(kapsalonUitList.getId())){
                 List<Barber> kapperList = barberRepository.findAll();
                 for (Barber kapperUitList : kapperList) {
-                    if(dto.getBarber().getId().equals(kapperUitList.getId()) && dto.getKapsalon().getId().equals(kapperUitList.getKapsalon().getId())){
+                    if(dto.getSelectedBarber().getId().equals(kapperUitList.getId()) && dto.getSelectedKapsalon().getId().equals(kapperUitList.getKapsalon().getId())){
                         List<Dienst> kapperDienstenList = kapperUitList.getDiensten();
                         for (Dienst kapperDienst: kapperDienstenList) {
-                            if (dto.getDienst().getId().equals(kapperDienst.getId())) {
+                            if (dto.getSelectedDienst().getId().equals(kapperDienst.getId())) {
 
                                 Appointment entity = appointmentRepository.save(fromDtoToEntity(dto));
 
-                                Kapsalon kapsalon = kapsalonRepository.findById(dto.getKapsalon().getId())
-                                        .orElseThrow(() -> new EntityNotFoundException("Kapsalon not found with id: " + dto.getKapsalon().getId()));
-                                entity.setKapsalon(kapsalon);
+                                Kapsalon kapsalon = kapsalonRepository.findById(dto.getSelectedKapsalon().getId())
+                                        .orElseThrow(() -> new EntityNotFoundException("Kapsalon not found with id: " + dto.getSelectedKapsalon().getId()));
+                                entity.setSelectedKapsalon(kapsalon);
 
-                                Dienst dienst =dienstRepository.findById(dto.getDienst().getId())
-                                        .orElseThrow(() -> new EntityNotFoundException("Dienst not found with id: " + dto.getDienst().getId()));
-                                entity.setDienst(dienst);
+                                Dienst dienst =dienstRepository.findById(dto.getSelectedDienst().getId())
+                                        .orElseThrow(() -> new EntityNotFoundException("Dienst not found with id: " + dto.getSelectedDienst().getId()));
+                                entity.setSelectedDienst(dienst);
 
-                                Barber barber = barberRepository.findById(dto.getBarber().getId())
-                                        .orElseThrow(() -> new EntityNotFoundException("Barber not found with id: " + dto.getBarber().getId()));
-                                entity.setBarber(barber);
+                                Barber barber = barberRepository.findById(dto.getSelectedBarber().getId())
+                                        .orElseThrow(() -> new EntityNotFoundException("Barber not found with id: " + dto.getSelectedBarber().getId()));
+                                entity.setSelectedBarber(barber);
 
                                 Customer customer = customerRepository.findById(dto.getCustomer().getId())
                                         .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + dto.getCustomer().getId()));
@@ -90,13 +90,13 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         List<Kapsalon> kapsalonList = kapsalonRepository.findAll();
         for (Kapsalon kapsalonUitList : kapsalonList){
-            if (dto.getKapsalon().getId().equals(kapsalonUitList.getId())){
+            if (dto.getSelectedKapsalon().getId().equals(kapsalonUitList.getId())){
                 List<Barber> kapperList = barberRepository.findAll();
                 for (Barber kapperUitList : kapperList) {
-                    if(dto.getBarber().getId().equals(kapperUitList.getId()) && dto.getKapsalon().getId().equals(kapperUitList.getKapsalon().getId())){
+                    if(dto.getSelectedBarber().getId().equals(kapperUitList.getId()) && dto.getSelectedKapsalon().getId().equals(kapperUitList.getKapsalon().getId())){
                         List<Dienst> kapperDienstenList = kapperUitList.getDiensten();
                         for (Dienst kapperDienst: kapperDienstenList) {
-                            if (dto.getDienst().getId().equals(kapperDienst.getId())) {
+                            if (dto.getSelectedDienst().getId().equals(kapperDienst.getId())) {
 
                                 Optional<Appointment> entityId = appointmentRepository.findById(id);
                                 if (entityId.isPresent()) {
@@ -104,23 +104,23 @@ public class AppointmentServiceImpl implements AppointmentService {
 
                                     entity.setAppointmentDate(dto.getAppointmentDate());
                                     entity.setAppointmentTime(dto.getAppointmentTime());
-                                    entity.setKapsalon(dto.getKapsalon());
-                                    entity.setDienst(dto.getDienst());
-                                    entity.setBarber(dto.getBarber());
+                                    entity.setSelectedKapsalon(dto.getSelectedKapsalon());
+                                    entity.setSelectedDienst(dto.getSelectedDienst());
+                                    entity.setSelectedBarber(dto.getSelectedBarber());
                                     entity.setCustomer(dto.getCustomer());
                                     Appointment updatedEntity = appointmentRepository.save(entity);
 
-                                    Kapsalon kapsalon = kapsalonRepository.findById(dto.getKapsalon().getId())
-                                            .orElseThrow(() -> new EntityNotFoundException("Kapsalon not found with id: " + dto.getKapsalon().getId()));
-                                    updatedEntity.setKapsalon(kapsalon);
+                                    Kapsalon kapsalon = kapsalonRepository.findById(dto.getSelectedKapsalon().getId())
+                                            .orElseThrow(() -> new EntityNotFoundException("Kapsalon not found with id: " + dto.getSelectedKapsalon().getId()));
+                                    updatedEntity.setSelectedKapsalon(kapsalon);
 
-                                    Dienst dienst =dienstRepository.findById(dto.getDienst().getId())
-                                            .orElseThrow(() -> new EntityNotFoundException("Dienst not found with id: " + dto.getDienst().getId()));
-                                    updatedEntity.setDienst(dienst);
+                                    Dienst dienst =dienstRepository.findById(dto.getSelectedDienst().getId())
+                                            .orElseThrow(() -> new EntityNotFoundException("Dienst not found with id: " + dto.getSelectedDienst().getId()));
+                                    updatedEntity.setSelectedDienst(dienst);
 
-                                    Barber barber = barberRepository.findById(dto.getBarber().getId())
-                                            .orElseThrow(() -> new EntityNotFoundException("Barber not found with id: " + dto.getBarber().getId()));
-                                    updatedEntity.setBarber(barber);
+                                    Barber barber = barberRepository.findById(dto.getSelectedBarber().getId())
+                                            .orElseThrow(() -> new EntityNotFoundException("Barber not found with id: " + dto.getSelectedBarber().getId()));
+                                    updatedEntity.setSelectedBarber(barber);
 
                                     Customer customer = customerRepository.findById(dto.getCustomer().getId())
                                             .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + dto.getCustomer().getId()));
@@ -154,27 +154,28 @@ public class AppointmentServiceImpl implements AppointmentService {
         AppointmentDTO dto = new AppointmentDTO();
 
         dto.setId(entity.getId());
-        dto.setKapsalon(entity.getKapsalon());
-        dto.setDienst(entity.getDienst());
-        dto.setBarber(entity.getBarber());
+        dto.setSelectedKapsalon(entity.getSelectedKapsalon());
+        dto.setSelectedDienst(entity.getSelectedDienst());
+        dto.setSelectedBarber(entity.getSelectedBarber());
         dto.setAppointmentDate(entity.getAppointmentDate());
         dto.setAppointmentTime(entity.getAppointmentTime());
         dto.setCustomer(entity.getCustomer());
+        dto.setPaid(entity.isPaid());
 
         return  dto;
     }
 
-    public  Appointment fromDtoToEntity(AppointmentDTO dto) {
+    public static   Appointment fromDtoToEntity(AppointmentDTO dto) {
 
         Appointment entity = new Appointment();
         entity.setId(dto.getId());
-        entity.setKapsalon(dto.getKapsalon());
-        entity.setDienst(dto.getDienst());
-        entity.setBarber(dto.getBarber());
+        entity.setSelectedKapsalon(dto.getSelectedKapsalon());
+        entity.setSelectedDienst(dto.getSelectedDienst());
+        entity.setSelectedBarber(dto.getSelectedBarber());
         entity.setAppointmentDate(dto.getAppointmentDate());
         entity.setAppointmentTime(dto.getAppointmentTime());
         entity.setCustomer(dto.getCustomer());
-
+        entity.setPaid(dto.isPaid());
         return entity;
 
     }

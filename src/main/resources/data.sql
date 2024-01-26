@@ -19,6 +19,7 @@ INSERT INTO barbers (name, available, license,kapsalon_id) VALUES ('Baelish', tr
 
 INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (1,1);
 INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (3,2);
+INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (3,3);
 INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (2,2);
 INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (1,3);
 
@@ -34,7 +35,8 @@ INSERT INTO financial_details (bank_name, account_name, account_number, card_num
 
 
 
-INSERT INTO appointment (appointment_date, appointment_time, barber_id,dienst_id ,customer_id,kapsalon_id) VALUES('2023-01-15', '10:30', 1,1,1,1);
+INSERT INTO appointment (kapsalon_id,dienst_id , barber_id,appointment_date, appointment_time ,customer_id,is_paid) VALUES( 1,1,1, '2023-01-15', '10:30',1, true);
+INSERT INTO appointment (kapsalon_id,dienst_id , barber_id,appointment_date, appointment_time ,customer_id,is_paid) VALUES( 2,3,3, '2023-01-20', '10:30',2, false);
 
 
 

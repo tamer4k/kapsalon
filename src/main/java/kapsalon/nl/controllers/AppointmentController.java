@@ -1,8 +1,8 @@
 package kapsalon.nl.controllers;
 
-import kapsalon.nl.exceptions.RecordNotFoundException;
 import kapsalon.nl.models.dto.AppointmentDTO;
 import kapsalon.nl.services.AppointmentService;
+import kapsalon.nl.services.PdfService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -10,17 +10,63 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
 @RestController
 @RequestMapping("/api/v1/afspraken")
 public class AppointmentController {
     private final AppointmentService appointmentService;
-
-    public AppointmentController(AppointmentService appointmentService){
+    private final PdfService pdfService;
+    public AppointmentController(AppointmentService appointmentService, PdfService pdfService){
         this.appointmentService = appointmentService;
+
+        this.pdfService = pdfService;
+    }
+
+
+    @GetMapping("/{id}/download-pdf")
+    public ResponseEntity<byte[]> downloadPdf(@PathVariable Long id) {
+        try {
+            AppointmentDTO appointmentDTO = appointmentService.getAppointmentById(id);
+
+            if (appointmentDTO != null) {
+                byte[] pdfBytes = pdfService.generatePdf(appointmentDTO);
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_PDF);
+                headers.setContentDispositionFormData("attachment", "appointment.pdf");
+
+                String fileName = "appointment_" + id + ".pdf";
+                String filePath = "src/main/resources/invoices/" + fileName;
+
+                // Opslaan als bestand in het project
+                savePdfToFileSystem(pdfBytes, filePath);
+
+                return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (IOException e) {
+            // Handle exceptions appropriately, e.g., log the error
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    private void savePdfToFileSystem(byte[] pdfBytes, String filePath) throws IOException {
+        Files.write(Paths.get(filePath), pdfBytes);
     }
 
     @GetMapping

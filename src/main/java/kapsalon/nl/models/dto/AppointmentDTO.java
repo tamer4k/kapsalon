@@ -22,13 +22,13 @@ public class AppointmentDTO {
     private Long id;
 
     @NotNull(message = "het mag niet leeg zijn")
-    private Kapsalon kapsalon;
+    private Kapsalon selectedKapsalon;
 
     @NotNull(message = "het mag niet leeg zijn ")
-    private Dienst dienst;
+    private Dienst selectedDienst;
 
     @NotNull(message = "het mag niet leeg zijn")
-    private Barber barber;
+    private Barber selectedBarber;
 
     @NotNull(message = "het mag niet leeg zijn")
     @Future(message = "Datum moet in de toekomst liggen")
@@ -40,5 +40,8 @@ public class AppointmentDTO {
 
     @NotNull(message = "het mag niet leeg zijn")
     private Customer customer;
+
+    private  boolean isPaid;
+
 
 }

@@ -35,6 +35,7 @@ public class Barber {
             joinColumns = @JoinColumn(name = "barber_id"),
             inverseJoinColumns = @JoinColumn(name = "dienst_id")
     )
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     private List<Dienst> diensten = new ArrayList<>();
 
 

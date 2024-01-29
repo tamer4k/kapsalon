@@ -23,9 +23,6 @@ public class UserDetailsService implements org.springframework.security.core.use
         this.userService = userService;
     }
 
-//    @Autowired
-//    private AuthorityService authorityService;
-
     @Override
     public UserDetails loadUserByUsername(String username) {
         UserDto userDto = userService.getByUserName(username);

@@ -56,8 +56,11 @@ public class DienstServiceImpl implements DienstService {
         Dienst dienst = dienstRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("No Dienst found with ID: " + id));
 
+        if (dto.getCategory() != null) {
+            dienst.setCategory(Category.valueOf(dto.getCategory()));
+        }
 
-        dienst.setCategory(Category.valueOf(dto.getCategory()));
+//        dienst.setCategory(Category.valueOf(dto.getCategory()));
         dienst.setTitle(dto.getTitle());
         dienst.setDescription(dto.getDescription());
         dienst.setPrice(dto.getPrice());
@@ -80,7 +83,9 @@ public class DienstServiceImpl implements DienstService {
     public static DienstDTO fromEntityToDto(Dienst entity){
         DienstDTO dto = new DienstDTO();
         dto.setId(entity.getId());
-        dto.setCategory(entity.getCategory().getDisplayName());
+//        dto.setCategory(entity.getCategory().getDisplayName());
+        Category category = entity.getCategory();
+        dto.setCategory(category != null ? category.getDisplayName() : null);
         dto.setTitle(entity.getTitle());
         dto.setDescription(entity.getDescription());
         dto.setPrice(entity.getPrice());
@@ -93,7 +98,10 @@ public class DienstServiceImpl implements DienstService {
         Dienst entity = new Dienst();
 
         entity.setId(dto.getId());
-        entity.setCategory(Category.valueOf(dto.getCategory()));
+        if (dto.getCategory() != null && !dto.getCategory().isEmpty()) {
+            entity.setCategory(Category.valueOf(dto.getCategory()));
+        }
+//        entity.setCategory(Category.valueOf(dto.getCategory()));
         entity.setTitle(dto.getTitle());
         entity.setDescription(dto.getDescription());
         entity.setPrice(dto.getPrice());

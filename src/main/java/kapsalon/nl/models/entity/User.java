@@ -16,14 +16,12 @@ import java.util.Set;
 @NoArgsConstructor
 public class User {
 
-    // Deze eerste 3 variabelen zijn verplicht om te kunnen inloggen met een username, password en rol.
     @Id
     @Column(nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false, length = 255)
     private String password;
-
 
     @OneToMany(
             targetEntity = Authority.class,
@@ -32,14 +30,6 @@ public class User {
             orphanRemoval = true,
             fetch = FetchType.EAGER)
     private Set<Authority> authorities = new HashSet<>();
-
-    // Deze 3 variabelen zijn niet verplicht.
-    // Je mag ook een "String banaan;" toevoegen, als je dat graag wilt.
-    @Column(nullable = false)
-    private boolean enabled = true;
-
-    @Column
-    private String apikey;
 
     @Column
     private String email;
@@ -54,10 +44,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    public boolean isEnabled() { return enabled;}
-    public void setEnabled(boolean enabled) { this.enabled = enabled; }
-    public String getApikey() { return apikey; }
-    public void setApikey(String apikey) { this.apikey = apikey; }
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email;}
 

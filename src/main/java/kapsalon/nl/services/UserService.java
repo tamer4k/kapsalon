@@ -56,9 +56,6 @@ public class UserService {
         if (userExistsByUsername(userDto.getUsername())) {
             throw new UserAlreadyExistsException("User with username " + userDto.getUsername() + " already exists");
         }
-
-        String randomString = RandomStringGenerator.generateAlphaNumeric(20);
-        userDto.setApikey(randomString);
         userDto.getPassword();
         User newUser = userRepository.save(toUser(userDto));
         newUser.setPassword(userDto.getPassword());
@@ -79,7 +76,6 @@ public class UserService {
 
         user.setUsername(dto.getUsername());
         user.setPassword(dto.getPassword());
-        user.setApikey(dto.getApikey());
         user.setEmail(dto.getEmail());
         user.setAuthorities(dto.getAuthorities());
 
@@ -113,11 +109,8 @@ public class UserService {
     public static UserDto fromUser(User user){
 
         var dto = new UserDto();
-
         dto.username = user.getUsername();
         dto.password = user.getPassword();
-        dto.enabled = user.isEnabled();
-        dto.apikey = user.getApikey();
         dto.email = user.getEmail();
         dto.authorities = user.getAuthorities();
 
@@ -127,11 +120,8 @@ public class UserService {
     public User toUser(UserDto userDto) {
 
         var user = new User();
-
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
-        user.setEnabled(userDto.getEnabled());
-        user.setApikey(userDto.getApikey());
         user.setEmail(userDto.getEmail());
 
         return user;

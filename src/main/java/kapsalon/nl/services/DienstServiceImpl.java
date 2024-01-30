@@ -83,7 +83,6 @@ public class DienstServiceImpl implements DienstService {
     public static DienstDTO fromEntityToDto(Dienst entity){
         DienstDTO dto = new DienstDTO();
         dto.setId(entity.getId());
-//        dto.setCategory(entity.getCategory().getDisplayName());
         Category category = entity.getCategory();
         dto.setCategory(category != null ? category.getDisplayName() : null);
         dto.setTitle(entity.getTitle());
@@ -101,7 +100,6 @@ public class DienstServiceImpl implements DienstService {
         if (dto.getCategory() != null && !dto.getCategory().isEmpty()) {
             entity.setCategory(Category.valueOf(dto.getCategory()));
         }
-//        entity.setCategory(Category.valueOf(dto.getCategory()));
         entity.setTitle(dto.getTitle());
         entity.setDescription(dto.getDescription());
         entity.setPrice(dto.getPrice());

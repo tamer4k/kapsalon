@@ -7,7 +7,8 @@ import kapsalon.nl.repo.KapsalonRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.access.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -42,18 +43,30 @@ public class KapsalonServiceImpl implements KapsalonService {
     }
 
 
+//    @Override
+//    public KapsalonDTO createKapsalon(KapsalonDTO dto) {
+//
+//        Kapsalon entity = kapsalonRepository.save(fromDtoToEntity(dto));
+//
+//        return fromEntityToDto(entity);
+//    }
+
     @Override
     public KapsalonDTO createKapsalon(KapsalonDTO dto) {
-
-        Kapsalon entity = kapsalonRepository.save(fromDtoToEntity(dto));
-
+        // Haal de ingelogde gebruikersnaam op
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String loggedInUsername = authentication.getName();
 
-        // Stel de eigenaar van de kapsalon in op de ingelogde gebruikersnaam
-        dto.setOwner(loggedInUsername);
+        // Controleer of de ingelogde gebruiker de rol "Owner" heeft
+        if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("OWNER"))) {
 
-        return fromEntityToDto(entity);
+            Kapsalon entity = kapsalonRepository.save(fromDtoToEntity(dto));
+            return fromEntityToDto(entity);
+
+        }else {
+            // De ingelogde gebruiker heeft niet de vereiste rol, gooi een AccessDeniedException
+            throw new AccessDeniedException("Unauthorized to create a kapsalon. Role 'OWNER' required.");
+        }
     }
 
     @Override
@@ -61,10 +74,11 @@ public class KapsalonServiceImpl implements KapsalonService {
         Kapsalon kapsalon = kapsalonRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Kapsalon not found with id: " + id));
 
-
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String loggedInUsername = authentication.getName();
 
         kapsalon.setName(dto.getName());
-        kapsalon.setOwner(dto.getOwner());
+        kapsalon.setOwner(loggedInUsername);
         kapsalon.setAvailability(dto.isAvailability());
         kapsalon.setLocation(dto.getLocation());
         kapsalon.setPostalCode(dto.getPostalCode());

@@ -18,7 +18,7 @@ public class KapsalonDTO {
     @NotBlank(message = "het mag niet leeg zijn")
     private String name;
 
-    @NotBlank(message = "het mag niet leeg zijn")
+
     private String owner;
 
     @NotBlank(message = "het mag niet leeg zijn")

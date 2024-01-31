@@ -43,14 +43,6 @@ public class KapsalonServiceImpl implements KapsalonService {
     }
 
 
-//    @Override
-//    public KapsalonDTO createKapsalon(KapsalonDTO dto) {
-//
-//        Kapsalon entity = kapsalonRepository.save(fromDtoToEntity(dto));
-//
-//        return fromEntityToDto(entity);
-//    }
-
     @Override
     public KapsalonDTO createKapsalon(KapsalonDTO dto) {
         // Haal de ingelogde gebruikersnaam op
@@ -58,7 +50,7 @@ public class KapsalonServiceImpl implements KapsalonService {
         String loggedInUsername = authentication.getName();
 
         // Controleer of de ingelogde gebruiker de rol "Owner" heeft
-        if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("OWNER"))) {
+        if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_OWNER"))) {
 
             Kapsalon entity = kapsalonRepository.save(fromDtoToEntity(dto));
             return fromEntityToDto(entity);

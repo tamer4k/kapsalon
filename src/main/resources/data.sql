@@ -41,9 +41,11 @@ INSERT INTO appointment (kapsalon_id,dienst_id , barber_id,appointment_date, app
 
 
 
-INSERT INTO users (username, password, email) VALUES ('user', '$2a$12$IzA1Ja1LH4PSMoro9PeITO1etDlknPjSX1nLusgt1vi9c1uaEXdEK','user@test.nl');
-INSERT INTO users (username, password, email) VALUES ('admin', '$2a$12$IzA1Ja1LH4PSMoro9PeITO1etDlknPjSX1nLusgt1vi9c1uaEXdEK', 'admin@test.nl');
+INSERT INTO users (username, password, email) VALUES ('User', '$2a$12$IzA1Ja1LH4PSMoro9PeITO1etDlknPjSX1nLusgt1vi9c1uaEXdEK','user@test.nl');
+INSERT INTO users (username, password, email) VALUES ('Admin', '$2a$12$IzA1Ja1LH4PSMoro9PeITO1etDlknPjSX1nLusgt1vi9c1uaEXdEK', 'admin@test.nl');
+INSERT INTO users (username, password, email) VALUES ('Eddard', '$2a$12$IzA1Ja1LH4PSMoro9PeITO1etDlknPjSX1nLusgt1vi9c1uaEXdEK','eddard@test.nl');
+INSERT INTO users (username, password, email) VALUES ('Tywin', '$2a$12$IzA1Ja1LH4PSMoro9PeITO1etDlknPjSX1nLusgt1vi9c1uaEXdEK', 'tywin@test.nl');
 
-INSERT INTO authorities (username, authority) VALUES ('user', 'ROLE_USER');
-INSERT INTO authorities (username, authority) VALUES ('admin', 'ROLE_USER');
-INSERT INTO authorities (username, authority) VALUES ('admin', 'ROLE_ADMIN');
+INSERT INTO authorities (username, authority) VALUES ('User', 'ROLE_USER');
+INSERT INTO authorities (username, authority) VALUES ('Admin', 'ROLE_USER');
+INSERT INTO authorities (username, authority) VALUES ('Admin', 'ROLE_ADMIN');

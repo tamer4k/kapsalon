@@ -4,9 +4,14 @@ import jakarta.persistence.EntityNotFoundException;
 import kapsalon.nl.exceptions.RecordNotFoundException;
 import kapsalon.nl.models.dto.BarberDTO;
 import kapsalon.nl.models.entity.Barber;
+import kapsalon.nl.models.entity.Dienst;
 import kapsalon.nl.models.entity.Kapsalon;
 import kapsalon.nl.repo.BarberRepository;
+import kapsalon.nl.repo.DienstRepository;
 import kapsalon.nl.repo.KapsalonRepository;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +21,11 @@ import java.util.Optional;
 public class BarberServiceImpl implements BarberService {
     private final BarberRepository barberRepository;
     private final KapsalonRepository kapsalonRepository;
-    public BarberServiceImpl(BarberRepository kapperRepository, KapsalonRepository kapsalonRepository){
+    private final DienstRepository dienstRepository;
+    public BarberServiceImpl(BarberRepository kapperRepository, KapsalonRepository kapsalonRepository, DienstRepository dienstRepository){
         this.barberRepository = kapperRepository;
         this.kapsalonRepository =kapsalonRepository;
+        this.dienstRepository = dienstRepository;
     }
     @Override
     public List<BarberDTO> getAllBarbers() {
@@ -38,56 +45,110 @@ public class BarberServiceImpl implements BarberService {
                 .orElseThrow(() -> new RecordNotFoundException("No Barber found with ID: " + id));
 
         return fromEntityToDto(entity);
-
-
     }
-
 
     @Override
     public BarberDTO createBarber(BarberDTO dto) {
+        // Haal de ingelogde gebruikersnaam op
+        String loggedInUsername = getLoggedInUsername();
+
+        // Zoek alle kapsalons van de ingelogde gebruiker op
+        List<Kapsalon> ownerKapsalons = kapsalonRepository.findAllByOwner(loggedInUsername);
+        // Controleer of de lijst leeg is
+        if (ownerKapsalons.isEmpty()) {
+            throw new AccessDeniedException("Only owners with kapsalons can add barbers. If you don't have a kapsalon yet, please create one.");
+        }
+
+        // Controleer of de kapsalon in het DTO overeenkomt met een van de kapsalons van de eigenaar
+        if (ownerKapsalons.stream().noneMatch(kapsalon -> kapsalon.getId().equals(dto.getKapsalon().getId()))) {
+            throw new AccessDeniedException("You can only add barbers to your own kapsalon. check what your kapsalon ID is.");
+        }
+
         Barber entity = barberRepository.save(fromDtoToEntity(dto));
 
         Kapsalon kapsalon = kapsalonRepository.findById(dto.getKapsalon().getId())
-                .orElseThrow(() -> new EntityNotFoundException("Kapsalon not found with id: " + dto.getKapsalon().getId()));
-
-
+                .orElseThrow(() -> new RecordNotFoundException("Kapsalon not found with id: " + dto.getKapsalon().getId()));
         entity.setKapsalon(kapsalon);
 
         return fromEntityToDto(entity);
     }
 
+
     @Override
     public BarberDTO updateBarber(Long id, BarberDTO dto) {
 
+        // Haal de originele barber op
         Barber entity = barberRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("No Barber found with ID: " + id));
 
+        // Haal de ingelogde gebruikersnaam op
+        String loggedInUsername = getLoggedInUsername();
 
+        // Zoek alle kapsalons van de ingelogde gebruiker op
+        List<Kapsalon> ownerKapsalons = kapsalonRepository.findAllByOwner(loggedInUsername);
 
-            entity.setName(dto.getName());
-            entity.setAvailable(dto.isAvailable());
-            entity.setLicense(dto.getLicense());
-            entity.setKapsalon(dto.getKapsalon());
-            entity.setDiensten(dto.getDiensten());
-            Barber updatedEntity = barberRepository.save(entity);
+        // Controleer of de barber behoort tot een van de kapsalons van de eigenaar
+        if (ownerKapsalons.stream().noneMatch(kapsalon -> kapsalon.getId().equals(entity.getKapsalon().getId()))) {
+            throw new AccessDeniedException("You can only update barbers in your own kapsalons. check the Barber ID");
+        }
 
-            Kapsalon kapsalon = kapsalonRepository.findById(dto.getKapsalon().getId())
-                    .orElseThrow(() -> new RecordNotFoundException("Kapsalon not found with id: " + dto.getKapsalon().getId()));
-            entity.setKapsalon(kapsalon);
+        // Update de eigenschappen van de barber
+        entity.setName(dto.getName());
+        entity.setAvailable(dto.isAvailable());
+        entity.setLicense(dto.getLicense());
 
-            return fromEntityToDto(updatedEntity);
+        // Controleer of de kapsalon in het DTO overeenkomt met een van de kapsalons van de eigenaar
+        Optional<Kapsalon> optionalKapsalon = ownerKapsalons.stream()
+                .filter(kapsalon -> kapsalon.getId().equals(dto.getKapsalon().getId()))
+                .findFirst();
+
+        // Als de kapsalon niet wordt gevonden, gooi een AccessDeniedException
+        if (optionalKapsalon.isEmpty()) {
+            throw new AccessDeniedException("You can only update barbers in your own kapsalons. check the Kapsalon ID");
+        }
+
+        // Stel de nieuwe kapsalon in
+        entity.setKapsalon(optionalKapsalon.get());
+        entity.setDiensten(dto.getDiensten());
+
+        // Sla de bijgewerkte barber op
+        Barber updatedEntity = barberRepository.save(entity);
+
+        // Geef het DTO-object terug
+        return fromEntityToDto(updatedEntity);
     }
+
 
     @Override
     public void deleteBarber(Long id) {
 
+        // Haal de originele barber op
         Barber barber = barberRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("No Barber found with ID: " + id));
 
-            barberRepository.delete(barber);
+        // Haal de ingelogde gebruikersnaam op
+        String loggedInUsername = getLoggedInUsername();
+
+        // Zoek alle kapsalons van de ingelogde gebruiker op
+        List<Kapsalon> ownerKapsalons = kapsalonRepository.findAllByOwner(loggedInUsername);
+
+        // Controleer of de barber behoort tot een van de kapsalons van de eigenaar
+        if (ownerKapsalons.stream().noneMatch(kapsalon -> kapsalon.getId().equals(barber.getKapsalon().getId()))) {
+            throw new AccessDeniedException("You can only delete barbers in your own kapsalons.");
+        }
+
+        // Verwijder de barber
+        barberRepository.delete(barber);
     }
 
-    public static BarberDTO fromEntityToDto(Barber entity){
+    private String getLoggedInUsername() {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getName();
+    }
+
+    public  BarberDTO fromEntityToDto(Barber entity){
+
         BarberDTO dto = new BarberDTO();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
@@ -98,9 +159,9 @@ public class BarberServiceImpl implements BarberService {
         return  dto;
     }
 
-    public static Barber fromDtoToEntity(BarberDTO dto) {
-        Barber entity = new Barber();
+    public  Barber fromDtoToEntity(BarberDTO dto) {
 
+        Barber entity = new Barber();
         entity.setId(dto.getId());
         entity.setName(dto.getName());
         entity.setAvailable(dto.isAvailable());

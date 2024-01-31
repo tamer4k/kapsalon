@@ -5,6 +5,8 @@ import kapsalon.nl.models.dto.KapsalonDTO;
 import kapsalon.nl.models.entity.Kapsalon;
 import kapsalon.nl.repo.KapsalonRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +44,15 @@ public class KapsalonServiceImpl implements KapsalonService {
 
     @Override
     public KapsalonDTO createKapsalon(KapsalonDTO dto) {
+
         Kapsalon entity = kapsalonRepository.save(fromDtoToEntity(dto));
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String loggedInUsername = authentication.getName();
+
+        // Stel de eigenaar van de kapsalon in op de ingelogde gebruikersnaam
+        dto.setOwner(loggedInUsername);
+
         return fromEntityToDto(entity);
     }
 
@@ -89,11 +99,16 @@ public class KapsalonServiceImpl implements KapsalonService {
     }
 
     public static Kapsalon fromDtoToEntity(KapsalonDTO dto) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String loggedInUsername = authentication.getName();
+
+
         Kapsalon entity = new Kapsalon();
 
         entity.setId(dto.getId());
         entity.setName(dto.getName());
-        entity.setOwner(dto.getOwner());
+        entity.setOwner(loggedInUsername);
         entity.setAvailability(dto.isAvailability());
         entity.setLocation(dto.getLocation());
         entity.setPostalCode(dto.getPostalCode());

@@ -70,17 +70,17 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public UserDto updateUser(String username, UserDto dto) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RecordNotFoundException("No user found with username: " + username));
 
-        user.setUsername(dto.getUsername());
-        user.setPassword(dto.getPassword());
-        user.setEmail(dto.getEmail());
-        user.setAuthorities(dto.getAuthorities());
+    public UserDto updateUser(String username, UserDto userDto) {
+        if (!userRepository.existsById(username)) throw new RecordNotFoundException();
+        User user = userRepository.findById(username).get();
+
+        user.setPassword(userDto.getPassword());
+        user.setEmail(userDto.getEmail());
 
         userRepository.save(user);
         return fromUser(user);
+
     }
 
     public Set<Authority> getAuthorities(String username) {

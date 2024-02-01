@@ -53,7 +53,6 @@ public class CustomerServiceImpl implements CustomerService {
             Customer entity = entityId.get();
             entity.setFirstName(dto.getFirstName());
             entity.setSecondName(dto.getSecondName());
-            entity.setEmail(dto.getEmail());
             entity.setPhoneNumber(dto.getPhoneNumber());
 
             Customer updatedEntity = customerRepository.save(entity);
@@ -73,7 +72,6 @@ public class CustomerServiceImpl implements CustomerService {
         dto.setId(entity.getId());
         dto.setFirstName(entity.getFirstName());
         dto.setSecondName(entity.getSecondName());
-        dto.setEmail(entity.getEmail());
         dto.setPhoneNumber(entity.getPhoneNumber());
         return  dto;
     }
@@ -84,7 +82,6 @@ public class CustomerServiceImpl implements CustomerService {
         entity.setId(dto.getId());
         entity.setFirstName(dto.getFirstName());
         entity.setSecondName(dto.getSecondName());
-        entity.setEmail(dto.getEmail());
         entity.setPhoneNumber(dto.getPhoneNumber());
         return entity;
     }

@@ -57,7 +57,7 @@ public class UserController {
 
 
         String newUsername = userService.createUser(dto);
-        userService.addAuthority(newUsername, "ROLE_USER");
+        userService.addAuthority(newUsername, "ROLE_CUSTOMER");
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}")
                 .buildAndExpand(newUsername).toUri();
@@ -66,9 +66,9 @@ public class UserController {
     }
 
     @PutMapping(value = "/{username}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable String username, @RequestBody UserDto dto) {
-        UserDto optionalUser = userService.updateUser(username,dto);
-        return ResponseEntity.ok().body(optionalUser);
+    public ResponseEntity<UserDto> updateUser(@PathVariable("username") String username, @RequestBody UserDto dto) {
+        UserDto updatedUser = userService.updateUser(username, dto);
+        return ResponseEntity.ok().body(updatedUser);
     }
 
     @DeleteMapping(value = "/{username}")

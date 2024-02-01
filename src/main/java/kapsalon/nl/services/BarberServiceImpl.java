@@ -134,7 +134,7 @@ public class BarberServiceImpl implements BarberService {
 
         // Controleer of de barber behoort tot een van de kapsalons van de eigenaar
         if (ownerKapsalons.stream().noneMatch(kapsalon -> kapsalon.getId().equals(barber.getKapsalon().getId()))) {
-            throw new AccessDeniedException("You can only delete barbers in your own kapsalons.");
+            throw new AccessDeniedException("You can only delete barbers in your own kapsalons. check the Barber ID");
         }
 
         // Verwijder de barber

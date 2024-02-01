@@ -25,9 +25,9 @@ INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (2,2);
 INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (1,3);
 
 
-INSERT INTO customers (first_name, second_name, email, phone_number) VALUES('Jon', ' Snow', 'Jon@example.com', '+1112233445');
-INSERT INTO customers (first_name, second_name, email, phone_number) VALUES('Joffrey', 'Baratheon', 'Joffrey@example.com', '+1234567890');
-INSERT INTO customers (first_name, second_name, email, phone_number) VALUES('Tyrion', 'Lannister', 'Tyrion@example.com', '+9876543210');
+INSERT INTO customers (first_name, second_name, phone_number) VALUES('Jon', ' Snow', '+1112233445');
+INSERT INTO customers (first_name, second_name, phone_number) VALUES('Joffrey', 'Baratheon', '+1234567890');
+INSERT INTO customers (first_name, second_name, phone_number) VALUES('Tyrion', 'Lannister', '+9876543210');
 
 
 INSERT INTO financial_details (bank_name, account_name, account_number, card_number, valid) VALUES('ING', 'John Doe', '12345678', '1111222233334444', '12/24');
@@ -46,6 +46,10 @@ INSERT INTO users (username, password, email) VALUES ('Admin', '$2a$12$IzA1Ja1LH
 INSERT INTO users (username, password, email) VALUES ('Eddard', '$2a$12$IzA1Ja1LH4PSMoro9PeITO1etDlknPjSX1nLusgt1vi9c1uaEXdEK','eddard@test.nl');
 INSERT INTO users (username, password, email) VALUES ('Tywin', '$2a$12$IzA1Ja1LH4PSMoro9PeITO1etDlknPjSX1nLusgt1vi9c1uaEXdEK', 'tywin@test.nl');
 
-INSERT INTO authorities (username, authority) VALUES ('User', 'ROLE_USER');
-INSERT INTO authorities (username, authority) VALUES ('Admin', 'ROLE_USER');
+
+INSERT INTO authorities (username, authority) VALUES ('Admin', 'ROLE_CUSTOMER');
 INSERT INTO authorities (username, authority) VALUES ('Admin', 'ROLE_ADMIN');
+INSERT INTO authorities (username, authority) VALUES ('Eddard', 'ROLE_CUSTOMER');
+INSERT INTO authorities (username, authority) VALUES ('Eddard', 'ROLE_OWNER');
+INSERT INTO authorities (username, authority) VALUES ('Tywin', 'ROLE_CUSTOMER');
+INSERT INTO authorities (username, authority) VALUES ('Tywin', 'ROLE_OWNER');

@@ -511,167 +511,6 @@
 			]
 		},
 		{
-			"name": "Customer",
-			"item": [
-				{
-					"name": "getAllCustomers",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/v1/customers",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"customers"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getCustomertById",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/v1/customers/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"customers",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "createCustomer",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Missandei\",\r\n    \"secondName\": \"Emmanuel\",\r\n    \"email\": \"Missandei@example.com\",\r\n    \"phoneNumber\": \"+1234567890\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/v1/customers",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"customers"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "updateCustomer",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Jon\",\r\n    \"secondName\": \" Snows\",\r\n    \"email\": \"Jon@example.com\",\r\n    \"phoneNumber\": \"+1112233445\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/v1/customers/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"customers",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "deleteCustomer",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/v1/customers/4",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"customers",
-								"4"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"auth": {
-				"type": "bearer",
-				"bearer": [
-					{
-						"key": "token",
-						"value": "{{AuthToken}}",
-						"type": "string"
-					}
-				]
-			},
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				}
-			]
-		},
-		{
 			"name": "Appointment",
 			"item": [
 				{
@@ -713,7 +552,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/appointment/1",
+							"raw": "http://localhost:8080/api/v1/appointment/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -723,7 +562,7 @@
 								"api",
 								"v1",
 								"appointment",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -736,7 +575,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"selectedKapsalon\":{\r\n        \"id\": 1\r\n    },\r\n    \"selectedDienst\":{\r\n        \"id\": 1\r\n    },\r\n    \"selectedBarber\":{\r\n        \"id\": 1\r\n    },\r\n    \"appointmentDate\": \"2024-02-25\",\r\n    \"appointmentTime\": \"16:15:00\",\r\n        \"customer\":{\r\n        \"id\":3\r\n    },\r\n    \"paid\": true\r\n}",
+							"raw": "{\r\n    \"selectedKapsalon\":{\r\n        \"id\": 1\r\n    },\r\n    \"selectedDienst\":{\r\n        \"id\": 1\r\n    },\r\n    \"selectedBarber\":{\r\n        \"id\": 1\r\n    },\r\n    \"appointmentDate\": \"2024-02-25\",\r\n    \"appointmentTime\": \"16:15:00\",\r\n        \"user\":{\r\n        \"username\":\"Jon\"\r\n    },\r\n    \"paid\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -766,7 +605,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"selectedKapsalon\":{\r\n        \"id\": 1\r\n    },\r\n    \"selectedDienst\":{\r\n        \"id\": 2\r\n    },\r\n    \"selectedBarber\":{\r\n        \"id\": 2\r\n    },\r\n    \"appointmentDate\": \"2024-02-26\",\r\n    \"appointmentTime\": \"16:15:00\",\r\n        \"customer\":{\r\n        \"id\":3\r\n    },\r\n    \"paid\": true\r\n}",
+							"raw": "{\r\n    \"selectedKapsalon\":{\r\n        \"id\": 1\r\n    },\r\n    \"selectedDienst\":{\r\n        \"id\": 2\r\n    },\r\n    \"selectedBarber\":{\r\n        \"id\": 2\r\n    },\r\n    \"appointmentDate\": \"2024-02-26\",\r\n    \"appointmentTime\": \"16:15:00\",\r\n        \"user\":{\r\n        \"username\":\"Tyrion\"\r\n    },\r\n    \"paid\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -818,7 +657,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/afspraken/1/download-pdf",
+							"raw": "http://localhost:8080/api/v1/appointment/1/download-pdf",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -827,7 +666,7 @@
 							"path": [
 								"api",
 								"v1",
-								"afspraken",
+								"appointment",
 								"1",
 								"download-pdf"
 							]

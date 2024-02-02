@@ -25,9 +25,14 @@ INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (2,2);
 INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (1,3);
 
 
-INSERT INTO customers (first_name, second_name, phone_number) VALUES('Jon', ' Snow', '+1112233445');
-INSERT INTO customers (first_name, second_name, phone_number) VALUES('Joffrey', 'Baratheon', '+1234567890');
-INSERT INTO customers (first_name, second_name, phone_number) VALUES('Tyrion', 'Lannister', '+9876543210');
+--  3 Customers
+INSERT INTO users (username, password, email) VALUES ('Jon', '$2a$12$IzA1Ja1LH4PSMoro9PeITO1etDlknPjSX1nLusgt1vi9c1uaEXdEK','jon@test.nl');
+INSERT INTO users (username, password, email) VALUES ('Joffrey', '$2a$12$IzA1Ja1LH4PSMoro9PeITO1etDlknPjSX1nLusgt1vi9c1uaEXdEK', 'joffrey@test.nl');
+INSERT INTO users (username, password, email) VALUES ('Tyrion', '$2a$12$IzA1Ja1LH4PSMoro9PeITO1etDlknPjSX1nLusgt1vi9c1uaEXdEK','tyrion@test.nl');
+
+INSERT INTO authorities (username, authority) VALUES ('Jon', 'ROLE_CUSTOMER');
+INSERT INTO authorities (username, authority) VALUES ('Joffrey', 'ROLE_CUSTOMER');
+INSERT INTO authorities (username, authority) VALUES ('Tyrion', 'ROLE_CUSTOMER');
 
 
 INSERT INTO financial_details (bank_name, account_name, account_number, card_number, valid) VALUES('ING', 'John Doe', '12345678', '1111222233334444', '12/24');
@@ -36,8 +41,8 @@ INSERT INTO financial_details (bank_name, account_name, account_number, card_num
 
 
 
-INSERT INTO appointment (kapsalon_id,dienst_id , barber_id,appointment_date, appointment_time ,customer_id,is_paid) VALUES( 1,1,1, '2023-01-15', '10:30',1, true);
-INSERT INTO appointment (kapsalon_id,dienst_id , barber_id,appointment_date, appointment_time ,customer_id,is_paid) VALUES( 2,3,3, '2023-01-20', '10:30',2, false);
+INSERT INTO appointment (kapsalon_id,dienst_id , barber_id,appointment_date, appointment_time ,customer_id,is_paid) VALUES( 1,1,1, '2023-01-15', '10:30','Jon', true);
+INSERT INTO appointment (kapsalon_id,dienst_id , barber_id,appointment_date, appointment_time ,customer_id,is_paid) VALUES( 2,3,3, '2023-01-20', '10:30','Joffrey', false);
 
 
 
@@ -53,3 +58,5 @@ INSERT INTO authorities (username, authority) VALUES ('Eddard', 'ROLE_CUSTOMER')
 INSERT INTO authorities (username, authority) VALUES ('Eddard', 'ROLE_OWNER');
 INSERT INTO authorities (username, authority) VALUES ('Tywin', 'ROLE_CUSTOMER');
 INSERT INTO authorities (username, authority) VALUES ('Tywin', 'ROLE_OWNER');
+
+

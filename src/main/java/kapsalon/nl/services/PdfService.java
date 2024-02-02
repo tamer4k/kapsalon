@@ -57,7 +57,7 @@ public class PdfService {
         contentStream.newLine();
         contentStream.showText("Dienst: " + appointmentDTO.getSelectedDienst().getCategory() + appointmentDTO.getSelectedDienst().getTitle());
         contentStream.newLine();
-        contentStream.showText("Klant: " + appointmentDTO.getCustomer().getFirstName() + " " + appointmentDTO.getCustomer().getSecondName());
+        contentStream.showText("Klant: " + appointmentDTO.getUser().getUsername() + " " + appointmentDTO.getUser().getEmail());
         contentStream.newLine();
         contentStream.showText("Datum: " + appointmentDTO.getAppointmentDate());
         contentStream.newLine();

@@ -75,12 +75,6 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.POST,"/api/v1/kapsalon").hasAnyRole("ADMIN","CUSTOMER")
                 .requestMatchers(HttpMethod.PUT,"/api/v1/kapsalon/**").hasAnyRole("ADMIN","CUSTOMER")
                 .requestMatchers(HttpMethod.DELETE,"/api/v1/kapsalon/**").hasAnyRole("ADMIN","CUSTOMER")
-                                // Customer
-                .requestMatchers(HttpMethod.GET,"/api/v1/customers").hasAnyRole("ADMIN","CUSTOMER")
-                .requestMatchers(HttpMethod.GET,"/api/v1/customers/**").hasAnyRole("ADMIN","CUSTOMER")
-                .requestMatchers(HttpMethod.POST,"/api/v1/customers").hasAnyRole("ADMIN","CUSTOMER")
-                .requestMatchers(HttpMethod.PUT,"/api/v1/customers/**").hasAnyRole("ADMIN","CUSTOMER")
-                .requestMatchers(HttpMethod.DELETE,"/api/v1/customers/**").hasAnyRole("ADMIN","CUSTOMER")
                                 // Appointment
                 .requestMatchers(HttpMethod.GET,"/api/v1/appointment").hasAnyRole("ADMIN","CUSTOMER")
                 .requestMatchers(HttpMethod.GET,"/api/v1/appointment/**").hasAnyRole("ADMIN","CUSTOMER")

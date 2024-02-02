@@ -39,7 +39,7 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private User user;
 
     private  boolean isPaid;
 

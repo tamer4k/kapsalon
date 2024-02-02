@@ -13,14 +13,14 @@ import java.util.Optional;
 public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentRepository appointmentRepository;
     private final BarberRepository barberRepository;
-    private final CustomerRepository customerRepository;
+    private final UserRepository userRepository;
     private final KapsalonRepository kapsalonRepository;
     private final DienstRepository dienstRepository;
 
-    public AppointmentServiceImpl (AppointmentRepository appointmentRepository, BarberRepository barberRepository, CustomerRepository customerRepository, KapsalonRepository kapsalonRepository, DienstRepository dienstRepository){
+    public AppointmentServiceImpl (AppointmentRepository appointmentRepository, BarberRepository barberRepository, UserRepository userRepository, KapsalonRepository kapsalonRepository, DienstRepository dienstRepository){
         this.appointmentRepository = appointmentRepository;
         this.barberRepository = barberRepository;
-        this.customerRepository = customerRepository;
+        this.userRepository = userRepository;
         this.kapsalonRepository = kapsalonRepository;
         this.dienstRepository =dienstRepository;
     }
@@ -70,9 +70,9 @@ public class AppointmentServiceImpl implements AppointmentService {
                                         .orElseThrow(() -> new EntityNotFoundException("Barber not found with id: " + dto.getSelectedBarber().getId()));
                                 entity.setSelectedBarber(barber);
 
-                                Customer customer = customerRepository.findById(dto.getCustomer().getId())
-                                        .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + dto.getCustomer().getId()));
-                                entity.setCustomer(customer);
+                                User user = userRepository.findById(dto.getUser().getUsername())
+                                        .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + dto.getUser().getUsername()));
+                                entity.setUser(user);
 
                                 return fromEntityToDto(entity);
                             }
@@ -107,7 +107,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                                     entity.setSelectedKapsalon(dto.getSelectedKapsalon());
                                     entity.setSelectedDienst(dto.getSelectedDienst());
                                     entity.setSelectedBarber(dto.getSelectedBarber());
-                                    entity.setCustomer(dto.getCustomer());
+                                    entity.setUser(dto.getUser());
                                     Appointment updatedEntity = appointmentRepository.save(entity);
 
                                     Kapsalon kapsalon = kapsalonRepository.findById(dto.getSelectedKapsalon().getId())
@@ -122,9 +122,9 @@ public class AppointmentServiceImpl implements AppointmentService {
                                             .orElseThrow(() -> new EntityNotFoundException("Barber not found with id: " + dto.getSelectedBarber().getId()));
                                     updatedEntity.setSelectedBarber(barber);
 
-                                    Customer customer = customerRepository.findById(dto.getCustomer().getId())
-                                            .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + dto.getCustomer().getId()));
-                                    updatedEntity.setCustomer(customer);
+                                    User user = userRepository.findById(dto.getUser().getUsername())
+                                            .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + dto.getUser().getUsername()));
+                                    updatedEntity.setUser(user);
 
                                     return fromEntityToDto(updatedEntity);
 
@@ -159,7 +159,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         dto.setSelectedBarber(entity.getSelectedBarber());
         dto.setAppointmentDate(entity.getAppointmentDate());
         dto.setAppointmentTime(entity.getAppointmentTime());
-        dto.setCustomer(entity.getCustomer());
+        dto.setUser(entity.getUser());
         dto.setPaid(entity.isPaid());
 
         return  dto;
@@ -174,7 +174,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         entity.setSelectedBarber(dto.getSelectedBarber());
         entity.setAppointmentDate(dto.getAppointmentDate());
         entity.setAppointmentTime(dto.getAppointmentTime());
-        entity.setCustomer(dto.getCustomer());
+        entity.setUser(dto.getUser());
         entity.setPaid(dto.isPaid());
         return entity;
 

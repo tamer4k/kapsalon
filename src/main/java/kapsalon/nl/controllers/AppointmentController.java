@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 @RestController
-@RequestMapping("/api/v1/afspraken")
+@RequestMapping("/api/v1/appointment")
 public class AppointmentController {
     private final AppointmentService appointmentService;
     private final PdfService pdfService;

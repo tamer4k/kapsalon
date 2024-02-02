@@ -81,13 +81,13 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.POST,"/api/v1/customers").hasAnyRole("ADMIN","CUSTOMER")
                 .requestMatchers(HttpMethod.PUT,"/api/v1/customers/**").hasAnyRole("ADMIN","CUSTOMER")
                 .requestMatchers(HttpMethod.DELETE,"/api/v1/customers/**").hasAnyRole("ADMIN","CUSTOMER")
-                                // Afspraak
-                .requestMatchers(HttpMethod.GET,"/api/v1/afspraken").hasAnyRole("ADMIN","CUSTOMER")
-                .requestMatchers(HttpMethod.GET,"/api/v1/afspraken/**").hasAnyRole("ADMIN","CUSTOMER")
-                .requestMatchers(HttpMethod.POST,"/api/v1/afspraken").hasAnyRole("ADMIN","CUSTOMER")
-                .requestMatchers(HttpMethod.PUT,"/api/v1/afspraken/**").hasAnyRole("ADMIN","CUSTOMER")
-                .requestMatchers(HttpMethod.DELETE,"/api/v1/afspraken/**").hasAnyRole("ADMIN","CUSTOMER")
-                .requestMatchers(HttpMethod.GET, "/api/v1/afspraken/{id}/download-pdf").hasAnyRole("ADMIN", "CUSTOMER")
+                                // Appointment
+                .requestMatchers(HttpMethod.GET,"/api/v1/appointment").hasAnyRole("ADMIN","CUSTOMER")
+                .requestMatchers(HttpMethod.GET,"/api/v1/appointment/**").hasAnyRole("ADMIN","CUSTOMER")
+                .requestMatchers(HttpMethod.POST,"/api/v1/appointment").hasAnyRole("ADMIN","CUSTOMER")
+                .requestMatchers(HttpMethod.PUT,"/api/v1/appointment/**").hasAnyRole("ADMIN","CUSTOMER")
+                .requestMatchers(HttpMethod.DELETE,"/api/v1/appointment/**").hasAnyRole("ADMIN","CUSTOMER")
+                .requestMatchers(HttpMethod.GET, "/api/v1/appointment/{id}/download-pdf").hasAnyRole("ADMIN", "CUSTOMER")
 
                                 // User
                 .requestMatchers(HttpMethod.GET,"/api/v1/users").hasAnyRole("ADMIN","CUSTOMER")

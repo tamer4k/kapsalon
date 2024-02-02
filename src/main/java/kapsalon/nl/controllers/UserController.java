@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/register")
-    public ResponseEntity<UserDto> createKlant(@RequestBody UserDto dto) {;
+    public ResponseEntity<Object> createKlant(@RequestBody UserDto dto) {;
 
         String encodedPassword = passwordEncoder.encode(dto.getPassword());
         dto.setPassword(encodedPassword);
@@ -62,7 +62,7 @@ public class UserController {
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}")
                 .buildAndExpand(newUsername).toUri();
 
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(newUsername);
     }
 
     @PutMapping(value = "/{username}")

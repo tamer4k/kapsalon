@@ -3,14 +3,14 @@ package kapsalon.nl.controllers;
 
 import kapsalon.nl.models.dto.AuthenticationRequest;
 import kapsalon.nl.models.dto.AuthenticationResponse;
+import kapsalon.nl.services.LoggedUserService;
 import kapsalon.nl.utils.JwtUtil;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
@@ -22,12 +22,13 @@ public class AuthenticationController {
     private final AuthenticationManager authenticationManager;
 
     private final UserDetailsService userDetailsService;
-
+    private final LoggedUserService loggedUserService;
     private final JwtUtil jwtUtl;
 
-    public AuthenticationController(AuthenticationManager authenticationManager, UserDetailsService userDetailsService, JwtUtil jwtUtl) {
+    public AuthenticationController(AuthenticationManager authenticationManager, UserDetailsService userDetailsService, LoggedUserService loggedUserService, JwtUtil jwtUtl) {
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;
+        this.loggedUserService = loggedUserService;
         this.jwtUtl = jwtUtl;
     }
 
@@ -46,17 +47,17 @@ public class AuthenticationController {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(username, password)
             );
-        }
-        catch (BadCredentialsException ex) {
+        } catch (BadCredentialsException ex) {
+            // Log inlogpoging met onjuiste referenties of niet-bestaande gebruiker
+            loggedUserService.saveLoginAttempt(username, password);
+
             throw new Exception("Incorrect username or password", ex);
         }
 
-        final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(username);
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
         final String jwt = jwtUtl.generateToken(userDetails);
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
-
 }

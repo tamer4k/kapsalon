@@ -2,9 +2,9 @@ package kapsalon.nl.models.entity;
 
 public enum Status {
 
-    OPEN("OPEN"),
+    PENDING("PENDING"),
     APPROVED("APPROVED"),
-    REFUSED("REFUSED");
+    REJECTED("REJECTED");
     private final String displayName;
     Status(String displayName) {
         this.displayName = displayName;

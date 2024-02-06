@@ -50,7 +50,7 @@ public class RequestedOwnerRoleService {
         }
 
         // Zoek de enum-waarde die overeenkomt met "OPEN"
-        Status status = Status.OPEN;
+        Status status = Status.PENDING;
 
         requestedOwnerRoleDTO.setStatus(status.getDisplayName()); // Gebruik de displayName van de enum-waarde
         requestedOwnerRoleDTO.setUsername(loggedInUsername);
@@ -84,7 +84,7 @@ public class RequestedOwnerRoleService {
             Status newStatus = Status.valueOf(requestedOwnerRoleDTO.getStatus().toUpperCase()); // Converteer de status-string naar enum-waarde
 
             // Controleer of de nieuwe status overeenkomt met de huidige status
-            if (existingRequestedOwnerRole.getStatus() != Status.OPEN && newStatus != existingRequestedOwnerRole.getStatus()) {
+            if (existingRequestedOwnerRole.getStatus() != Status.PENDING && newStatus != existingRequestedOwnerRole.getStatus()) {
                 throw new AccessDeniedException("Status cannot be changed once it's set to '" + existingRequestedOwnerRole.getStatus().getDisplayName() + "'");
             }
 

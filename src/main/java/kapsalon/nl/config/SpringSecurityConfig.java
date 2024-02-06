@@ -69,6 +69,9 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.POST,"/api/v1/barbers").hasAnyRole("OWNER")
                 .requestMatchers(HttpMethod.PUT,"/api/v1/barbers/{id}").hasAnyRole("OWNER","BARBER")
                 .requestMatchers(HttpMethod.DELETE,"/api/v1/barbers/{id}").hasAnyRole("OWNER")
+                                // Image upload an download
+                .requestMatchers(HttpMethod.POST,"/api/v1/images").hasAnyRole("OWNER")
+                .requestMatchers(HttpMethod.GET,"/api/v1/images/{id}").hasAnyRole("OWNER")
                                 // Kapsalon
                 .requestMatchers(HttpMethod.GET,"/api/v1/kapsalon").hasAnyRole("OWNER")
                 .requestMatchers(HttpMethod.GET,"/api/v1/kapsalon/{id}").hasAnyRole("OWNER")

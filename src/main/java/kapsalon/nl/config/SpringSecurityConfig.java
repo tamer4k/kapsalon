@@ -72,7 +72,7 @@ public class SpringSecurityConfig {
                                 // Kapsalon
                 .requestMatchers(HttpMethod.GET,"/api/v1/kapsalon").hasAnyRole("OWNER")
                 .requestMatchers(HttpMethod.GET,"/api/v1/kapsalon/{id}").hasAnyRole("OWNER")
-                .requestMatchers(HttpMethod.POST,"/api/v1/kapsalon").hasAnyRole("OWNER")
+                .requestMatchers(HttpMethod.POST,"/api/v1/kapsalon").hasAnyRole("CUSTOMER","OWNER")
                 .requestMatchers(HttpMethod.PUT,"/api/v1/kapsalon/{id}").hasAnyRole("OWNER")
                 .requestMatchers(HttpMethod.DELETE,"/api/v1/kapsalon/{id}").hasAnyRole("OWNER")
                                 // Appointment

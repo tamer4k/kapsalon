@@ -18,5 +18,6 @@ public class RequestedOwnerRole {
 
     private String username;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 }

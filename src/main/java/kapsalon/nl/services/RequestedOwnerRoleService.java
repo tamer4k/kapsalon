@@ -2,8 +2,9 @@ package kapsalon.nl.services;
 
 import kapsalon.nl.exceptions.RecordNotFoundException;
 import kapsalon.nl.models.dto.RequestedOwnerRoleDTO;
-import kapsalon.nl.models.entity.Dienst;
+import kapsalon.nl.models.entity.Category;
 import kapsalon.nl.models.entity.RequestedOwnerRole;
+import kapsalon.nl.models.entity.Status;
 import kapsalon.nl.repo.RequestedOwnerRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
@@ -20,9 +21,11 @@ public class RequestedOwnerRoleService {
 
     private final RequestedOwnerRoleRepository requestedOwnerRoleRepository;
 
+    private final UserService userService;
     @Autowired
-    public RequestedOwnerRoleService(RequestedOwnerRoleRepository requestedOwnerRoleRepository) {
+    public RequestedOwnerRoleService(RequestedOwnerRoleRepository requestedOwnerRoleRepository, UserService userService) {
         this.requestedOwnerRoleRepository = requestedOwnerRoleRepository;
+        this.userService = userService;
     }
 
     public List<RequestedOwnerRoleDTO> getAllRequestedOwnerRoles() {
@@ -40,22 +43,22 @@ public class RequestedOwnerRoleService {
     }
 
     public RequestedOwnerRoleDTO createRequestedOwnerRole(RequestedOwnerRoleDTO requestedOwnerRoleDTO) {
-
         String loggedInUsername = getLoggedInUsername();
 
         if (hasOnlyOwnerRole()) {
             throw new IllegalStateException("User with 'OWNER' role cannot submit the request again.");
         }
 
-        requestedOwnerRoleDTO.setStatus("open");
+        // Zoek de enum-waarde die overeenkomt met "OPEN"
+        Status status = Status.OPEN;
 
+        requestedOwnerRoleDTO.setStatus(status.getDisplayName()); // Gebruik de displayName van de enum-waarde
         requestedOwnerRoleDTO.setUsername(loggedInUsername);
 
         RequestedOwnerRole newRequestedOwnerRole = dTOToEntity(requestedOwnerRoleDTO);
         RequestedOwnerRole savedRequestedOwnerRole = requestedOwnerRoleRepository.save(newRequestedOwnerRole);
         return entityToDTO(savedRequestedOwnerRole);
     }
-
     private String getLoggedInUsername() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {
@@ -68,20 +71,33 @@ public class RequestedOwnerRoleService {
                 .anyMatch(authority -> authority.getAuthority().equals("ROLE_OWNER"));
 
         if (hasOwnerRole) {
-            throw new AccessDeniedException("User with 'OWNER' role cannot submit the request again.");
+            throw new AccessDeniedException("you have 'OWNER' role cannot submit the request again.");
         }
 
         return hasOwnerRole;
     }
-
     public RequestedOwnerRoleDTO updateRequestedOwnerRole(Long id, RequestedOwnerRoleDTO requestedOwnerRoleDTO) {
-
         Optional<RequestedOwnerRole> existingRequestedOwnerRoleOptional = requestedOwnerRoleRepository.findById(id);
 
         if (existingRequestedOwnerRoleOptional.isPresent()) {
             RequestedOwnerRole existingRequestedOwnerRole = existingRequestedOwnerRoleOptional.get();
-            existingRequestedOwnerRole.setUsername(requestedOwnerRoleDTO.getUsername());
-            existingRequestedOwnerRole.setStatus(requestedOwnerRoleDTO.getStatus());
+            Status newStatus = Status.valueOf(requestedOwnerRoleDTO.getStatus().toUpperCase()); // Converteer de status-string naar enum-waarde
+
+            // Controleer of de nieuwe status overeenkomt met de huidige status
+            if (existingRequestedOwnerRole.getStatus() != Status.OPEN && newStatus != existingRequestedOwnerRole.getStatus()) {
+                throw new AccessDeniedException("Status cannot be changed once it's set to '" + existingRequestedOwnerRole.getStatus().getDisplayName() + "'");
+            }
+
+            existingRequestedOwnerRole.setStatus(newStatus);
+
+            // Controleer of de status is gewijzigd naar 'APPROVED' en voeg automatisch de rol 'Owner' toe
+            if (newStatus == Status.APPROVED) {
+                // Haal de gebruikersnaam op uit de aangevraagde rol
+                String username = existingRequestedOwnerRole.getUsername();
+                // Voeg de rol 'Owner' toe aan de gebruiker
+                userService.addAuthority(username, "ROLE_OWNER");
+            }
+
             RequestedOwnerRole updatedRequestedOwnerRole = requestedOwnerRoleRepository.save(existingRequestedOwnerRole);
             return entityToDTO(updatedRequestedOwnerRole);
         } else {
@@ -100,14 +116,14 @@ public class RequestedOwnerRoleService {
         return RequestedOwnerRoleDTO.builder()
                 .id(entity.getId())
                 .username(entity.getUsername())
-                .status(entity.getStatus())
+                .status(entity.getStatus().getDisplayName())
                 .build();
     }
 
     private RequestedOwnerRole dTOToEntity(RequestedOwnerRoleDTO dto) {
         return RequestedOwnerRole.builder()
                 .username(dto.getUsername())
-                .status(dto.getStatus())
+                .status(Status.valueOf(dto.getStatus()))
                 .build();
     }
 }

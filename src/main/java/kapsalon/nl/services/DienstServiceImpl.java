@@ -60,7 +60,6 @@ public class DienstServiceImpl implements DienstService {
             dienst.setCategory(Category.valueOf(dto.getCategory()));
         }
 
-//        dienst.setCategory(Category.valueOf(dto.getCategory()));
         dienst.setTitle(dto.getTitle());
         dienst.setDescription(dto.getDescription());
         dienst.setPrice(dto.getPrice());

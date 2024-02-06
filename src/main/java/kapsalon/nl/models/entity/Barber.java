@@ -38,4 +38,7 @@ public class Barber {
     private List<Dienst> diensten = new ArrayList<>();
 
 
+    @OneToOne(mappedBy = "barber")
+    private ImageData imageData;
+
 }

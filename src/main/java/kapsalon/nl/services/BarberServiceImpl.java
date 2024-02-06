@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BarberServiceImpl implements BarberService {
@@ -27,6 +28,13 @@ public class BarberServiceImpl implements BarberService {
         this.kapsalonRepository =kapsalonRepository;
         this.dienstRepository = dienstRepository;
     }
+
+    @Override
+    public List<BarberDTO> findAvailableBarbers() {
+        List<Barber> availableBarbers = barberRepository.findByAvailableTrue();
+        return availableBarbers.stream().map(this::fromEntityToDto).collect(Collectors.toList());
+    }
+
     @Override
     public List<BarberDTO> getAllBarbers() {
 

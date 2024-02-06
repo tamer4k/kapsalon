@@ -22,6 +22,11 @@ public class BarberController {
         this.barberService = barberService;
     }
 
+    @GetMapping("/available")
+    public ResponseEntity<List<BarberDTO>> getAvailableBarbers() {
+        List<BarberDTO> availableBarbers = barberService.findAvailableBarbers();
+        return new ResponseEntity<>(availableBarbers, HttpStatus.OK);
+    }
     @GetMapping
     public ResponseEntity<List<BarberDTO>> getAllBarbers() {
         List<BarberDTO> result = barberService.getAllBarbers();

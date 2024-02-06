@@ -10,5 +10,6 @@ public interface BarberService {
     public BarberDTO createBarber(BarberDTO kapperDTO);
     public BarberDTO updateBarber(Long id, BarberDTO barberDTO);
     public void deleteBarber(Long id);
+    public List<BarberDTO> findAvailableBarbers();
 
 }

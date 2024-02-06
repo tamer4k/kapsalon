@@ -11,9 +11,9 @@ INSERT INTO kapsalon (name, owner, location, postal_code, availability, opening_
 INSERT INTO kapsalon (name, owner,location, postal_code,availability, opening_hours_id)VALUES('LannisterStyle', 'Tywin' ,  'Main Street4','3356KA', true,2);
 
 
-INSERT INTO barbers (name, available, license,kapsalon_id) VALUES ('Sansa', true, 'License123',1);
+INSERT INTO barbers (name, available, license,kapsalon_id) VALUES ('Sansa', false, 'License123',1);
 INSERT INTO barbers (name, available, license,kapsalon_id) VALUES ('Arya', true, 'License456',1);
-INSERT INTO barbers (name, available, license,kapsalon_id) VALUES ('Cersei', true, 'License789',2);
+INSERT INTO barbers (name, available, license,kapsalon_id) VALUES ('Cersei', false, 'License789',2);
 INSERT INTO barbers (name, available, license,kapsalon_id) VALUES ('Baelish', true, 'License780',2);
 
 

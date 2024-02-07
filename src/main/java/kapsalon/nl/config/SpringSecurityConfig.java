@@ -67,7 +67,7 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.GET,"/api/v1/barbers").hasAnyRole("ADMIN","OWNER")
                 .requestMatchers(HttpMethod.GET,"/api/v1/barbers/{id}").hasAnyRole("ADMIN","OWNER")
                 .requestMatchers(HttpMethod.POST,"/api/v1/barbers").hasAnyRole("OWNER")
-                .requestMatchers(HttpMethod.PUT,"/api/v1/barbers/{id}").hasAnyRole("OWNER","BARBER")
+                .requestMatchers(HttpMethod.PUT,"/api/v1/barbers/{id}").hasAnyRole("OWNER")
                 .requestMatchers(HttpMethod.DELETE,"/api/v1/barbers/{id}").hasAnyRole("OWNER")
                 .requestMatchers(HttpMethod.GET,"/api/v1/barbers/available").hasAnyRole("CUSTOMER","OWNER")
                                 // Image upload an download
@@ -84,7 +84,8 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.GET,"/api/v1/appointment/{id}").hasAnyRole("OWNER")
                 .requestMatchers(HttpMethod.POST,"/api/v1/appointment").hasAnyRole("CUSTOMER")
                 .requestMatchers(HttpMethod.PUT,"/api/v1/appointment/{id}").hasAnyRole("CUSTOMER")
-                .requestMatchers(HttpMethod.DELETE,"/api/v1/appointment/{id}").hasAnyRole("BARBER","CUSTOMER")
+                .requestMatchers(HttpMethod.PUT,"/api/v1/appointment/owner/{id}").hasAnyRole("OWNER")
+                .requestMatchers(HttpMethod.DELETE,"/api/v1/appointment/{id}").hasAnyRole("CUSTOMER")
                 .requestMatchers(HttpMethod.GET, "/api/v1/appointment/{id}/download-pdf").hasAnyRole("OWNER", "CUSTOMER")
                                 // User
                 .requestMatchers(HttpMethod.GET,"/api/v1/users").hasAnyRole("ADMIN")

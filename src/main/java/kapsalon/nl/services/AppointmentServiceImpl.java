@@ -2,8 +2,13 @@ package kapsalon.nl.services;
 import jakarta.persistence.EntityNotFoundException;
 import kapsalon.nl.exceptions.RecordNotFoundException;
 import kapsalon.nl.models.dto.AppointmentDTO;
+import kapsalon.nl.models.dto.UpdateAppointmentByOwnerDTO;
 import kapsalon.nl.models.entity.*;
 import kapsalon.nl.repo.*;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,99 +50,153 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public AppointmentDTO createAppointment(AppointmentDTO dto) {
+        // Zoek de kapsalon op basis van de geselecteerde kapsalon-ID
+        Kapsalon kapsalon = kapsalonRepository.findById(dto.getSelectedKapsalon().getId())
+                .orElseThrow(() -> new RecordNotFoundException("Kapsalon not found with id: " + dto.getSelectedKapsalon().getId()));
 
-        List<Kapsalon> kapsalonList = kapsalonRepository.findAll();
-        for (Kapsalon kapsalonUitList : kapsalonList){
-            if (dto.getSelectedKapsalon().getId().equals(kapsalonUitList.getId())){
-                List<Barber> kapperList = barberRepository.findAll();
-                for (Barber kapperUitList : kapperList) {
-                    if(dto.getSelectedBarber().getId().equals(kapperUitList.getId()) && dto.getSelectedKapsalon().getId().equals(kapperUitList.getKapsalon().getId())){
-                        List<Dienst> kapperDienstenList = kapperUitList.getDiensten();
-                        for (Dienst kapperDienst: kapperDienstenList) {
-                            if (dto.getSelectedDienst().getId().equals(kapperDienst.getId())) {
+        // Zoek de kapper op basis van de geselecteerde kapper-ID
+        Barber kapper = barberRepository.findById(dto.getSelectedBarber().getId())
+                .orElseThrow(() -> new RecordNotFoundException("Barber not found with id: " + dto.getSelectedBarber().getId()));
 
-                                Appointment entity = appointmentRepository.save(fromDtoToEntity(dto));
-
-                                Kapsalon kapsalon = kapsalonRepository.findById(dto.getSelectedKapsalon().getId())
-                                        .orElseThrow(() -> new EntityNotFoundException("Kapsalon not found with id: " + dto.getSelectedKapsalon().getId()));
-                                entity.setSelectedKapsalon(kapsalon);
-
-                                Dienst dienst =dienstRepository.findById(dto.getSelectedDienst().getId())
-                                        .orElseThrow(() -> new EntityNotFoundException("Dienst not found with id: " + dto.getSelectedDienst().getId()));
-                                entity.setSelectedDienst(dienst);
-
-                                Barber barber = barberRepository.findById(dto.getSelectedBarber().getId())
-                                        .orElseThrow(() -> new EntityNotFoundException("Barber not found with id: " + dto.getSelectedBarber().getId()));
-                                entity.setSelectedBarber(barber);
-
-                                User user = userRepository.findById(dto.getUser().getUsername())
-                                        .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + dto.getUser().getUsername()));
-                                entity.setUser(user);
-
-                                return fromEntityToDto(entity);
-                            }
-                        }
-                    }
-                }
-            }
+        // Controleer of de kapper beschikbaar is
+        if (!kapper.isAvailable()) {
+            throw new AccessDeniedException("De geselecteerde kapper is niet beschikbaar.");
         }
 
-        return null;
+        // Controleer of de kapper bij de geselecteerde kapsalon werkt
+        if (!kapper.getKapsalon().getId().equals(kapsalon.getId())) {
+            throw new AccessDeniedException("De geselecteerde kapper werkt niet bij de geselecteerde kapsalon.");
+        }
+
+        // Zoek de dienst op basis van de geselecteerde dienst-ID
+        Dienst dienst = dienstRepository.findById(dto.getSelectedDienst().getId())
+                .orElseThrow(() -> new RecordNotFoundException("Dienst not found with id: " + dto.getSelectedDienst().getId()));
+
+        // Controleer of de geselecteerde kapper de geselecteerde dienst aanbiedt
+        if (!kapper.getDiensten().contains(dienst)) {
+            throw new AccessDeniedException("De geselecteerde kapper biedt de geselecteerde dienst niet aan.");
+        }
+
+        // Haal de ingelogde gebruikersnaam op
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String loggedInUsername = authentication.getName();
+
+        // Zoek de ingelogde gebruiker op
+        User loggedInUser = userRepository.findByUsername(loggedInUsername)
+                .orElseThrow(() -> new RecordNotFoundException("Ingelogde gebruiker niet gevonden: " + loggedInUsername));
+
+        // Maak een nieuwe afspraakentiteit
+        Appointment entity = fromDtoToEntity(dto);
+        entity.setSelectedKapsalon(kapsalon);
+        entity.setSelectedBarber(kapper);
+        entity.setSelectedDienst(dienst);
+        entity.setUser(loggedInUser);
+
+        // Stel de standaardstatus in op "PENDING"
+        entity.setStatus(Status.PENDING);
+
+        // Stel de standaar isPaid in op false
+        entity.setPaid(false);
+
+        // Sla de afspraak op
+        Appointment savedAppointment = appointmentRepository.save(entity);
+
+        // Converteer de opgeslagen afspraak terug naar een DTO en retourneer deze
+        return fromEntityToDto(savedAppointment);
     }
 
     @Override
     public AppointmentDTO updateAppointment(Long id, AppointmentDTO dto) {
+        // Zoek de afspraak op basis van het opgegeven ID
+        Appointment existingAppointment = appointmentRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("Appointment not found with id: " + id));
 
-        List<Kapsalon> kapsalonList = kapsalonRepository.findAll();
-        for (Kapsalon kapsalonUitList : kapsalonList){
-            if (dto.getSelectedKapsalon().getId().equals(kapsalonUitList.getId())){
-                List<Barber> kapperList = barberRepository.findAll();
-                for (Barber kapperUitList : kapperList) {
-                    if(dto.getSelectedBarber().getId().equals(kapperUitList.getId()) && dto.getSelectedKapsalon().getId().equals(kapperUitList.getKapsalon().getId())){
-                        List<Dienst> kapperDienstenList = kapperUitList.getDiensten();
-                        for (Dienst kapperDienst: kapperDienstenList) {
-                            if (dto.getSelectedDienst().getId().equals(kapperDienst.getId())) {
+        // Haal de huidige ingelogde gebruiker op
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String loggedInUsername = authentication.getName();
 
-                                Optional<Appointment> entityId = appointmentRepository.findById(id);
-                                if (entityId.isPresent()) {
-                                    Appointment entity = entityId.get();
+        // Zoek de ingelogde gebruiker op
+        User loggedInUser = userRepository.findByUsername(loggedInUsername)
+                .orElseThrow(() -> new RecordNotFoundException("Ingelogde gebruiker niet gevonden: " + loggedInUsername));
 
-                                    entity.setAppointmentDate(dto.getAppointmentDate());
-                                    entity.setAppointmentTime(dto.getAppointmentTime());
-                                    entity.setSelectedKapsalon(dto.getSelectedKapsalon());
-                                    entity.setSelectedDienst(dto.getSelectedDienst());
-                                    entity.setSelectedBarber(dto.getSelectedBarber());
-                                    entity.setUser(dto.getUser());
-                                    Appointment updatedEntity = appointmentRepository.save(entity);
-
-                                    Kapsalon kapsalon = kapsalonRepository.findById(dto.getSelectedKapsalon().getId())
-                                            .orElseThrow(() -> new EntityNotFoundException("Kapsalon not found with id: " + dto.getSelectedKapsalon().getId()));
-                                    updatedEntity.setSelectedKapsalon(kapsalon);
-
-                                    Dienst dienst =dienstRepository.findById(dto.getSelectedDienst().getId())
-                                            .orElseThrow(() -> new EntityNotFoundException("Dienst not found with id: " + dto.getSelectedDienst().getId()));
-                                    updatedEntity.setSelectedDienst(dienst);
-
-                                    Barber barber = barberRepository.findById(dto.getSelectedBarber().getId())
-                                            .orElseThrow(() -> new EntityNotFoundException("Barber not found with id: " + dto.getSelectedBarber().getId()));
-                                    updatedEntity.setSelectedBarber(barber);
-
-                                    User user = userRepository.findById(dto.getUser().getUsername())
-                                            .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + dto.getUser().getUsername()));
-                                    updatedEntity.setUser(user);
-
-                                    return fromEntityToDto(updatedEntity);
-
-
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        // Controleer of de ingelogde gebruiker overeenkomt met de klant van de bestaande afspraak
+        if (!existingAppointment.getUser().getUsername().equals(loggedInUser.getUsername())) {
+            throw new AccessDeniedException("U heeft geen toestemming om deze afspraak bij te werken. check je afspraak ID");
         }
 
-        return null;
+        // Zoek de kapsalon op basis van de geselecteerde kapsalon-ID
+        Kapsalon kapsalon = kapsalonRepository.findById(dto.getSelectedKapsalon().getId())
+                .orElseThrow(() -> new RecordNotFoundException("Kapsalon not found with id: " + dto.getSelectedKapsalon().getId()));
+
+        // Zoek de kapper op basis van de geselecteerde kapper-ID
+        Barber kapper = barberRepository.findById(dto.getSelectedBarber().getId())
+                .orElseThrow(() -> new RecordNotFoundException("Barber not found with id: " + dto.getSelectedBarber().getId()));
+
+        // Controleer of de kapper beschikbaar is
+        if (!kapper.isAvailable()) {
+            throw new AccessDeniedException("De geselecteerde kapper is niet beschikbaar.");
+        }
+
+        // Controleer of de kapper bij de geselecteerde kapsalon werkt
+        if (!kapper.getKapsalon().getId().equals(kapsalon.getId())) {
+            throw new AccessDeniedException("De geselecteerde kapper werkt niet bij de geselecteerde kapsalon.");
+        }
+
+        // Zoek de dienst op basis van de geselecteerde dienst-ID
+        Dienst dienst = dienstRepository.findById(dto.getSelectedDienst().getId())
+                .orElseThrow(() -> new RecordNotFoundException("Dienst not found with id: " + dto.getSelectedDienst().getId()));
+
+        // Controleer of de geselecteerde kapper de geselecteerde dienst aanbiedt
+        if (!kapper.getDiensten().contains(dienst)) {
+            throw new AccessDeniedException("De geselecteerde kapper biedt de geselecteerde dienst niet aan.");
+        }
+
+        // Update de gegevens van de bestaande afspraak met de nieuwe DTO-gegevens
+        existingAppointment.setAppointmentDate(dto.getAppointmentDate());
+        existingAppointment.setAppointmentTime(dto.getAppointmentTime());
+        existingAppointment.setSelectedKapsalon(kapsalon);
+        existingAppointment.setSelectedBarber(kapper);
+        existingAppointment.setSelectedDienst(dienst);
+        existingAppointment.setUser(loggedInUser);
+        existingAppointment.setPaid(dto.isPaid()); // afhankelijk van je DTO
+
+        // Sla de bijgewerkte afspraak op
+        Appointment updatedAppointment = appointmentRepository.save(existingAppointment);
+
+        // Converteer de bijgewerkte afspraak terug naar een DTO en retourneer deze
+        return fromEntityToDto(updatedAppointment);
+    }
+
+    @Override
+    public AppointmentDTO updateAppointmentByOwner(Long id, UpdateAppointmentByOwnerDTO dto) {
+        // Haal de ingelogde gebruikersnaam op
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String loggedInUsername = authentication.getName();
+
+        // Zoek de kapsalons van de ingelogde gebruiker (eigenaar)
+        Optional<Kapsalon> ownerKapsalons = kapsalonRepository.findByOwner(loggedInUsername);
+
+        // Zoek de afspraak op basis van het opgegeven ID
+        Appointment existingAppointment = appointmentRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("Appointment not found with id: " + id));
+
+        // Controleer of de ingelogde gebruiker de eigenaar is van de kapsalon waar de afspraak toe behoort
+        boolean isOwnerAppointment = ownerKapsalons.stream()
+                .anyMatch(kapsalon -> kapsalon.getId().equals(existingAppointment.getSelectedKapsalon().getId()));
+
+        if (!isOwnerAppointment) {
+            throw new AccessDeniedException("U heeft geen toestemming om deze afspraak bij te werken. deze afspraak hoort niet bij je Kapsalon");
+        }
+
+        // Update de status en isPaid van de afspraak
+        existingAppointment.setStatus(Status.valueOf(dto.getStatus()));
+        existingAppointment.setPaid(dto.isPaid());
+
+        // Sla de bijgewerkte afspraak op
+        Appointment updatedAppointment = appointmentRepository.save(existingAppointment);
+
+        // Converteer de bijgewerkte afspraak terug naar een DTO en retourneer deze
+        return fromEntityToDto(updatedAppointment);
     }
 
     @Override
@@ -160,6 +219,8 @@ public class AppointmentServiceImpl implements AppointmentService {
         dto.setAppointmentDate(entity.getAppointmentDate());
         dto.setAppointmentTime(entity.getAppointmentTime());
         dto.setUser(entity.getUser());
+        dto.setStatus(entity.getStatus().getDisplayName());
+
         dto.setPaid(entity.isPaid());
 
         return  dto;
@@ -174,8 +235,9 @@ public class AppointmentServiceImpl implements AppointmentService {
         entity.setSelectedBarber(dto.getSelectedBarber());
         entity.setAppointmentDate(dto.getAppointmentDate());
         entity.setAppointmentTime(dto.getAppointmentTime());
-        entity.setUser(dto.getUser());
-        entity.setPaid(dto.isPaid());
+//        entity.setUser(dto.getUser());
+//        entity.setStatus(Status.valueOf(dto.getStatus()));
+//        entity.setPaid(dto.isPaid());
         return entity;
 
     }

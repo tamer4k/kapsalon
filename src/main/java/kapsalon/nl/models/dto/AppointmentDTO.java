@@ -38,8 +38,9 @@ public class AppointmentDTO {
     @NotNull(message = "het mag niet leeg zijn")
     private Time appointmentTime;
 
-    @NotNull(message = "het mag niet leeg zijn")
     private User user;
+
+    private String status;
 
     private  boolean isPaid;
 

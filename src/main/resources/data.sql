@@ -19,10 +19,14 @@ INSERT INTO barbers (name, available, license,kapsalon_id) VALUES ('Baelish', tr
 
 
 INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (1,1);
-INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (3,2);
-INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (3,3);
-INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (2,2);
 INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (1,3);
+INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (2,2);
+
+INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (3,1);
+INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (3,3);
+INSERT INTO barber_dienst(barber_id,dienst_id)VALUES (4,2);
+
+
 
 
 --  3 Customers
@@ -35,15 +39,9 @@ INSERT INTO authorities (username, authority) VALUES ('Joffrey', 'ROLE_CUSTOMER'
 INSERT INTO authorities (username, authority) VALUES ('Tyrion', 'ROLE_CUSTOMER');
 
 
-INSERT INTO financial_details (bank_name, account_name, account_number, card_number, valid) VALUES('ING', 'John Doe', '12345678', '1111222233334444', '12/24');
-INSERT INTO financial_details (bank_name, account_name, account_number, card_number, valid) VALUES('ABN', 'Alice Smith', '98765432', '5555666677778888', '08/23');
-INSERT INTO financial_details (bank_name, account_name, account_number, card_number, valid) VALUES('Rabobank', 'Bob Johnson', '11223344', '9999888877776666', '03/25');
-
-
-
-INSERT INTO appointment (kapsalon_id,dienst_id , barber_id,appointment_date, appointment_time ,customer_id,is_paid) VALUES( 1,1,1, '2023-01-15', '10:30','Jon', true);
-INSERT INTO appointment (kapsalon_id,dienst_id , barber_id,appointment_date, appointment_time ,customer_id,is_paid) VALUES( 2,3,3, '2023-01-20', '10:30','Joffrey', false);
-
+INSERT INTO appointment (kapsalon_id,dienst_id , barber_id,appointment_date, appointment_time ,customer_id, status ,is_paid) VALUES( 1,1,1, '2024-01-01', '10:30','Jon','APPROVED', true);
+INSERT INTO appointment (kapsalon_id,dienst_id , barber_id,appointment_date, appointment_time ,customer_id, status ,is_paid) VALUES( 1,1,1, '2024-12-12', '10:30','Jon','PENDING', false);
+INSERT INTO appointment (kapsalon_id,dienst_id , barber_id,appointment_date, appointment_time ,customer_id, status ,is_paid) VALUES( 2,3,3, '2024-01-20', '10:30','Joffrey','APPROVED', true);
 
 
 INSERT INTO users (username, password, email) VALUES ('User', '$2a$12$IzA1Ja1LH4PSMoro9PeITO1etDlknPjSX1nLusgt1vi9c1uaEXdEK','user@test.nl');

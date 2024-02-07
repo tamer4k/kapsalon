@@ -75,17 +75,18 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         // Zoek de afspraak op basis van het opgegeven ID
         AppointmentDTO appointmentDTO = getAppointmentById(id);
-
+        Optional<Appointment> appointment = appointmentRepository.findById(id);
         // Controleer of de afspraak bestaat
-        if (appointmentDTO != null) {
-            // Controleer of de ingelogde gebruiker de eigenaar is van de afspraak
-            if (!appointmentDTO.getUser().getUsername().equals(loggedInUsername)) {
+        if (appointmentDTO != null ) {
+            // Controleer of de ingelogde gebruiker de eigenaar van de afspraak of de costomer is
+            if (!appointmentDTO.getSelectedKapsalon().getOwner().equals(loggedInUsername) && !appointmentDTO.getUser().getUsername().equals(loggedInUsername)) {
                 throw new AccessDeniedException("U heeft geen toestemming om deze afspraak te bekijken.");
             }
-
             // Genereer de PDF voor de afspraak en retourneer deze
             return pdfService.generatePdf(appointmentDTO);
-        } else {
+        }
+
+        else {
             throw new RecordNotFoundException("Appointment not found with id: " + id);
         }
     }

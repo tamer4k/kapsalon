@@ -1,5 +1,4 @@
 package kapsalon.nl.services;
-import jakarta.persistence.EntityNotFoundException;
 import kapsalon.nl.exceptions.RecordNotFoundException;
 import kapsalon.nl.models.dto.AppointmentDTO;
 import kapsalon.nl.models.dto.UpdateAppointmentByOwnerDTO;
@@ -7,9 +6,12 @@ import kapsalon.nl.models.entity.*;
 import kapsalon.nl.repo.*;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,13 +23,74 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final UserRepository userRepository;
     private final KapsalonRepository kapsalonRepository;
     private final DienstRepository dienstRepository;
-
-    public AppointmentServiceImpl (AppointmentRepository appointmentRepository, BarberRepository barberRepository, UserRepository userRepository, KapsalonRepository kapsalonRepository, DienstRepository dienstRepository){
+    private final PdfService pdfService;
+    public AppointmentServiceImpl (AppointmentRepository appointmentRepository, BarberRepository barberRepository, UserRepository userRepository, KapsalonRepository kapsalonRepository, DienstRepository dienstRepository, PdfService pdfService){
         this.appointmentRepository = appointmentRepository;
         this.barberRepository = barberRepository;
         this.userRepository = userRepository;
         this.kapsalonRepository = kapsalonRepository;
         this.dienstRepository =dienstRepository;
+        this.pdfService = pdfService;
+    }
+
+
+//    @Override
+//    public byte[] generatePdfForAppointment(Long id) throws IOException {
+//        // Haal de ingelogde gebruikersnaam op
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String loggedInUsername = authentication.getName();
+//
+//        // Zoek de ingelogde gebruiker op
+//        User loggedInUser = userRepository.findByUsername(loggedInUsername)
+//                .orElseThrow(() -> new RecordNotFoundException("Ingelogde gebruiker niet gevonden: " + loggedInUsername));
+//
+//        // Zoek de afspraak op basis van het opgegeven ID
+//        AppointmentDTO appointmentDTO = getAppointmentById(id);
+//
+//        // Controleer of de afspraak bestaat
+//        if (appointmentDTO != null) {
+//            // Controleer of de ingelogde gebruiker de klant is van de afspraak
+//            if (!appointmentDTO.getUser().getUsername().equals(loggedInUsername)) {
+//                throw new AccessDeniedException("U heeft geen toestemming om deze afspraak te bekijken.");
+//            }else {
+//                // Controleer of de ingelogde gebruiker de eigenaar is van de afspraak
+//                if(!appointmentDTO.getSelectedKapsalon().getOwner().equals(loggedInUsername)) {
+//                    throw new AccessDeniedException("U heeft geen toestemming om deze afspraak te bekijken.");
+//                }
+//                // Genereer de PDF voor de afspraak en retourneer deze
+//                return pdfService.generatePdf(appointmentDTO);
+//            }
+//
+//
+//        } else {
+//            throw new RecordNotFoundException("Appointment not found with id: " + id);
+//        }
+//    }
+
+    @Override
+    public byte[] generatePdfForAppointment(Long id) throws IOException {
+        // Haal de ingelogde gebruikersnaam op
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String loggedInUsername = authentication.getName();
+
+        // Zoek de afspraak op basis van het opgegeven ID
+        AppointmentDTO appointmentDTO = getAppointmentById(id);
+
+        // Controleer of de afspraak bestaat
+        if (appointmentDTO != null) {
+            // Controleer of de ingelogde gebruiker de eigenaar is van de afspraak
+            if (!appointmentDTO.getUser().getUsername().equals(loggedInUsername)) {
+                throw new AccessDeniedException("U heeft geen toestemming om deze afspraak te bekijken.");
+            }
+
+            // Genereer de PDF voor de afspraak en retourneer deze
+            return pdfService.generatePdf(appointmentDTO);
+        } else {
+            throw new RecordNotFoundException("Appointment not found with id: " + id);
+        }
+    }
+    public void savePdfToFileSystem(byte[] pdfBytes, String filePath) throws IOException {
+        Files.write(Paths.get(filePath), pdfBytes);
     }
     @Override
     public List<AppointmentDTO> getAllAppointment() {
@@ -205,7 +268,6 @@ public class AppointmentServiceImpl implements AppointmentService {
                .orElseThrow(() -> new RecordNotFoundException("Appointment not found with id: " + id));
 
             appointmentRepository.delete(appointment);
-
     }
 
     public  AppointmentDTO fromEntityToDto(Appointment entity){

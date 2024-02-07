@@ -1,10 +1,12 @@
 package kapsalon.nl.controllers;
 
 import kapsalon.nl.models.dto.AppointmentDTO;
+import kapsalon.nl.models.dto.UpdateAppointmentByOwnerDTO;
 import kapsalon.nl.services.AppointmentService;
 import kapsalon.nl.services.PdfService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
@@ -113,10 +115,22 @@ public class AppointmentController {
         if (result != null) {
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage.);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+    @PutMapping("/owner/{id}")
+    public ResponseEntity<AppointmentDTO> updateAppointmentByOwner(@PathVariable Long id,@RequestBody UpdateAppointmentByOwnerDTO dto) {
+
+            AppointmentDTO result = appointmentService.updateAppointmentByOwner(id, dto);
+        if (result != null) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteAppointment(@PathVariable Long id) {

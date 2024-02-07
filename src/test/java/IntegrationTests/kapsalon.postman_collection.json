@@ -316,6 +316,87 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "upload image",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/talashraf/Downloads/e9a39c795078c5c262704e195ba4f225.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/images?id=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"images"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "download image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/images/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"images",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Barbers available",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/barbers/available",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"barbers",
+								"available"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"auth": {
@@ -575,7 +656,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"selectedKapsalon\":{\r\n        \"id\": 1\r\n    },\r\n    \"selectedDienst\":{\r\n        \"id\": 1\r\n    },\r\n    \"selectedBarber\":{\r\n        \"id\": 1\r\n    },\r\n    \"appointmentDate\": \"2024-02-25\",\r\n    \"appointmentTime\": \"16:15:00\",\r\n        \"user\":{\r\n        \"username\":\"Jon\"\r\n    },\r\n    \"paid\": true\r\n}",
+							"raw": "{\r\n    \"selectedKapsalon\":{\r\n        \"id\": 1\r\n    },\r\n    \"selectedDienst\":{\r\n        \"id\": 2\r\n    },\r\n    \"selectedBarber\":{\r\n        \"id\": 2\r\n    },\r\n    \"appointmentDate\": \"2024-02-25\",\r\n    \"appointmentTime\": \"16:15:00\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -605,7 +686,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"selectedKapsalon\":{\r\n        \"id\": 1\r\n    },\r\n    \"selectedDienst\":{\r\n        \"id\": 2\r\n    },\r\n    \"selectedBarber\":{\r\n        \"id\": 2\r\n    },\r\n    \"appointmentDate\": \"2024-02-26\",\r\n    \"appointmentTime\": \"16:15:00\",\r\n        \"user\":{\r\n        \"username\":\"Tyrion\"\r\n    },\r\n    \"paid\": true\r\n}",
+							"raw": "{\r\n    \"selectedKapsalon\":{\r\n        \"id\": 2\r\n    },\r\n    \"selectedDienst\":{\r\n        \"id\": 2\r\n    },\r\n    \"selectedBarber\":{\r\n        \"id\": 4\r\n    },\r\n    \"appointmentDate\": \"2024-02-27\",\r\n    \"appointmentTime\": \"16:15:00\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -613,7 +694,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/appointment/1",
+							"raw": "http://localhost:8080/api/v1/appointment/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -623,7 +704,7 @@
 								"api",
 								"v1",
 								"appointment",
-								"1"
+								"4"
 							]
 						}
 					},
@@ -669,6 +750,38 @@
 								"appointment",
 								"3",
 								"download-pdf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateAppointmentByOwner",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"APPROVED\",\r\n    \"paid\": true\r\n}\r\n\r\n// {\r\n//     \"status\": \"PENDING\",\r\n//     \"paid\": false\r\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/appointment/owner/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"appointment",
+								"owner",
+								"2"
 							]
 						}
 					},
@@ -969,7 +1082,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\r\n}",
+							"raw": "{}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -999,7 +1112,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"status\": \"APPROVED\"\r\n}",
+							"raw": "// {\r\n//     \"status\": \"REJECTED\"\r\n// }\r\n\r\n{\r\n    \"status\": \"APPROVED\"\r\n}\r\n\r\n\r\n// {\r\n//     \"status\": \"PENDING\"\r\n// }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1206,6 +1319,49 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"username\": \"Aerys\",\r\n    \"password\": \"password\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login as Owner",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody = pm.response.json();\r",
+									"var jwt = responseBody.jwt;\r",
+									"pm.environment.set(\"AuthToken\", jwt);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Eddard\",\r\n    \"password\": \"password\"\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

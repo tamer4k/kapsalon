@@ -43,6 +43,7 @@ public class Appointment {
 
     private  boolean isPaid;
 
-
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
 }

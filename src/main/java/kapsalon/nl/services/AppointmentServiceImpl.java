@@ -33,40 +33,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         this.pdfService = pdfService;
     }
 
-
-//    @Override
-//    public byte[] generatePdfForAppointment(Long id) throws IOException {
-//        // Haal de ingelogde gebruikersnaam op
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String loggedInUsername = authentication.getName();
-//
-//        // Zoek de ingelogde gebruiker op
-//        User loggedInUser = userRepository.findByUsername(loggedInUsername)
-//                .orElseThrow(() -> new RecordNotFoundException("Ingelogde gebruiker niet gevonden: " + loggedInUsername));
-//
-//        // Zoek de afspraak op basis van het opgegeven ID
-//        AppointmentDTO appointmentDTO = getAppointmentById(id);
-//
-//        // Controleer of de afspraak bestaat
-//        if (appointmentDTO != null) {
-//            // Controleer of de ingelogde gebruiker de klant is van de afspraak
-//            if (!appointmentDTO.getUser().getUsername().equals(loggedInUsername)) {
-//                throw new AccessDeniedException("U heeft geen toestemming om deze afspraak te bekijken.");
-//            }else {
-//                // Controleer of de ingelogde gebruiker de eigenaar is van de afspraak
-//                if(!appointmentDTO.getSelectedKapsalon().getOwner().equals(loggedInUsername)) {
-//                    throw new AccessDeniedException("U heeft geen toestemming om deze afspraak te bekijken.");
-//                }
-//                // Genereer de PDF voor de afspraak en retourneer deze
-//                return pdfService.generatePdf(appointmentDTO);
-//            }
-//
-//
-//        } else {
-//            throw new RecordNotFoundException("Appointment not found with id: " + id);
-//        }
-//    }
-
     @Override
     public byte[] generatePdfForAppointment(Long id) throws IOException {
         // Haal de ingelogde gebruikersnaam op
@@ -75,13 +41,27 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         // Zoek de afspraak op basis van het opgegeven ID
         AppointmentDTO appointmentDTO = getAppointmentById(id);
-        Optional<Appointment> appointment = appointmentRepository.findById(id);
         // Controleer of de afspraak bestaat
         if (appointmentDTO != null ) {
+
+
+
             // Controleer of de ingelogde gebruiker de eigenaar van de afspraak of de costomer is
             if (!appointmentDTO.getSelectedKapsalon().getOwner().equals(loggedInUsername) && !appointmentDTO.getUser().getUsername().equals(loggedInUsername)) {
                 throw new AccessDeniedException("U heeft geen toestemming om deze afspraak te bekijken.");
             }
+
+            // Controleer of de status van de afspraak 'approved' is
+            if(!appointmentDTO.getStatus().equals("APPROVED")){
+
+                throw new AccessDeniedException("De status van de afspraak is nog niet 'approved'.");
+            }
+
+            // Controleer of de appointment wordt betaald
+            if(!appointmentDTO.isPaid() == true){
+                throw new AccessDeniedException("De afspraak is nog niet betaald.");
+            }
+
             // Genereer de PDF voor de afspraak en retourneer deze
             return pdfService.generatePdf(appointmentDTO);
         }

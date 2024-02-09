@@ -62,6 +62,12 @@ public class AppointmentServiceImpl implements AppointmentService {
                 throw new AccessDeniedException("De afspraak is nog niet betaald.");
             }
 
+            byte[] pdfBytes = pdfService.generatePdf(appointmentDTO);
+            String fileName = "appointment_" + id + ".pdf";
+            String filePath = "src/main/resources/invoices/" + fileName;
+            savePdfToFileSystem(pdfBytes, filePath);
+
+
             // Genereer de PDF voor de afspraak en retourneer deze
             return pdfService.generatePdf(appointmentDTO);
         }

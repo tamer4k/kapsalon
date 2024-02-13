@@ -51,7 +51,7 @@ public class DienstController {
         }else {
             DienstDTO result = dienstService.createDienst(dto);
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(result);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
         }
     }
 
@@ -67,7 +67,7 @@ public class DienstController {
     public ResponseEntity<?> deleteDienst(@PathVariable Long id) {
 
          dienstService.deleteDienst(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
         }
 

@@ -1,23 +1,29 @@
 package kapsalon.nl.services;
 
+import kapsalon.nl.exceptions.RecordNotFoundException;
 import kapsalon.nl.models.dto.BarberDTO;
+import kapsalon.nl.models.dto.KapsalonDTO;
 import kapsalon.nl.models.entity.*;
+import org.mockito.Mockito;
+import org.springframework.security.core.Authentication;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
+import java.nio.file.AccessDeniedException;
+import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import kapsalon.nl.repo.BarberRepository;
 import kapsalon.nl.repo.KapsalonRepository;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 @ExtendWith(MockitoExtension.class)
 class BarberServiceImplTest {
     @Mock
@@ -25,18 +31,26 @@ class BarberServiceImplTest {
 
     @Mock
     private KapsalonRepository kapsalonRepository;
-
+    @Mock
+    private Authentication authentication;
     @InjectMocks
     private BarberServiceImpl barberService;
 
 
     @AfterEach
     void tearDown() {
+
     }
+
+    @BeforeEach
+    void setUp() {
+
+    }
+
     private Barber createSampleBarber() {
         Barber barber = new Barber();
         barber.setId(1L);
-        barber.setName("John Doe");
+        barber.setName("Ashraf");
         barber.setLicense("123ABC");
         barber.setAvailable(true);
 
@@ -63,7 +77,6 @@ class BarberServiceImplTest {
 
         barber.setDiensten(diensten);
 
-
         Kapsalon kapsalon = createSampleKapsalon();
         barber.setKapsalon(kapsalon);
 
@@ -73,10 +86,9 @@ class BarberServiceImplTest {
     private BarberDTO createSampleBarberDTO() {
         BarberDTO dto = new BarberDTO();
         dto.setId(1L);
-        dto.setName("John Doe");
+        dto.setName("Ashraf");
         dto.setAvailable(true);
         dto.setLicense("123ABC");
-
 
         List<Dienst> diensten = new ArrayList<>();
         Dienst dienst1 = new Dienst();
@@ -95,7 +107,6 @@ class BarberServiceImplTest {
         dienst2.setPrice(30.0);
         dienst2.setDuration(45);
 
-
         diensten.add(dienst1);
         diensten.add(dienst2);
 
@@ -110,11 +121,11 @@ class BarberServiceImplTest {
     private Kapsalon createSampleKapsalon() {
         Kapsalon kapsalon = new Kapsalon();
         kapsalon.setId(1L);
-        kapsalon.setName("Sample Kapsalon");
+        kapsalon.setName("AlkmaarKapsalon");
         kapsalon.setLocation("Sample Location");
         kapsalon.setPostalCode("12345");
         kapsalon.setAvailability(true);
-        kapsalon.setOwner("John Doe");
+        kapsalon.setOwner("Eddard");
 
         OpeningHours openingHours = new OpeningHours();
         openingHours.setMonday("9:00 - 18:00");
@@ -129,21 +140,24 @@ class BarberServiceImplTest {
 
         return kapsalon;
     }
+
     @Test
     void getAllBarbers() {
+
         // Arrange
-        List<Barber> entityList = new ArrayList<>();
-        Barber barber = createSampleBarber();
-        entityList.add(barber);
-        when(barberRepository.findAll()).thenReturn(entityList);
+        List<Barber> mockBarberList = new ArrayList<>();
+        mockBarberList.add(createSampleBarber());
+
+        when(barberRepository.findAll()).thenReturn(mockBarberList);
 
         // Act
         List<BarberDTO> result = barberService.getAllBarbers();
 
         // Assert
-        assertEquals(1, entityList.size());
-        assertEquals(1, entityList.size());
+        assertEquals(mockBarberList.size(), result.size());
+        assertEquals(mockBarberList.get(0).getName(), result.get(0).getName());
     }
+
 
     @Test
     void getBarberById() {
@@ -157,7 +171,7 @@ class BarberServiceImplTest {
         // Assert
         assertNotNull(result);
         assertEquals(1L, result.getId());
-        assertEquals("John Doe", result.getName());
+        assertEquals("Ashraf", result.getName());
         assertEquals("123ABC", result.getLicense());
         assertEquals(true, result.getKapsalon().isAvailability());
         assertEquals(2, result.getDiensten().size());
@@ -165,27 +179,89 @@ class BarberServiceImplTest {
 
     }
 
+
+@Test
+void createBarber() {
+    // Arrange
+    String loggedInUsername = "Eddard";
+    Kapsalon kapsalon = createSampleKapsalon();
+    when(kapsalonRepository.findAllByOwner(loggedInUsername)).thenReturn(Collections.singletonList(kapsalon));
+    BarberDTO barberDTO = createSampleBarberDTO();
+    barberDTO.getKapsalon().setId(kapsalon.getId());
+    when(kapsalonRepository.findById(kapsalon.getId())).thenReturn(Optional.of(kapsalon));
+    when(barberRepository.save(any())).thenReturn(new Barber());
+    Authentication authentication = mock(Authentication.class);
+    when(authentication.getName()).thenReturn(loggedInUsername);
+    SecurityContextHolder.getContext().setAuthentication(authentication);
+
+    // Act
+    BarberDTO result = barberService.createBarber(barberDTO);
+
+    // Assert
+    assertNotNull(result);
+
+}
+
     @Test
-    void createBarber() {
+    void createBarber_WithoutKapsalon() {
         // Arrange
+        String loggedInUsername = "Eddard";
+        when(kapsalonRepository.findAllByOwner(loggedInUsername)).thenReturn(Collections.emptyList());
+
         BarberDTO barberDTO = createSampleBarberDTO();
-        when(barberRepository.save(any())).thenReturn(createSampleBarber());
-        when(kapsalonRepository.findById(anyLong())).thenReturn(Optional.of(createSampleKapsalon()));
+        Kapsalon kapsalon = createSampleKapsalon();
+        barberDTO.setKapsalon(kapsalon);
 
-        // Act
-        BarberDTO result = barberService.createBarber(barberDTO);
+        Authentication authentication = mock(Authentication.class);
+        when(authentication.getName()).thenReturn(loggedInUsername);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        // Assert
-        assertNotNull(result);
+        // Act & Assert
+        org.springframework.security.access.AccessDeniedException exception = assertThrows(org.springframework.security.access.AccessDeniedException.class, () -> barberService.createBarber(barberDTO));
+        assertEquals("Only owners with kapsalons can add barbers. If you don't have a kapsalon yet, please create one.", exception.getMessage());
     }
 
     @Test
-    void updateBarber() {
+    void createBarber_WithDifferentOwnerKapsalon() {
         // Arrange
+        String loggedInUsername = "Eddard";
+
+
+        List<Kapsalon> ownerKapsalons = new ArrayList<>();
+        Kapsalon otherOwnerKapsalon = new Kapsalon();
+        otherOwnerKapsalon.setId(2L);
+        ownerKapsalons.add(otherOwnerKapsalon);
+        when(kapsalonRepository.findAllByOwner(loggedInUsername)).thenReturn(ownerKapsalons);
+
+
+        BarberDTO barberDTO = createSampleBarberDTO();
+        Kapsalon kapsalon = createSampleKapsalon();
+        barberDTO.setKapsalon(kapsalon);
+
+
+        Authentication authentication = mock(Authentication.class);
+        when(authentication.getName()).thenReturn(loggedInUsername);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        // Act & Assert
+        org.springframework.security.access.AccessDeniedException exception = assertThrows(org.springframework.security.access.AccessDeniedException.class, () -> barberService.createBarber(barberDTO));
+        assertEquals("You can only add barbers to your own kapsalon. check what your kapsalon ID is.", exception.getMessage());
+    }
+    @Test
+    void updateBarber() {
+
+
+        // Arrange
+        Authentication authentication = mock(Authentication.class);
+        when(authentication.getName()).thenReturn("Eddard");
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+
         BarberDTO updatedBarberDTO = createSampleBarberDTO();
-        when(barberRepository.findById(anyLong())).thenReturn(Optional.of(createSampleBarber()));
+        Barber barber = createSampleBarber();
+        when(barberRepository.findById(anyLong())).thenReturn(Optional.of(barber));
+        when(kapsalonRepository.findAllByOwner("Eddard")).thenReturn(Collections.singletonList(barber.getKapsalon()));
         when(barberRepository.save(any())).thenReturn(createSampleBarber());
-        when(kapsalonRepository.findById(anyLong())).thenReturn(Optional.of(createSampleKapsalon()));
 
         // Act
         BarberDTO result = barberService.updateBarber(1L, updatedBarberDTO);
@@ -194,18 +270,60 @@ class BarberServiceImplTest {
         assertNotNull(result);
         assertEquals(updatedBarberDTO.getName(), result.getName());
     }
+    @Test
+    void updateBarber_WithDifferentKapsalon() {
+        // Arrange
+        String loggedInUsername = "Eddard"; // Gebruikersnaam voor de mock-authenticatie
+        BarberDTO updatedBarberDTO = createSampleBarberDTO();
+        Barber barber = createSampleBarber();
+
+        when(barberRepository.findById(anyLong())).thenReturn(Optional.of(barber));
+        when(kapsalonRepository.findAllByOwner(loggedInUsername)).thenReturn(Collections.emptyList());
+
+        Authentication authentication = mock(Authentication.class);
+        when(authentication.getName()).thenReturn(loggedInUsername);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        // Act & Assert
+        org.springframework.security.access.AccessDeniedException exception = assertThrows(org.springframework.security.access.AccessDeniedException.class, () -> barberService.updateBarber(1L, updatedBarberDTO));
+        assertEquals("You can only update barbers in your own kapsalons. check the Barber ID", exception.getMessage());
+    }
+
 
     @Test
     void deleteBarber() {
         // Arrange
+        Authentication authentication = mock(Authentication.class);
+        when(authentication.getName()).thenReturn("Eddard");
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        long id = 1L;
         Barber barber = createSampleBarber();
-        Mockito.when(barberRepository.findById(1L)).thenReturn(Optional.of(barber));
+        when(barberRepository.findById(id)).thenReturn(Optional.of(barber));
+        when(kapsalonRepository.findAllByOwner("Eddard")).thenReturn(Collections.singletonList(barber.getKapsalon()));
 
-        // Act
-        barberService.deleteBarber(1L);
-
-        // Assert
-        Mockito.verify(barberRepository, Mockito.times(1)).delete(barber);
+        // Act & Assert
+        assertDoesNotThrow(() -> barberService.deleteBarber(id));
+        verify(barberRepository, times(1)).delete(barber);
     }
 
+
+
+    @Test
+    void testFindAvailableBarbers() {
+        // Arrange
+        List<Barber> availableBarbers = new ArrayList<>();
+        Barber barber1 = createSampleBarber();
+        availableBarbers.add(barber1);
+
+        when(barberRepository.findByAvailableTrue()).thenReturn(availableBarbers);
+
+        // Act
+        List<BarberDTO> result = barberService.findAvailableBarbers();
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(availableBarbers.size(), result.size());
+
+    }
 }

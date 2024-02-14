@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.security.access.AccessDeniedException;
 
-import java.nio.file.AccessDeniedException;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -273,7 +273,7 @@ void createBarber() {
     @Test
     void updateBarber_WithDifferentKapsalon() {
         // Arrange
-        String loggedInUsername = "Eddard"; // Gebruikersnaam voor de mock-authenticatie
+        String loggedInUsername = "Eddard";
         BarberDTO updatedBarberDTO = createSampleBarberDTO();
         Barber barber = createSampleBarber();
 
@@ -288,7 +288,48 @@ void createBarber() {
         org.springframework.security.access.AccessDeniedException exception = assertThrows(org.springframework.security.access.AccessDeniedException.class, () -> barberService.updateBarber(1L, updatedBarberDTO));
         assertEquals("You can only update barbers in your own kapsalons. check the Barber ID", exception.getMessage());
     }
+    @Test
+    void updateBarber_KapsalonNotFound() {
+        // Arrange
+        Authentication authentication = mock(Authentication.class);
+        when(authentication.getName()).thenReturn("loggedInUser");
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
+        String loggedInUsername = "loggedInUser";
+        Long barberId = 1L;
+        BarberDTO updatedBarberDTO = createSampleBarberDTO();
+        Barber barber = new Barber();
+        barber.setKapsalon(new Kapsalon());
+        when(authentication.getName()).thenReturn(loggedInUsername);
+        when(kapsalonRepository.findAllByOwner(loggedInUsername)).thenReturn(Collections.emptyList()); // Geen kapsalons van de eigenaar
+        when(barberRepository.findById(barberId)).thenReturn(Optional.of(barber));
+
+        // Act & Assert
+        assertThrows(AccessDeniedException.class, () -> barberService.updateBarber(barberId, updatedBarberDTO));
+    }
+
+
+    @Test
+    void updateBarber_BarberNotBelongToOwnerKapsalon() {
+        // Arrange
+        Authentication authentication = mock(Authentication.class);
+        when(authentication.getName()).thenReturn("Eddard");
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String loggedInUsername = "Eddard";
+        Long barberId = 1L;
+        BarberDTO updatedBarberDTO = createSampleBarberDTO();
+        Barber barber = createSampleBarber();
+        Kapsalon kapsalon = new Kapsalon();
+        kapsalon.setId(999L);
+        barber.setKapsalon(kapsalon);
+        when(authentication.getName()).thenReturn(loggedInUsername);
+        when(kapsalonRepository.findAllByOwner(loggedInUsername)).thenReturn(Collections.singletonList(createSampleKapsalon()));
+        when(barberRepository.findById(barberId)).thenReturn(Optional.of(barber));
+
+        // Act & Assert
+        assertThrows(AccessDeniedException.class, () -> barberService.updateBarber(barberId, updatedBarberDTO));
+    }
 
     @Test
     void deleteBarber() {
@@ -307,8 +348,36 @@ void createBarber() {
         verify(barberRepository, times(1)).delete(barber);
     }
 
+    @Test
+    void deleteBarber_BarberDoesNotExist() {
+        // Arrange
+        Long nonExistingBarberId = 999L;
+        when(barberRepository.findById(nonExistingBarberId)).thenReturn(Optional.empty());
 
+        // Act & Assert
+        assertThrows(RecordNotFoundException.class, () -> barberService.deleteBarber(nonExistingBarberId));
+        verify(barberRepository, never()).delete(any(Barber.class));
+    }
 
+    @Test
+    void deleteBarber_BarberNotBelongsToOwnerKapsalon() {
+        // Arrange
+        Authentication authentication = mock(Authentication.class);
+        when(authentication.getName()).thenReturn("loggedInUser");
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String loggedInUsername = "loggedInUser";
+        Long barberId = 1L;
+        Barber barber = new Barber();
+        barber.setKapsalon(new Kapsalon());
+        when(authentication.getName()).thenReturn(loggedInUsername);
+        when(kapsalonRepository.findAllByOwner(loggedInUsername)).thenReturn(Collections.emptyList());
+        when(barberRepository.findById(barberId)).thenReturn(Optional.of(barber));
+
+        // Act & Assert
+        assertThrows(AccessDeniedException.class, () -> barberService.deleteBarber(barberId));
+        verify(barberRepository, never()).delete(any(Barber.class));
+    }
     @Test
     void testFindAvailableBarbers() {
         // Arrange

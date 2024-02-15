@@ -51,7 +51,7 @@ public class DienstController {
         }else {
             DienstDTO result = dienstService.createDienst(dto);
 
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+            return ResponseEntity.status(HttpStatus.CREATED).body(result);
         }
     }
 

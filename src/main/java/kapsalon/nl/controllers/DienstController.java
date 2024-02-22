@@ -33,7 +33,7 @@ public class DienstController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getDienstById(@PathVariable Long id) {
+    public ResponseEntity<DienstDTO> getDienstById(@PathVariable Long id) {
 
             DienstDTO result = dienstService.getDienstById(id);
             return new ResponseEntity<>(result, HttpStatus.OK);
@@ -41,13 +41,14 @@ public class DienstController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createDienst(@Validated @RequestBody DienstDTO dto, BindingResult bindingResult) {
+    public ResponseEntity<DienstDTO> createDienst(@Validated @RequestBody DienstDTO dto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
             for (FieldError error : bindingResult.getFieldErrors()) {
                 errors.put(error.getField(), error.getDefaultMessage());
             }
-            return ResponseEntity.badRequest().body(errors);
+            return ResponseEntity.badRequest().body((DienstDTO) errors);
+
         }else {
             DienstDTO result = dienstService.createDienst(dto);
 
@@ -56,7 +57,7 @@ public class DienstController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateDienst(@PathVariable Long id, @RequestBody DienstDTO dienstDTO) {
+    public ResponseEntity<DienstDTO> updateDienst(@PathVariable Long id, @RequestBody DienstDTO dienstDTO) {
 
             DienstDTO result = dienstService.updateDienst(id, dienstDTO);
             return new ResponseEntity<>(result, HttpStatus.OK);
@@ -64,7 +65,7 @@ public class DienstController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteDienst(@PathVariable Long id) {
+    public ResponseEntity<DienstDTO> deleteDienst(@PathVariable Long id) {
 
          dienstService.deleteDienst(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

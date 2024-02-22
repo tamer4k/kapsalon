@@ -63,7 +63,7 @@ public class AppointmentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getAppointmentById(@PathVariable Long id) {
+    public ResponseEntity<AppointmentDTO> getAppointmentById(@PathVariable Long id) {
 
             AppointmentDTO result = appointmentService.getAppointmentById(id);
             return new ResponseEntity<>(result, HttpStatus.OK);
@@ -86,8 +86,7 @@ public class AppointmentController {
                 return ResponseEntity.status(HttpStatus.CREATED).body(result);
             } else {
 
-                String errorMessage = "de kapsalon moet wel een juiste kapper bevatten en de kapper moet wel een juiste dienst hebben, kijk naar kapper table om te kijken in welke kapsalon werkt hij of zij en welke diensten hij of zij biedt ";
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomErrorResponse(errorMessage));
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
 
             }
         }
@@ -118,7 +117,7 @@ public class AppointmentController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteAppointment(@PathVariable Long id) {
+    public ResponseEntity<AppointmentDTO> deleteAppointment(@PathVariable Long id) {
 
             appointmentService.deleteAppointment(id);
         return new ResponseEntity<>(HttpStatus.OK);

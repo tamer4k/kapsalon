@@ -34,7 +34,7 @@ public class BarberController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getBarberById(@PathVariable Long id) {
+    public ResponseEntity<BarberDTO> getBarberById(@PathVariable Long id) {
 
         BarberDTO result = barberService.getBarberById(id);
             return new ResponseEntity<>(result, HttpStatus.OK);
@@ -42,13 +42,13 @@ public class BarberController {
 
 
     @PostMapping
-    public ResponseEntity<Object> createBarber(@Validated @RequestBody BarberDTO dto , BindingResult bindingResult) {
+    public ResponseEntity<BarberDTO> createBarber(@Validated @RequestBody BarberDTO dto , BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
             for (FieldError error : bindingResult.getFieldErrors()) {
                 errors.put(error.getField(), error.getDefaultMessage());
             }
-            return ResponseEntity.badRequest().body(errors);
+            return ResponseEntity.badRequest().body((BarberDTO) errors);
         }else {
             BarberDTO result = barberService.createBarber(dto);
 
@@ -57,7 +57,7 @@ public class BarberController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateBarber(@PathVariable Long id, @RequestBody BarberDTO barberDTO) {
+    public ResponseEntity<BarberDTO> updateBarber(@PathVariable Long id, @RequestBody BarberDTO barberDTO) {
 
             BarberDTO result = barberService.updateBarber(id, barberDTO);
             return new ResponseEntity<>(result, HttpStatus.OK);
@@ -65,7 +65,7 @@ public class BarberController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteBarber(@PathVariable Long id) {
+    public ResponseEntity<BarberDTO> deleteBarber(@PathVariable Long id) {
 
         barberService.deleteBarber(id);
         return new ResponseEntity<>(HttpStatus.OK);

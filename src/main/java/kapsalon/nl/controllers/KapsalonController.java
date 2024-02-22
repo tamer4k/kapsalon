@@ -30,7 +30,7 @@ public class KapsalonController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getKapsalonById(@PathVariable Long id) {
+    public ResponseEntity<KapsalonDTO> getKapsalonById(@PathVariable Long id) {
 
             KapsalonDTO result = kapsalonService.getKapsalonById(id);
             return new ResponseEntity<>(result, HttpStatus.OK);
@@ -40,13 +40,13 @@ public class KapsalonController {
 
 
     @PostMapping
-    public ResponseEntity<Object> createKapsalon(@Validated @RequestBody KapsalonDTO dto , BindingResult bindingResult) {
+    public ResponseEntity<KapsalonDTO> createKapsalon(@Validated @RequestBody KapsalonDTO dto , BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
             for (FieldError error : bindingResult.getFieldErrors()) {
                 errors.put(error.getField(), error.getDefaultMessage());
             }
-            return ResponseEntity.badRequest().body(errors);
+            return ResponseEntity.badRequest().body((KapsalonDTO) errors);
         }else {
             KapsalonDTO result = kapsalonService.createKapsalon(dto);
 
@@ -55,7 +55,7 @@ public class KapsalonController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateKapsalon(@PathVariable Long id, @RequestBody KapsalonDTO dto) {
+    public ResponseEntity<KapsalonDTO> updateKapsalon(@PathVariable Long id, @RequestBody KapsalonDTO dto) {
 
         KapsalonDTO result = kapsalonService.updateKapsalon(id, dto);
             return new ResponseEntity<>(result, HttpStatus.OK);
@@ -63,7 +63,7 @@ public class KapsalonController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteKapsalon(@PathVariable Long id) {
+    public ResponseEntity<KapsalonDTO> deleteKapsalon(@PathVariable Long id) {
 
         kapsalonService.deleteKapsalon(id);
         return new ResponseEntity<>(HttpStatus.OK);

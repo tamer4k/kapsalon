@@ -10,7 +10,9 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,18 +43,24 @@ public class DienstController {
     }
 
     @PostMapping
-    public ResponseEntity<DienstDTO> createDienst(@Validated @RequestBody DienstDTO dto, BindingResult bindingResult) {
+    public ResponseEntity<Object> createDienst(@Validated @RequestBody DienstDTO dto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
             for (FieldError error : bindingResult.getFieldErrors()) {
                 errors.put(error.getField(), error.getDefaultMessage());
             }
-            return ResponseEntity.badRequest().body((DienstDTO) errors);
+            return ResponseEntity.badRequest().body(errors);
 
         }else {
             DienstDTO result = dienstService.createDienst(dto);
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(result);
+            URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
+                    .path("")
+                    .buildAndExpand(result)
+                    .toUri();
+            return ResponseEntity.created(location).body(result);
+
+
         }
     }
 

@@ -9,10 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +46,7 @@ public class UserController {
 
 
     @GetMapping(value = "/{username}")
-    public ResponseEntity<?> getByByUserName(@PathVariable String username) {
+    public ResponseEntity<UserDto> getByByUserName(@PathVariable String username) {
 
             UserDto optionalUser = userService.getByUserName(username);
             return ResponseEntity.ok().body(optionalUser);
@@ -50,19 +54,29 @@ public class UserController {
     }
 
     @PostMapping(value = "/register")
-    public ResponseEntity<Object> createKlant(@RequestBody UserDto dto) {;
+    public ResponseEntity<Object> createKlant(@Validated  @RequestBody UserDto dto, BindingResult bindingResult) {
 
-        String encodedPassword = passwordEncoder.encode(dto.getPassword());
-        dto.setPassword(encodedPassword);
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errors.put(error.getField(), error.getDefaultMessage());
+            }
+            return ResponseEntity.badRequest().body(errors);
+
+        }else {
+            String encodedPassword = passwordEncoder.encode(dto.getPassword());
+            dto.setPassword(encodedPassword);
 
 
-        String newUsername = userService.createUser(dto);
-        userService.addAuthority(newUsername, "ROLE_CUSTOMER");
+            String newUsername = userService.createUser(dto);
+            userService.addAuthority(newUsername, "ROLE_CUSTOMER");
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}")
-                .buildAndExpand(newUsername).toUri();
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(newUsername);
+            URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
+                    .path("")
+                    .buildAndExpand(newUsername)
+                    .toUri();
+            return ResponseEntity.created(location).body(newUsername);
+        }
     }
 
     @PutMapping(value = "/{username}")
@@ -83,7 +97,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/{username}/authorities")
-    public ResponseEntity<Object> addAuthority(@PathVariable("username") String username, @RequestBody Map<String, Object> fields) {
+    public ResponseEntity<UserDto> addAuthority(@PathVariable("username") String username, @RequestBody Map<String, Object> fields) {
 
             String authorityName = (String) fields.get("authority");
             userService.addAuthority(username, authorityName);
@@ -92,7 +106,7 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/{username}/authorities/{authority}")
-    public ResponseEntity<Object> deleteUserAuthority(@PathVariable("username") String username, @PathVariable("authority") String authority) {
+    public ResponseEntity<UserDto> deleteUserAuthority(@PathVariable("username") String username, @PathVariable("authority") String authority) {
         userService.removeAuthority(username, authority);
         return ResponseEntity.noContent().build();
     }

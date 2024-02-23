@@ -13,6 +13,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -26,6 +27,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 @RestController
@@ -83,7 +85,12 @@ public class AppointmentController {
         }else {
             AppointmentDTO result = appointmentService.createAppointment(dto);
             if (result != null) {
-                return ResponseEntity.status(HttpStatus.CREATED).body(result);
+
+                URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
+                        .path("")
+                        .buildAndExpand(result)
+                        .toUri();
+                return ResponseEntity.created(location).body(result);
             } else {
 
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);

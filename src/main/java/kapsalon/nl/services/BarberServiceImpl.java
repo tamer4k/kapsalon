@@ -3,6 +3,7 @@ package kapsalon.nl.services;
 import jakarta.persistence.EntityNotFoundException;
 import kapsalon.nl.exceptions.RecordNotFoundException;
 import kapsalon.nl.models.dto.BarberDTO;
+import kapsalon.nl.models.dto.DienstDTO;
 import kapsalon.nl.models.entity.Barber;
 import kapsalon.nl.models.entity.Dienst;
 import kapsalon.nl.models.entity.Kapsalon;
@@ -70,6 +71,12 @@ public class BarberServiceImpl implements BarberService {
         // Controleer of de kapsalon in het DTO overeenkomt met een van de kapsalons van de eigenaar
         if (ownerKapsalons.stream().noneMatch(kapsalon -> kapsalon.getId().equals(dto.getKapsalon().getId()))) {
             throw new AccessDeniedException("You can only add barbers to your own kapsalon. check what your kapsalon ID is.");
+        }
+
+        // Controleer of alle diensten in het DTO bestaan
+        for (Dienst dienst : dto.getDiensten()) {
+            dienstRepository.findById(dienst.getId())
+                    .orElseThrow(() -> new RecordNotFoundException("Dienst not found with id: " + dienst.getId()));
         }
 
         Barber entity = barberRepository.save(fromDtoToEntity(dto));

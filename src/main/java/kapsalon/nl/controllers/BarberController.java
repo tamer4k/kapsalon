@@ -9,6 +9,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,17 +45,22 @@ public class BarberController {
 
 
     @PostMapping
-    public ResponseEntity<BarberDTO> createBarber(@Validated @RequestBody BarberDTO dto , BindingResult bindingResult) {
+    public ResponseEntity<Object> createBarber(@Validated @RequestBody BarberDTO dto , BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
             for (FieldError error : bindingResult.getFieldErrors()) {
                 errors.put(error.getField(), error.getDefaultMessage());
             }
-            return ResponseEntity.badRequest().body((BarberDTO) errors);
+            return ResponseEntity.badRequest().body(errors);
+
         }else {
             BarberDTO result = barberService.createBarber(dto);
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(result);
+            URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
+                    .path("")
+                    .buildAndExpand(result)
+                    .toUri();
+            return ResponseEntity.created(location).body(result);
         }
     }
 

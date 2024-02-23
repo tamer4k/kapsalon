@@ -3,17 +3,21 @@ package kapsalon.nl.models.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import kapsalon.nl.models.entity.Authority;
+import org.springframework.validation.annotation.Validated;
 
 
 import java.util.Set;
 
+@Validated
 public class UserDto {
 
     @NotBlank(message = "het mag niet leeg zijn")
     public String username;
 
     @NotBlank(message = "het mag niet leeg zijn")
+    @Size(min = 4, max = 20, message = "Lengte moet tussen 2 en 20 liggen")
     public String password;
 
     @Email(message = "Ongeldig e-mailadres")

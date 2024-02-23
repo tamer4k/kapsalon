@@ -73,11 +73,11 @@ public class BarberServiceImpl implements BarberService {
             throw new AccessDeniedException("You can only add barbers to your own kapsalon. check what your kapsalon ID is.");
         }
 
-        // Controleer of alle diensten in het DTO bestaan
-        for (Dienst dienst : dto.getDiensten()) {
-            dienstRepository.findById(dienst.getId())
-                    .orElseThrow(() -> new RecordNotFoundException("Dienst not found with id: " + dienst.getId()));
-        }
+//        // Controleer of alle diensten in het DTO bestaan
+//        for (Dienst dienst : dto.getDiensten()) {
+//            dienstRepository.findById(dienst.getId())
+//                    .orElseThrow(() -> new RecordNotFoundException("Dienst not found with id: " + dienst.getId()));
+//        }
 
         Barber entity = barberRepository.save(fromDtoToEntity(dto));
 

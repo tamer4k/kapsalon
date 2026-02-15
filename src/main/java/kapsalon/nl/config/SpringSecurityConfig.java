@@ -65,8 +65,8 @@ public class SpringSecurityConfig {
                                 .requestMatchers(HttpMethod.DELETE,"/api/v1/diensten/{id}").hasAnyRole("OWNER")
                                 // Barber
                                 .requestMatchers(HttpMethod.GET,"/api/v1/barbers/available").hasAnyRole("CUSTOMER","OWNER")
-                                .requestMatchers(HttpMethod.GET,"/api/v1/barbers").hasAnyRole("OWNER")
-                                .requestMatchers(HttpMethod.GET,"/api/v1/barbers/{id}").hasAnyRole("OWNER")
+                                .requestMatchers(HttpMethod.GET,"/api/v1/barbers").hasAnyRole("CUSTOMER","OWNER")
+                                .requestMatchers(HttpMethod.GET,"/api/v1/barbers/{id}").hasAnyRole("CUSTOMER","OWNER")
                                 .requestMatchers(HttpMethod.POST,"/api/v1/barbers").hasAnyRole("OWNER")
                                 .requestMatchers(HttpMethod.PUT,"/api/v1/barbers/{id}").hasAnyRole("OWNER")
                                 .requestMatchers(HttpMethod.DELETE,"/api/v1/barbers/{id}").hasAnyRole("OWNER")

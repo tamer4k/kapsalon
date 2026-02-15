@@ -1,0 +1,340 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for kapsalon.nl:kapsalon:jar:1.1 release version
+[WARNING] 'dependencies.dependency.version' for org.jetbrains:annotations:jar is either LATEST or RELEASE (both of them are being deprecated) @ line 45, column 22
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------------< kapsalon.nl:kapsalon >------------------------
+[INFO] Building kapsalon 1.1 release version
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.2.1:run (default-cli) > test-compile @ kapsalon >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ kapsalon ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 6 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ kapsalon ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ kapsalon ---
+[INFO] skip non existing resourceDirectory C:\Users\tamer\Desktop\Java\kapsalon\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ kapsalon ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] <<< spring-boot:3.2.1:run (default-cli) < test-compile @ kapsalon <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.1:run (default-cli) @ kapsalon ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.1)
+
+2026-02-15T19:13:10.134+01:00  INFO 4084 --- [           main] kapsalon.nl.KapsalonApplication          : Starting KapsalonApplication using Java 17.0.18 with PID 4084 (C:\Users\tamer\Desktop\Java\kapsalon\target\classes started by tamer in C:\Users\tamer\Desktop\Java\kapsalon)
+2026-02-15T19:13:10.143+01:00  INFO 4084 --- [           main] kapsalon.nl.KapsalonApplication          : No active profile set, falling back to 1 default profile: "default"
+2026-02-15T19:13:12.159+01:00  INFO 4084 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-15T19:13:12.402+01:00  INFO 4084 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 217 ms. Found 9 JPA repository interfaces.
+2026-02-15T19:13:14.013+01:00  INFO 4084 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-02-15T19:13:14.041+01:00  INFO 4084 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-15T19:13:14.042+01:00  INFO 4084 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.17]
+2026-02-15T19:13:14.242+01:00  INFO 4084 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-02-15T19:13:14.244+01:00  INFO 4084 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3981 ms
+2026-02-15T19:13:14.566+01:00  INFO 4084 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-15T19:13:14.730+01:00  INFO 4084 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2026-02-15T19:13:14.872+01:00  INFO 4084 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-15T19:13:15.571+01:00  INFO 4084 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-15T19:13:15.663+01:00  INFO 4084 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-15T19:13:16.224+01:00  INFO 4084 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@71369e1a
+2026-02-15T19:13:16.228+01:00  INFO 4084 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-15T19:13:16.327+01:00  WARN 4084 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-15T19:13:17.604+01:00  WARN 4084 --- [           main] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): kapsalon.nl.models.entity.AuthorityKey
+2026-02-15T19:13:17.607+01:00  WARN 4084 --- [           main] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): kapsalon.nl.models.entity.AuthorityKey
+2026-02-15T19:13:19.572+01:00  INFO 4084 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: alter table if exists appointment drop constraint if exists FK3b8mg0kpq590cnrvwdl2gyxsu
+Hibernate: alter table if exists appointment drop constraint if exists FKcptdbd9g3o5ojh9hbp0qd6avh
+Hibernate: alter table if exists appointment drop constraint if exists FKtkeuhsovf2aa89n9k88x0gura
+Hibernate: alter table if exists appointment drop constraint if exists FKi71h8mcr2o9jv5mgpjtf2spuc
+Hibernate: alter table if exists barber_dienst drop constraint if exists FKgqwxtdi2ka9wqrhrcjfuhwwfu
+Hibernate: alter table if exists barber_dienst drop constraint if exists FK2bkkou6x4fe3pc62h9t1s5n41
+Hibernate: alter table if exists barbers drop constraint if exists FKsqw8txoxln6tkjc40lxn56wxw
+Hibernate: alter table if exists images drop constraint if exists FK8nr6vxs9vkdo2l37yf408esop
+Hibernate: alter table if exists kapsalon drop constraint if exists FKoaq04oun0a6yu0ecxgpfwxucm
+Hibernate: drop table if exists appointment cascade
+Hibernate: drop table if exists authorities cascade
+Hibernate: drop table if exists barber_dienst cascade
+Hibernate: drop table if exists barbers cascade
+Hibernate: drop table if exists diensten cascade
+Hibernate: drop table if exists images cascade
+Hibernate: drop table if exists kapsalon cascade
+Hibernate: drop table if exists logged cascade
+Hibernate: drop table if exists opening_hours cascade
+Hibernate: drop table if exists requested_owner_role cascade
+Hibernate: drop table if exists users cascade
+Hibernate: create table appointment (appointment_date date, appointment_time time(6), is_paid boolean not null, barber_id bigint, dienst_id bigint, id bigserial not null, kapsalon_id bigint, customer_id varchar(255), status varchar(255) check (status in ('PENDING','APPROVED','REJECTED')), primary key (id))
+Hibernate: create table authorities (authority varchar(255) not null, username varchar(255) not null, primary key (authority, username))
+Hibernate: create table barber_dienst (barber_id bigint not null, dienst_id bigint not null)
+Hibernate: create table barbers (available boolean not null, id bigserial not null, kapsalon_id bigint, license varchar(255), name varchar(255), primary key (id))
+Hibernate: create table diensten (duration float(53) not null, price float(53) not null, id bigserial not null, category varchar(255) check (category in ('Men','Women','Children')), description varchar(255), title varchar(255), primary key (id))
+Hibernate: create table images (barber_id bigint unique, id bigserial not null, name varchar(255), type varchar(255), image_data oid, primary key (id))
+Hibernate: create table kapsalon (availability boolean not null, id bigserial not null, opening_hours_id bigint unique, location varchar(255), name varchar(255), owner varchar(255), postal_code varchar(255), primary key (id))
+Hibernate: create table logged (id bigserial not null, login_time timestamp(6), try_password varchar(255), try_username varchar(255), primary key (id))
+Hibernate: create table opening_hours (id bigserial not null, friday varchar(255), monday varchar(255), saturday varchar(255), sunday varchar(255), thursday varchar(255), tuesday varchar(255), wednesday varchar(255), primary key (id))
+Hibernate: create table requested_owner_role (id bigserial not null, status varchar(255) check (status in ('PENDING','APPROVED','REJECTED')), username varchar(255), primary key (id))
+Hibernate: create table users (email varchar(255), password varchar(255) not null, username varchar(255) not null, primary key (username))
+Hibernate: alter table if exists appointment add constraint FK3b8mg0kpq590cnrvwdl2gyxsu foreign key (barber_id) references barbers
+Hibernate: alter table if exists appointment add constraint FKcptdbd9g3o5ojh9hbp0qd6avh foreign key (dienst_id) references diensten
+Hibernate: alter table if exists appointment add constraint FKtkeuhsovf2aa89n9k88x0gura foreign key (kapsalon_id) references kapsalon on delete set null
+Hibernate: alter table if exists appointment add constraint FKi71h8mcr2o9jv5mgpjtf2spuc foreign key (customer_id) references users
+Hibernate: alter table if exists barber_dienst add constraint FKgqwxtdi2ka9wqrhrcjfuhwwfu foreign key (dienst_id) references diensten
+Hibernate: alter table if exists barber_dienst add constraint FK2bkkou6x4fe3pc62h9t1s5n41 foreign key (barber_id) references barbers on delete set null
+Hibernate: alter table if exists barbers add constraint FKsqw8txoxln6tkjc40lxn56wxw foreign key (kapsalon_id) references kapsalon on delete set null
+Hibernate: alter table if exists images add constraint FK8nr6vxs9vkdo2l37yf408esop foreign key (barber_id) references barbers
+Hibernate: alter table if exists kapsalon add constraint FKoaq04oun0a6yu0ecxgpfwxucm foreign key (opening_hours_id) references opening_hours
+2026-02-15T19:13:20.175+01:00  INFO 4084 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-15T19:13:21.542+01:00  WARN 4084 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-15T19:13:23.098+01:00  INFO 4084 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@40f77135, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4138af7, org.springframework.security.web.context.SecurityContextHolderFilter@4c81e7c2, org.springframework.security.web.header.HeaderWriterFilter@23307c6c, org.springframework.web.filter.CorsFilter@5bbf3869, org.springframework.security.web.authentication.logout.LogoutFilter@22e650e, kapsalon.nl.filter.JwtRequestFilter@78141c58, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@21e15093, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@62cf873a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@64dfa1a3, org.springframework.security.web.session.SessionManagementFilter@3b171fbd, org.springframework.security.web.access.ExceptionTranslationFilter@54da736e, org.springframework.security.web.access.intercept.AuthorizationFilter@25fc2b8f]
+2026-02-15T19:13:23.943+01:00  INFO 4084 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-02-15T19:13:23.975+01:00  INFO 4084 --- [           main] kapsalon.nl.KapsalonApplication          : Started KapsalonApplication in 14.665 seconds (process running for 15.527)
+2026-02-15T19:14:41.891+01:00  INFO 4084 --- [nio-8080-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-15T19:14:41.892+01:00  INFO 4084 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-02-15T19:14:41.895+01:00  INFO 4084 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select u1_0.username,a1_0.username,a1_0.authority,u1_0.email,u1_0.password from users u1_0 left join authorities a1_0 on u1_0.username=a1_0.username where u1_0.username=?
+Hibernate: insert into users (email,password,username) values (?,?,?)
+Hibernate: select count(*) from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.authority,a1_0.username from authorities a1_0 where (a1_0.authority,a1_0.username) in ((?,?))
+Hibernate: insert into authorities (authority,username) values (?,?)
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select b1_0.id,b1_0.available,b1_0.kapsalon_id,b1_0.license,b1_0.name from barbers b1_0
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code from kapsalon k1_0 left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where k1_0.id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code from kapsalon k1_0 left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where k1_0.id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select d1_0.id,d1_0.category,d1_0.description,d1_0.duration,d1_0.price,d1_0.title from diensten d1_0
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select b1_0.id,b1_0.available,b1_0.kapsalon_id,b1_0.license,b1_0.name from barbers b1_0
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code from kapsalon k1_0 left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where k1_0.id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code from kapsalon k1_0 left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where k1_0.id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select b1_0.id,b1_0.available,b1_0.kapsalon_id,b1_0.license,b1_0.name from barbers b1_0
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code from kapsalon k1_0 left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where k1_0.id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code from kapsalon k1_0 left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where k1_0.id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select b1_0.id,b1_0.available,b1_0.kapsalon_id,b1_0.license,b1_0.name from barbers b1_0
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code from kapsalon k1_0 left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where k1_0.id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code from kapsalon k1_0 left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where k1_0.id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select b1_0.id,b1_0.available,id1_0.id,id1_0.image_data,id1_0.name,id1_0.type,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name from barbers b1_0 left join images id1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where b1_0.id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select b1_0.id,b1_0.available,id1_0.id,id1_0.image_data,id1_0.name,id1_0.type,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name from barbers b1_0 left join images id1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where b1_0.id=?
+Hibernate: select k1_0.id,k1_0.availability,k1_0.location,k1_0.name,k1_0.opening_hours_id,k1_0.owner,k1_0.postal_code from kapsalon k1_0 where k1_0.owner=?
+Hibernate: select d1_0.id,d1_0.category,d1_0.description,d1_0.duration,d1_0.price,d1_0.title from diensten d1_0 where d1_0.id=?
+Hibernate: select d1_0.id,d1_0.category,d1_0.description,d1_0.duration,d1_0.price,d1_0.title from diensten d1_0 where d1_0.id=?
+Hibernate: delete from barber_dienst where barber_id=?
+Hibernate: insert into barber_dienst (barber_id,dienst_id) values (?,?)
+Hibernate: insert into barber_dienst (barber_id,dienst_id) values (?,?)
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select b1_0.id,b1_0.available,id1_0.id,id1_0.image_data,id1_0.name,id1_0.type,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name from barbers b1_0 left join images id1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where b1_0.id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select b1_0.id,b1_0.available,b1_0.kapsalon_id,b1_0.license,b1_0.name from barbers b1_0
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code from kapsalon k1_0 left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where k1_0.id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code from kapsalon k1_0 left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where k1_0.id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code from kapsalon k1_0 left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where k1_0.id=?
+Hibernate: select b1_0.id,b1_0.available,id1_0.id,id1_0.image_data,id1_0.name,id1_0.type,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name from barbers b1_0 left join images id1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where b1_0.id=?
+Hibernate: select d1_0.id,d1_0.category,d1_0.description,d1_0.duration,d1_0.price,d1_0.title from diensten d1_0 where d1_0.id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: insert into appointment (appointment_date,appointment_time,is_paid,barber_id,dienst_id,kapsalon_id,status,customer_id) values (?,?,?,?,?,?,?,?)
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select a1_0.id,a1_0.appointment_date,a1_0.appointment_time,a1_0.is_paid,a1_0.barber_id,a1_0.dienst_id,a1_0.kapsalon_id,a1_0.status,a1_0.customer_id from appointment a1_0
+Hibernate: select b1_0.id,b1_0.available,id1_0.id,id1_0.image_data,id1_0.name,id1_0.type,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name from barbers b1_0 left join images id1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where b1_0.id=?
+Hibernate: select d1_0.id,d1_0.category,d1_0.description,d1_0.duration,d1_0.price,d1_0.title from diensten d1_0 where d1_0.id=?
+Hibernate: select u1_0.username,a1_0.username,a1_0.authority,u1_0.email,u1_0.password from users u1_0 left join authorities a1_0 on u1_0.username=a1_0.username where u1_0.username=?
+Hibernate: select b1_0.id,b1_0.available,id1_0.id,id1_0.image_data,id1_0.name,id1_0.type,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name from barbers b1_0 left join images id1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where b1_0.id=?
+Hibernate: select d1_0.id,d1_0.category,d1_0.description,d1_0.duration,d1_0.price,d1_0.title from diensten d1_0 where d1_0.id=?
+Hibernate: select u1_0.username,a1_0.username,a1_0.authority,u1_0.email,u1_0.password from users u1_0 left join authorities a1_0 on u1_0.username=a1_0.username where u1_0.username=?
+Hibernate: select b1_0.id,b1_0.available,id1_0.id,id1_0.image_data,id1_0.name,id1_0.type,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name from barbers b1_0 left join images id1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where b1_0.id=?
+Hibernate: select u1_0.username,a1_0.username,a1_0.authority,u1_0.email,u1_0.password from users u1_0 left join authorities a1_0 on u1_0.username=a1_0.username where u1_0.username=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select a1_0.id,a1_0.appointment_date,a1_0.appointment_time,a1_0.is_paid,a1_0.barber_id,a1_0.dienst_id,a1_0.kapsalon_id,a1_0.status,a1_0.customer_id from appointment a1_0
+Hibernate: select b1_0.id,b1_0.available,id1_0.id,id1_0.image_data,id1_0.name,id1_0.type,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name from barbers b1_0 left join images id1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where b1_0.id=?
+Hibernate: select d1_0.id,d1_0.category,d1_0.description,d1_0.duration,d1_0.price,d1_0.title from diensten d1_0 where d1_0.id=?
+Hibernate: select u1_0.username,a1_0.username,a1_0.authority,u1_0.email,u1_0.password from users u1_0 left join authorities a1_0 on u1_0.username=a1_0.username where u1_0.username=?
+Hibernate: select b1_0.id,b1_0.available,id1_0.id,id1_0.image_data,id1_0.name,id1_0.type,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name from barbers b1_0 left join images id1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where b1_0.id=?
+Hibernate: select d1_0.id,d1_0.category,d1_0.description,d1_0.duration,d1_0.price,d1_0.title from diensten d1_0 where d1_0.id=?
+Hibernate: select u1_0.username,a1_0.username,a1_0.authority,u1_0.email,u1_0.password from users u1_0 left join authorities a1_0 on u1_0.username=a1_0.username where u1_0.username=?
+Hibernate: select b1_0.id,b1_0.available,id1_0.id,id1_0.image_data,id1_0.name,id1_0.type,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name from barbers b1_0 left join images id1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where b1_0.id=?
+Hibernate: select u1_0.username,a1_0.username,a1_0.authority,u1_0.email,u1_0.password from users u1_0 left join authorities a1_0 on u1_0.username=a1_0.username where u1_0.username=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select k1_0.id,k1_0.availability,k1_0.location,k1_0.name,k1_0.opening_hours_id,k1_0.owner,k1_0.postal_code from kapsalon k1_0 where k1_0.owner=?
+Hibernate: select oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday from opening_hours oh1_0 where oh1_0.id=?
+Hibernate: select a1_0.id,a1_0.appointment_date,a1_0.appointment_time,a1_0.is_paid,sb1_0.id,sb1_0.available,id1_0.id,id1_0.image_data,id1_0.name,id1_0.type,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,sb1_0.license,sb1_0.name,sd1_0.id,sd1_0.category,sd1_0.description,sd1_0.duration,sd1_0.price,sd1_0.title,sk1_0.id,sk1_0.availability,sk1_0.location,sk1_0.name,oh2_0.id,oh2_0.friday,oh2_0.monday,oh2_0.saturday,oh2_0.sunday,oh2_0.thursday,oh2_0.tuesday,oh2_0.wednesday,sk1_0.owner,sk1_0.postal_code,a1_0.status,u1_0.username,a2_0.username,a2_0.authority,u1_0.email,u1_0.password from appointment a1_0 left join barbers sb1_0 on sb1_0.id=a1_0.barber_id left join images id1_0 on sb1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=sb1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id left join diensten sd1_0 on sd1_0.id=a1_0.dienst_id left join kapsalon sk1_0 on sk1_0.id=a1_0.kapsalon_id left join opening_hours oh2_0 on oh2_0.id=sk1_0.opening_hours_id left join users u1_0 on u1_0.username=a1_0.customer_id left join authorities a2_0 on u1_0.username=a2_0.username where a1_0.id=?
+Hibernate: update appointment set appointment_date=?,appointment_time=?,is_paid=?,barber_id=?,dienst_id=?,kapsalon_id=?,status=?,customer_id=? where id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select a1_0.id,a1_0.appointment_date,a1_0.appointment_time,a1_0.is_paid,sb1_0.id,sb1_0.available,id1_0.id,id1_0.image_data,id1_0.name,id1_0.type,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,sb1_0.license,sb1_0.name,sd1_0.id,sd1_0.category,sd1_0.description,sd1_0.duration,sd1_0.price,sd1_0.title,sk1_0.id,sk1_0.availability,sk1_0.location,sk1_0.name,oh2_0.id,oh2_0.friday,oh2_0.monday,oh2_0.saturday,oh2_0.sunday,oh2_0.thursday,oh2_0.tuesday,oh2_0.wednesday,sk1_0.owner,sk1_0.postal_code,a1_0.status,u1_0.username,a2_0.username,a2_0.authority,u1_0.email,u1_0.password from appointment a1_0 left join barbers sb1_0 on sb1_0.id=a1_0.barber_id left join images id1_0 on sb1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=sb1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id left join diensten sd1_0 on sd1_0.id=a1_0.dienst_id left join kapsalon sk1_0 on sk1_0.id=a1_0.kapsalon_id left join opening_hours oh2_0 on oh2_0.id=sk1_0.opening_hours_id left join users u1_0 on u1_0.username=a1_0.customer_id left join authorities a2_0 on u1_0.username=a2_0.username where a1_0.id=?
+2026-02-15T19:25:16.740+01:00  WARN 4084 --- [nio-8080-exec-7] o.a.p.p.font.FileSystemFontProvider      : 143 new fonts found, font cache will be re-built
+2026-02-15T19:25:16.740+01:00  WARN 4084 --- [nio-8080-exec-7] o.a.p.p.font.FileSystemFontProvider      : Building on-disk font cache, this may take a while
+2026-02-15T19:25:38.230+01:00  WARN 4084 --- [nio-8080-exec-7] o.a.p.p.font.FileSystemFontProvider      : Finished building on-disk font cache, found 166 fonts
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select k1_0.id,k1_0.availability,k1_0.location,k1_0.name,k1_0.opening_hours_id,k1_0.owner,k1_0.postal_code from kapsalon k1_0
+Hibernate: select oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday from opening_hours oh1_0 where oh1_0.id=?
+Hibernate: select oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday from opening_hours oh1_0 where oh1_0.id=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select b1_0.id,b1_0.available,b1_0.kapsalon_id,b1_0.license,b1_0.name from barbers b1_0
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code from kapsalon k1_0 left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where k1_0.id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code from kapsalon k1_0 left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where k1_0.id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+2026-02-15T21:31:28.277+01:00  WARN 4084 --- [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h29m41s190ms112µs).
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select b1_0.id,b1_0.available,b1_0.kapsalon_id,b1_0.license,b1_0.name from barbers b1_0
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code from kapsalon k1_0 left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where k1_0.id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code from kapsalon k1_0 left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where k1_0.id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select u1_0.username,u1_0.email,u1_0.password from users u1_0 where u1_0.username=?
+Hibernate: select a1_0.username,a1_0.authority from authorities a1_0 where a1_0.username=?
+Hibernate: select b1_0.id,b1_0.available,b1_0.kapsalon_id,b1_0.license,b1_0.name from barbers b1_0
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code from kapsalon k1_0 left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where k1_0.id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code from kapsalon k1_0 left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where k1_0.id=?
+Hibernate: select id1_0.id,b1_0.id,b1_0.available,k1_0.id,k1_0.availability,k1_0.location,k1_0.name,oh1_0.id,oh1_0.friday,oh1_0.monday,oh1_0.saturday,oh1_0.sunday,oh1_0.thursday,oh1_0.tuesday,oh1_0.wednesday,k1_0.owner,k1_0.postal_code,b1_0.license,b1_0.name,id1_0.image_data,id1_0.name,id1_0.type from images id1_0 left join barbers b1_0 on b1_0.id=id1_0.barber_id left join kapsalon k1_0 on k1_0.id=b1_0.kapsalon_id left join opening_hours oh1_0 on oh1_0.id=k1_0.opening_hours_id where id1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
+Hibernate: select d1_0.barber_id,d1_1.id,d1_1.category,d1_1.description,d1_1.duration,d1_1.price,d1_1.title from barber_dienst d1_0 join diensten d1_1 on d1_1.id=d1_0.dienst_id where d1_0.barber_id=?
